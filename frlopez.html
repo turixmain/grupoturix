@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Omar Hernández González | Profile</title>
+    <title>Dr. Francisco Ronay López Estrada | Profile</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,7 +35,7 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
 
-        /* --- HEADER & NAV --- */
+        /* --- HEADER & NAV (Consistente con Index) --- */
         .top-bar {
             position: sticky;
             top: 0;
@@ -78,10 +78,9 @@
         .nav-menu a:hover::after { width: 100%; }
 
 
-        /* --- PROFILE HERO (Chemical Processes / Industrial Control) --- */
+        /* --- PROFILE HERO (Encabezado Personal) --- */
         .profile-hero {
-            /* FOTO DE FONDO: Planta industrial/química para reflejar "Chemical Processes" */
-            background: linear-gradient(to bottom, rgba(10,46,82,0.7), var(--bg-dark)), url('https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&q=80');
+            background: linear-gradient(to bottom, rgba(10,46,82,0.6), var(--bg-dark)), url('images/mapacontrol.jpg');
             background-size: cover;
             background-position: center;
             padding: 80px 20px 40px;
@@ -104,7 +103,6 @@
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid var(--bg-dark);
-            object-position: top;
         }
 
         .profile-info h1 {
@@ -112,23 +110,20 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 5px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .profile-info h2 {
             color: var(--accent);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
             letter-spacing: 1px;
             margin-bottom: 10px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-            max-width: 800px;
-            margin-left: auto; margin-right: auto;
         }
         
-        .role-badge {
-            background: #0ea5e9; /* Azul cielo para SNI */
-            color: white;
+        .sni-badge {
+            background: #eab308;
+            color: #000;
             font-weight: bold;
             padding: 4px 12px;
             border-radius: 4px;
@@ -138,7 +133,7 @@
             text-transform: uppercase;
         }
 
-        /* Botones de Identificadores */
+        /* Botones de Identificadores (Scopus, ORCID, etc) */
         .id-badges {
             display: flex;
             justify-content: center;
@@ -158,7 +153,7 @@
             transition: all 0.3s;
         }
         .id-btn:hover { background: white; color: var(--primary); transform: translateY(-2px); }
-        .id-email { border-color: var(--accent); color: white; }
+        .id-cvu { background: var(--accent); color: var(--primary); font-weight: bold; border-color: var(--accent); }
 
 
         /* --- CONTENIDO GRID --- */
@@ -167,7 +162,7 @@
             margin: 0 auto;
             padding: 40px 20px;
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2fr 1fr; /* Columna Izq (Bio/Cursos) más ancha */
             gap: 40px;
         }
 
@@ -190,6 +185,7 @@
         }
         .card h3 i { color: var(--accent); }
 
+        /* Estilos de Texto Bio */
         .bio-text p {
             color: var(--text-muted);
             line-height: 1.8;
@@ -198,7 +194,7 @@
             font-size: 1rem;
         }
 
-        /* SECCIÓN CURSOS */
+        /* --- SECCIÓN CURSOS (Highlight) --- */
         .courses-section {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(37, 99, 235, 0.1));
             border: 1px solid var(--accent);
@@ -227,20 +223,27 @@
             box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
             transition: all 0.3s;
         }
-        .btn-courses:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 210, 255, 0.6); }
+        .btn-courses:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.6);
+        }
 
-        /* LISTAS LATERALES */
+        /* Listas de Detalles (Educación, Libros) */
         .detail-list li {
             margin-bottom: 20px;
             display: flex;
             gap: 15px;
         }
-        .detail-list i { color: var(--accent); margin-top: 5px; }
-        .detail-content strong { display: block; color: white; font-size: 0.95rem; }
-        .detail-content span { display: block; color: var(--text-muted); font-size: 0.85rem; }
-        .detail-content em { color: #888; font-style: italic; font-size: 0.8rem; }
+        .detail-list i {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+        
+        .detail-content strong { display: block; color: white; font-size: 1rem; }
+        .detail-content span { display: block; color: var(--text-muted); font-size: 0.9rem; }
+        .detail-content em { color: #888; font-style: italic; font-size: 0.85rem; }
 
-        /* TAGS */
+        /* Tags de Interés */
         .tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
         .tag {
             background: rgba(255,255,255,0.05);
@@ -259,10 +262,12 @@
             color: #666; font-size: 0.9rem; margin-top: 40px;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             .main-container { grid-template-columns: 1fr; }
             .top-bar { flex-direction: column; height: auto; padding: 20px; gap: 15px; }
             .nav-menu ul { flex-wrap: wrap; justify-content: center; }
+            .profile-info h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -270,7 +275,7 @@
 
     <div class="top-bar">
         <div class="logo-container">
-            <img src="../images/TURIX.png" alt="TURIX DYNAMICS Logo">
+            <img src="images/TURIX.png" alt="TURIX DYNAMICS Logo">
             <div class="brand-name">
                 <h1>TURIX DYNAMICS</h1>
                 <span>Diagnosis & Control Group</span>
@@ -278,10 +283,10 @@
         </div>
         <nav class="nav-menu">
             <ul>
-                <li><a href="../index.html">Home</a></li>
-                    <li><a href="../turix-ittg/academicstaff.html">Academic Staff</a></li>
-                <li><a href="../turix-ittg/phdturix.html">Ph.D. Students</a></li>
-                <li><a href="../turix-ittg/mastersturix.html">Master Students</a></li>
+                <li><a href="index.html">Home</a></li>
+                 <li><a href="turix-ittg/academicstaff.html">Academic Staff</a></li>
+                <li><a href="turix-ittg/phdturix.html">Ph.D. Students</a></li>
+                <li><a href="turix-ittg/mastersturix.html">Master Students</a></li>
                 <li><a href="projects-turix.html">Projects</a></li>
                 <li><a href="publications-turix.html">Publications</a></li>
                 <li><a href="software.html">Software</a></li>
@@ -291,39 +296,33 @@
 
     <header class="profile-hero">
         <div class="profile-img-container">
-            <img src="../images/Omar.jpg" alt="Dr. Omar Hernández González">
+            <img src="images/ronay.jpeg" alt="Dr. Francisco Ronay">
         </div>
         
         <div class="profile-info">
-            <h1>Dr. Omar Hernández González</h1>
+            <h1>Dr. Francisco Ronay López Estrada</h1>
             <h2>Ph.D. in Automatic Control</h2>
-            <div class="role-badge">National Researcher (SNI Member)</div>
+            <div class="sni-badge">National Researcher Level 2 (SNI II)</div>
             
-            <p style="color:#ccc; margin-bottom:15px; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Tecnológico Nacional de México - IT Hermosillo</p>
+            <p style="color:#ccc; margin-bottom:15px;">Full Professor at TecNM / IT Tuxtla Gutiérrez</p>
             
             <div class="id-badges">
-                <a href="mailto:omar.hernandezg@hermosillo.tecnm.mx" class="id-btn id-email">
-                    <i class="fas fa-envelope"></i> Email Contact
+                <a href="mailto:frlopez@ittg.edu.mx" class="id-btn">
+                    <i class="fas fa-envelope"></i> Email
                 </a>
-                <a href="https://www.linkedin.com/in/omar-hernandez-gonzalez-4a73aa126/" target="_blank" class="id-btn" style="border-color:#0077b5; color:#0077b5;">
+                <a href="#" class="id-btn id-cvu">
+                    <i class="fas fa-file-pdf"></i> Download CVU
+                </a>
+                <a href="https://www.linkedin.com/in/francisco-ronay-l%C3%B3pez-estrada-a4a36430/" target="_blank" class="id-btn" style="border-color:#0077b5; color:#0077b5;">
                     <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
             </div>
             
             <div class="id-badges" style="margin-top:10px;">
-                <a href="https://www.scopus.com/authid/detail.uri?authorId=57193486613" target="_blank" class="id-btn">
-                    <i class="fas fa-quote-right"></i> Scopus ID: 57193486613
-
-                </a>
-                <a href="https://orcid.org/0000-0002-5870-556X" target="_blank" class="id-btn">
-                    <i class="fab fa-orcid"></i> ORCID
-                </a>
-                <a href="#" class="id-btn">
-                    <i class="fas fa-check-circle"></i> Publons: F-2014-2017
-                </a>
-                <a href="https://scholar.google.com/citations?user=bIxCKtIAAAAJ&hl=en&oi=ao" class="id-btn">
-                    <i class="fas fa-graduation-cap"></i> Google Scholar
-                </a>
+                <a href="#" class="id-btn">Scopus ID: 1830244</a>
+                <a href="https://orcid.org/0000-0002-8724-335X" target="_blank"  class="id-btn">ORCID: 0000-0002-8724-335X</a>
+                <a href="https://www.researchgate.net/profile/Francisco-Ronay-Lopez-Estrada?ev=hdr_xprf"  target="_blank" class="id-btn">ResearchGate</a>
+                <a href="https://scholar.google.com/citations?user=Ng3OnvoAAAAJ&hl=es" target="_blank" class="id-btn">Google Scholar</a>
             </div>
         </div>
     </header>
@@ -333,22 +332,48 @@
         <div class="left-col">
             
             <div class="card">
-                <h3><i class="fas fa-user-tie"></i> Biography</h3>
+                <h3><i class="fas fa-user-astronaut"></i> Biography</h3>
                 <div class="bio-text">
-                    <p><strong>Omar Hernández González</strong> was born in Coatzacoalcos, Mexico, in 1983. He received the Engineering degree in Electronics from the Tecnológico Nacional de México-IT Minatitlan, Mexico, in 2005, and the M.Sc. and the Ph.D. degree in Automatic Control from the National Center of Research and Technological Development (CENIDET) Mexico, in 2008 and <strong>The University of Caen Normandie, France</strong> in 2017, respectively.</p>
+                    <p><strong>Francisco-Ronay López-Estrada</strong> earned his Ph.D. degree in Automatic Control from the University of Lorraine, France, in 2014. Since 2008, he has been a full professor at the National Technological Institute of Mexico / IT Tuxtla Gutiérrez. He is the founder and head of the <strong>TURIX-Dynamics Research Group</strong>.</p>
                     
-                    <p>Since 2019, Dr. Hernández-González is a member of the National Research System (SNI), Mexico. His research interests include nonlinear control, delayed systems, observer designs, and its applications to UAV and <strong>chemical processes</strong>.</p>
+                    <p>His research interests focus on the development of observers for state estimation and fault diagnosis in dynamic systems, robust control, and the application of these theories to Unmanned Aircraft Systems (UAS), hydraulic networks, and renewable energy systems.</p>
+
+                    <p>Dr. Ronay is also active in the professional community. In 2019, he was elected to the board of the Mexican Association of Automatic Control (AMCA), and in 2022, he chaired the National Congress of Automatic Control (CNCA).</p>
                 </div>
             </div>
 
             <div class="card courses-section">
                 <i class="fas fa-chalkboard-teacher" style="font-size:3rem; color:var(--accent); margin-bottom:15px;"></i>
                 <h2>TEACHING & COURSES</h2>
-                <p style="color:#ccc;">Access materials for courses on Automatic Control and Nonlinear Systems.</p>
+                <p style="color:#ccc;">Access to slides, assignments, and simulation codes for undergraduate and graduate courses.</p>
                 
-                <a href="coursesomar.html" class="btn-courses">
+                <a href="coursesronay.html" class="btn-courses">
                     View Courses <i class="fas fa-arrow-right"></i>
                 </a>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-pen-nib"></i> Editorial Board Memberships</h3>
+                <ul class="detail-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div class="detail-content">
+                            <strong>Mathematical and Computational Applications</strong>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div class="detail-content">
+                            <strong>International Journal of Aerospace Engineering</strong>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div class="detail-content">
+                            <strong>Applied Mathematics and Computer Science</strong>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
         </div>
@@ -362,24 +387,16 @@
                         <i class="fas fa-university"></i>
                         <div class="detail-content">
                             <strong>Ph.D. in Automatic Control</strong>
-                            <span>University of Caen, France</span>
-                            <em>2017</em>
+                            <span>University of Lorraine, France</span>
+                            <em>2014</em>
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-university"></i>
                         <div class="detail-content">
-                            <strong>Master in Electronic Engineering</strong>
-                            <span>National Center for Research and Technological Development (CENIDET)</span>
+                            <strong>M.Sc. in Electronic Engineering</strong>
+                            <span>CENIDET, Mexico</span>
                             <em>2008</em>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-university"></i>
-                        <div class="detail-content">
-                            <strong>B.Eng. in Electronics</strong>
-                            <span>Tecnológico Nacional de México - IT Minatitlan</span>
-                            <em>2005</em>
                         </div>
                     </li>
                 </ul>
@@ -388,23 +405,37 @@
             <div class="card">
                 <h3><i class="fas fa-lightbulb"></i> Interests</h3>
                 <div class="tags-container">
-                    <span class="tag">Nonlinear observers</span>
-                    <span class="tag">Nonlinear control</span>
-                    <span class="tag">Unmanned aerial vehicles (UAV)</span>
-                    <span class="tag">Adaptive observers</span>
-                    <span class="tag">Delayed systems</span>
-                    <span class="tag">Chemical processes</span>
+                    <span class="tag">Mobile robotics</span>
+                    <span class="tag">Fault diagnosis</span>
+                    <span class="tag">Fault-tolerant control</span>
+                    <span class="tag">UAVs / Drones</span>
+                    <span class="tag">Leak detection</span>
+                    <span class="tag">Descriptor systems</span>
                 </div>
             </div>
 
             <div class="card">
-                <h3><i class="fas fa-building"></i> Affiliation</h3>
+                <h3><i class="fas fa-book"></i> Edited Books</h3>
                 <ul class="detail-list">
                     <li>
-                        <i class="fas fa-landmark"></i>
+                        <i class="fas fa-book-open"></i>
                         <div class="detail-content">
-                            <strong>TecNM - IT Hermosillo</strong>
-                            <span>Department of Electronic Engineering</span>
+                            <strong>Advanced Mathematics and Computational Applications in Control Systems Engineering</strong>
+                            <em>2020 (MCA)</em>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-book-open"></i>
+                        <div class="detail-content">
+                            <strong>Optimization for Control, Observation and Safety</strong>
+                            <em>2019 (Processes)</em>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-book-open"></i>
+                        <div class="detail-content">
+                            <strong>Optimization in Control Applications</strong>
+                            <em>2018 (MCA)</em>
                         </div>
                     </li>
                 </ul>
