@@ -19,6 +19,16 @@
         "graduated": false,
         "scholar": "#"
     },
+      {
+        "name": "Ing. Iván Ramón Urbina Leos",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Ivan.png",
+        "generation": "Current",
+        "thesis": "BLDC Motor Control System Using A High-Order Recurrent Neural Network Trained With a Kalman Filter",
+        "supervisor": "Dr. Jesús Medrano Hermosillo/Dr. Francisco Ronay López Estrada",
+        "graduated": false,
+        "scholar": "#"
+    },
     {
         "name": "Ing. Jesús Rodrigo Martínez Trujillo",
         "degree": "M.Sc. Student",
