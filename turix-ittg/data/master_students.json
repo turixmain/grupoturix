@@ -49,6 +49,16 @@
         "graduated": false,
         "scholar": "#"
     },
+     {
+        "name": "Ing. Fernando Rafael Martínez Algarin",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Fernando.png",
+        "generation": "Current",
+        "thesis": "Estimation of the pose of a mobile robot in dynamic environments using sensor fusion",
+        "supervisor": "Dr. Ildeberto de los Santos Ruiz",
+        "graduated": false,
+        "scholar": "#"
+    },
     {
         "name": "Ing. Yasmani González Cárdenas",
         "degree": "M.Sc. Student",
