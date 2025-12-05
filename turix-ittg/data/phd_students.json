@@ -1,11 +1,21 @@
 [
     {
+        "name": "Camila MARTÍNEZ MEDRERO",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/Camila.png",
+        "generation": "Sep 2025 - Ago 2029",
+        "thesis": "Optimal predictive control based on LPV models with input reparameterization applied to mechatronic systems",
+        "supervisor": "Dr. Guillermo Valencia Palomo",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
         "name": "Francisco MOLINA SANTIAGO",
         "degree": "Ph.D. Student",
         "photo": "../images/estudiantes/FcoMOlina.jpg",
         "generation": "Sep 2024 - Ago 2028",
         "thesis": "Development of Low-Computational Cost ADAS Algorithms Using Model Predictive Control (MPC)",
-        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "supervisor": "Dr. Francisco Ronay López Estrada /Dr. Vicenç Puig Cayuela",
         "graduated": false,
         "scholar": "#"
     },
@@ -15,7 +25,7 @@
         "photo": "../images/estudiantes/helen_jfif.jpg",
         "generation": "Sep 2024 - Ago 2028",
         "thesis": "Fault diagnosis of nonhomogeneous multiagent systems",
-        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "supervisor": "Dr. Francisco Ronay López Estrada/Dr. Víctor Estrada Manzo",
         "graduated": false,
         "scholar": "#"
     },
@@ -25,7 +35,7 @@
         "photo": "../images/estudiantes/alex.jpg",
         "generation": "Sep 2023 - Ago 2027",
         "thesis": "Robust Fault Tolerant Control of Autonomous Vehicles using LPV Models and Virtual Actuators",
-        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "supervisor": "Dr. Francisco Ronay López Estrada/Dr. Olivier Sename",
         "graduated": false,
         "scholar": "#"
     },
@@ -35,7 +45,7 @@
         "photo": "../images/estudiantes/Leonardo.jpg",
         "generation": "Sep 2023 - Ago 2027",
         "thesis": "Leak diagnosis in hydraulic networks using neural networks with delays",
-        "supervisor": "Dr. Ildeberto de los Santos-Ruiz",
+        "supervisor": "Dr. Ildeberto de los Santos-Ruiz/ Dr. Joaquim Blessa",
         "graduated": false,
         "scholar": "#"
     },
@@ -45,7 +55,7 @@
         "photo": "../images/estudiantes/Fco.jpg",
         "generation": "Sep 2021 - Ago 2025",
         "thesis": "Control of nonlinear mechatronic systems through deep reinforced learning",
-        "supervisor": "Dr. Ildeberto de los Santos / Dr. Francisco Ronay",
+        "supervisor": "Dr. Ildeberto de los Santos ",
         "graduated": false,
         "scholar": "#"
     },
