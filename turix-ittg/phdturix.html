@@ -9,148 +9,64 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES (Mismo estilo que Academic Staff) --- */
+        /* --- VARIABLES --- */
         :root {
-            --primary: #0a2e52; 
-            --accent: #00d2ff;  
-            --accent-grad: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            --dark: #1a1a1a;
-            --bg-dark: #0b0f19;
-            --glass: rgba(11, 15, 25, 0.95);
-            --card-bg: #151a25;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --primary: #0a2e52; --accent: #00d2ff; --dark: #1a1a1a; --bg-dark: #0b0f19;
+            --glass: rgba(11, 15, 25, 0.95); --card-bg: #151a25; --text-main: #ffffff; --text-muted: #94a3b8;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--bg-dark); color: var(--text-main); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- HEADER & NAV --- */
+        /* HEADER */
         .top-bar {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            padding: 10px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            height: 90px;
+            position: sticky; top: 0; width: 100%; padding: 10px 5%; display: flex; justify-content: space-between;
+            align-items: center; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1); height: 90px;
         }
-
         .logo-container { display: flex; align-items: center; gap: 15px; height: 100%; }
         .logo-container img { height: 60px; width: auto; display: block; }
-
         .brand-name h1 { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; line-height: 1; color: white; margin: 0; }
         .brand-name span { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; display: block; }
 
-        /* MENU */
+        /* NAV MENU */
         .nav-menu ul { display: flex; gap: 20px; }
         .nav-menu a {
-            font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600;
-            text-transform: uppercase; color: rgba(255,255,255,0.8); padding: 8px 0; position: relative;
+            font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+            color: rgba(255,255,255,0.8); padding: 8px 0; position: relative;
         }
         .nav-menu a:hover, .nav-menu a.active { color: var(--accent); }
-        .nav-menu a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: var(--accent); transition: width 0.3s;
-        }
+        .nav-menu a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--accent); transition: 0.3s; }
         .nav-menu a:hover::after { width: 100%; }
 
-        /* --- CONTENIDO --- */
-        .page-header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: radial-gradient(circle at center, rgba(10, 46, 82, 0.4) 0%, var(--bg-dark) 70%);
-        }
-        .page-header h1 {
-            font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800; margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        /* CONTENT */
+        .page-header { text-align: center; padding: 60px 20px 40px; background: radial-gradient(circle at center, rgba(10, 46, 82, 0.4) 0%, var(--bg-dark) 70%); }
+        .page-header h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; font-weight: 800; margin-bottom: 10px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .page-header p { color: var(--accent); font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; }
 
-        .section-separator {
-            max-width: 1200px; margin: 40px auto 20px; padding: 0 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .section-title {
-            font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: white; margin-bottom: 30px;
-            display: flex; align-items: center; gap: 15px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px 20px 80px; }
+        .section-separator { max-width: 1200px; margin: 40px auto 20px; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: white; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
         .section-title i { color: var(--accent); }
 
-        /* --- TARJETAS DE ESTUDIANTES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px 20px 80px; }
-        
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Tarjetas más anchas para que quepa la tesis */
-            gap: 30px;
-        }
-
+        /* GRID */
+        .student-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .student-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            align-items: flex-start; /* Alineado arriba */
-            gap: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--card-bg); border-radius: 15px; padding: 25px; border: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: flex-start; gap: 20px; transition: 0.3s;
         }
-
-        .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.1);
-            border-color: var(--accent);
-        }
-
-        .student-img {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            flex-shrink: 0; /* Evita que la foto se aplaste */
-        }
-
+        .student-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 210, 255, 0.1); border-color: var(--accent); }
+        
+        .student-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; }
         .student-info { flex: 1; }
-
-        .student-info h3 {
-            font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: white; margin-bottom: 5px;
-            text-transform: uppercase; letter-spacing: 0.5px;
-        }
-
-        .generation {
-            display: block; font-size: 0.8rem; color: var(--accent); font-weight: 700; margin-bottom: 10px;
-        }
-
-        .thesis-title {
-            font-size: 0.9rem; color: #ccc; line-height: 1.5; margin-bottom: 10px; font-style: italic;
-        }
-
-        .supervisor {
-            font-size: 0.8rem; color: var(--text-muted); display: block; border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 8px;
-        }
+        .student-info h3 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: white; margin-bottom: 5px; text-transform: uppercase; }
+        .generation { display: block; font-size: 0.8rem; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+        .thesis-title { font-size: 0.9rem; color: #ccc; line-height: 1.5; margin-bottom: 10px; font-style: italic; }
+        .supervisor { font-size: 0.8rem; color: var(--text-muted); display: block; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; }
         .supervisor strong { color: #fff; }
 
-        /* FOOTER */
-        footer {
-            text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.1);
-            color: #666; font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #666; font-size: 0.9rem; }
 
         @media (max-width: 768px) {
             .student-card { flex-direction: column; align-items: center; text-align: center; }
@@ -171,10 +87,10 @@
         </div>
         <nav class="nav-menu">
             <ul>
-                <li><a href="index.html">Home</a></li>
-               <li><a href="../turix-ittg/academicstaff.html">Academic Staff</a></li>
-                <li><a href="../turix-ittg/phdturix.html">Ph.D. Students</a></li>
-                <li><a href="../turix-ittg/mastersturix.html">Master Students</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="academicstaff.html">Academic Staff</a></li>
+                <li><a href="phdturix.html" class="active">Ph.D. Students</a></li>
+                <li><a href="mastersturix.html">Master Students</a></li>
                 <li><a href="projects-turix.html">Projects</a></li>
                 <li><a href="publications-turix.html">Publications</a></li>
                 <li><a href="software.html">Software</a></li>
@@ -192,79 +108,8 @@
         <div class="section-title">
             <i class="fas fa-user-graduate"></i> Current Students
         </div>
-
-        <div class="student-grid">
-            
-            <div class="student-card">
-                <img src="../images/estudiantes/FcoMOlina.jpg" alt="Francisco Molina" class="student-img">
-                <div class="student-info">
-                    <h3>Francisco MOLINA SANTIAGO</h3>
-                    <span class="generation">Gen: Sep 2024 - Ago 2028</span>
-                    <p class="thesis-title">"Development of Low-Computational Cost ADAS Algorithms Using Model Predictive Control (MPC)"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay López Estrada</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/helen_jfif.jpg" alt="Helen Darias" class="student-img">
-                <div class="student-info">
-                    <h3>Helen DARIAS HERNÁNDEZ</h3>
-                    <span class="generation">Gen: Sep 2024 - Ago 2028</span>
-                    <p class="thesis-title">"Fault diagnosis of nonhomogeneous multiagent systems"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay López Estrada</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/alex.jpg" alt="Alejandro Alvarado" class="student-img">
-                <div class="student-info">
-                    <h3>Alejandro ALVARADO-ALGARIN</h3>
-                    <span class="generation">Gen: Sep 2023 - Ago 2027</span>
-                    <p class="thesis-title">"Robust Fault Tolerant Control of Autonomous Vehicles using LPV Models and Virtual Actuators"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay López Estrada</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/Leonardo.jpg" alt="Leonardo Gómez" class="student-img">
-                <div class="student-info">
-                    <h3>Leonardo GÓMEZ-CORONEL</h3>
-                    <span class="generation">Gen: Sep 2023 - Ago 2027</span>
-                    <p class="thesis-title">"Leak diagnosis in hydraulic networks using neural networks with delays"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Ildeberto de los Santos-Ruiz</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/Fco.jpg" alt="Francisco Rodriguez" class="student-img">
-                <div class="student-info">
-                    <h3>Francisco RODRIGUEZ-SÁNCHEZ</h3>
-                    <span class="generation">Gen: Sep 2021 - Ago 2025</span>
-                    <p class="thesis-title">"Control of nonlinear mechatronic systems through deep reinforced learning"</p>
-                    <span class="supervisor"><strong>Supervisors:</strong> Dr. Ildeberto de los Santos / Dr. Francisco Ronay</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/moises.jpg" alt="Moisés Luna" class="student-img">
-                <div class="student-info">
-                    <h3>Moisés LUNA-AGUILAR</h3>
-                    <span class="generation">Gen: Sep 2021 - Ago 2025</span>
-                    <p class="thesis-title">"Fault-tolerant control of omnidirectional mobile robots"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Samuel Gómez-Peñate</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/Gasga.jpg" alt="Pedro Gasga" class="student-img">
-                <div class="student-info">
-                    <h3>Pedro GASGA GARCÍA</h3>
-                    <span class="generation">Gen: Sep 2021 - Ago 2025</span>
-                    <p class="thesis-title">"Estimation of time-varying multiplicative actuator faults using convex observers"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Samuel Gómez-Peñate</span>
-                </div>
-            </div>
-
+        <div class="student-grid" id="current-students-container">
+            <p style="color:#aaa;">Loading students...</p>
         </div>
 
         <div class="section-separator"></div>
@@ -272,137 +117,70 @@
         <div class="section-title">
             <i class="fas fa-check-circle"></i> Graduated (Alumni)
         </div>
-
-        <div class="student-grid">
-
-            <div class="student-card">
-                <img src="../images/estudiantes/esvan.jpg" alt="Esvan Pérez" class="student-img">
-                <div class="student-info">
-                    <h3>Esvan de Jesús PÉREZ-PÉREZ</h3>
-                    <span class="generation">Gen: 2019 - 2023</span>
-                    <p class="thesis-title">"Fault diagnosis of wind turbines using machine learning techniques"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay López-Estrada</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/peter.jpg" alt="Pedro Aguilar" class="student-img">
-                <div class="student-info">
-                    <h3>Pedro AGUILAR ÁLVAREZ</h3>
-                    <span class="generation">Gen: Feb 2019 - Jan 2023</span>
-                    <p class="thesis-title">"Active predictive vibration control of civil structures"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Guillermo Valencia-Palomo</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/rober_PNG.png" alt="Roberto Bermudez" class="student-img">
-                <div class="student-info">
-                    <h3>Roberto BERMUDEZ HERNANDEZ</h3>
-                    <span class="generation">Graduated January 2023</span>
-                    <p class="thesis-title">"Predictive control strategies for water-loss reduction in distribution networks"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay / Gipsa-Lab</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/Norberto.jpg" alt="Norberto Urbina" class="student-img">
-                <div class="student-info">
-                    <h3>Norberto URBINA BRITO</h3>
-                    <span class="generation">Gen: 2018 - 2022</span>
-                    <p class="thesis-title">"Estrategias de control colaborativos en robots móviles mediante enfoque MPC-LPV"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Guillermo Valencia-Palomo</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/julio.jpg" alt="Julio Guzmán" class="student-img">
-                <div class="student-info">
-                    <h3>Julio Alberto GÚZMAN RABASA</h3>
-                    <span class="generation">Graduated September 2021</span>
-                    <p class="thesis-title">"Fault diagnosis based PI observers with nonquadratic Lyapunov functions"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay López-Estrada</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/estudiantes/ildeberto.jpg" alt="Ildeberto de los Santos" class="student-img">
-                <div class="student-info">
-                    <h3>Ildeberto DE LOS SANTOS RUIZ</h3>
-                    <span class="generation">Graduated June 2021</span>
-                    <p class="thesis-title">"Detection and location of leaks in pipeline networks through deep learning"</p>
-                    <span class="supervisor"><strong>Supervisor:</strong> Dr. Francisco Ronay / Dr. Vicenç Puig</span>
-                </div>
-            </div>
-
-            <div class="student-card">
-                <img src="../images/Samuel.jpg" alt="Samuel Gómez" class="student-img">
-                <div class="student-info">
-                    <h3>Samuel GÓMEZ PEÑATE</h3>
-                    <span class="generation">Graduated April 2021</span>
-                    <p class="thesis-title">"Fault-tolerant control of Takagi-Sugeno systems with inexact premise variables"</p>
-                    <span class="supervisor"><strong>Supervisors:</strong> Dr. Francisco Ronay / Dr. Guillermo Valencia</span>
-                </div>
-            </div>
-
+        <div class="student-grid" id="graduated-students-container">
+            <p style="color:#aaa;">Loading alumni...</p>
         </div>
+
     </div>
 
     <footer>
         <p>&copy; 2024 TURIX DYNAMICS - IT Tuxtla Gutiérrez, México.</p>
     </footer>
-<script>
-    // CONFIGURACIÓN: Aquí eliges qué base de datos usar
-    const dbUrl = 'data/phd_students.json'; // Ruta al archivo JSON con datos de estudiantes
 
-    async function loadStudents() {
-        try {
-            const response = await fetch(dbUrl);
-            const students = await response.json();
+    <script>
+        // Ruta al JSON (Como está en la misma carpeta turix-ittg, no lleva ../)
+        const dbUrl = 'data/phd_students.json'; 
 
-            const currentContainer = document.getElementById('current-students-container');
-            const graduatedContainer = document.getElementById('graduated-students-container');
+        async function loadStudents() {
+            try {
+                const response = await fetch(dbUrl);
+                const students = await response.json();
 
-            // Limpiar contenedores
-            if(currentContainer) currentContainer.innerHTML = '';
-            if(graduatedContainer) graduatedContainer.innerHTML = '';
+                const currentContainer = document.getElementById('current-students-container');
+                const graduatedContainer = document.getElementById('graduated-students-container');
 
-            students.forEach(student => {
-                const cardHTML = `
-                    <div class="student-card">
-                        <img src="${student.photo}" alt="${student.name}" class="student-img" onerror="this.src='../images/estudiantes/default-user.png'">
-                        <div class="student-info">
-                            <small style="color:var(--accent); font-weight:bold; letter-spacing:1px; text-transform:uppercase;">${student.degree}</small>
-                            
-                            <h3 style="margin-top:5px;">${student.name}</h3>
-                            <span class="generation">${student.generation}</span>
-                            <p class="thesis-title">"${student.thesis}"</p>
-                            <span class="supervisor"><strong>Supervisor:</strong> ${student.supervisor}</span>
-                            
-                            ${student.scholar && student.scholar !== '#' ? 
-                                `<div style="margin-top:10px;">
-                                    <a href="${student.scholar}" target="_blank" style="color:#aaa; font-size:0.8rem; text-decoration:none; transition:0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#aaa'">
-                                        <i class="fas fa-graduation-cap"></i> Google Scholar
-                                    </a>
-                                 </div>` 
-                                : ''}
+                if(currentContainer) currentContainer.innerHTML = '';
+                if(graduatedContainer) graduatedContainer.innerHTML = '';
+
+                students.forEach(student => {
+                    const cardHTML = `
+                        <div class="student-card">
+                            <img src="${student.photo}" alt="${student.name}" class="student-img" onerror="this.src='../images/default-user.png'">
+                            <div class="student-info">
+                                <small style="color:var(--accent); font-weight:bold; letter-spacing:1px; text-transform:uppercase;">${student.degree}</small>
+                                
+                                <h3 style="margin-top:5px;">${student.name}</h3>
+                                <span class="generation">${student.generation}</span>
+                                <p class="thesis-title">"${student.thesis}"</p>
+                                <span class="supervisor"><strong>Supervisor:</strong> ${student.supervisor}</span>
+                                
+                                ${student.scholar && student.scholar !== '#' ? 
+                                    `<div style="margin-top:10px;">
+                                        <a href="${student.scholar}" target="_blank" style="color:#aaa; font-size:0.8rem; text-decoration:none; transition:0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#aaa'">
+                                            <i class="fas fa-graduation-cap"></i> Google Scholar
+                                        </a>
+                                     </div>` 
+                                    : ''}
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
 
-                if (student.graduated === true) {
-                    if(graduatedContainer) graduatedContainer.innerHTML += cardHTML;
-                } else {
-                    if(currentContainer) currentContainer.innerHTML += cardHTML;
-                }
-            });
+                    if (student.graduated === true) {
+                        if(graduatedContainer) graduatedContainer.innerHTML += cardHTML;
+                    } else {
+                        if(currentContainer) currentContainer.innerHTML += cardHTML;
+                    }
+                });
 
-        } catch (error) {
-            console.error('Error cargando estudiantes:', error);
+            } catch (error) {
+                console.error('Error cargando estudiantes:', error);
+                const currentContainer = document.getElementById('current-students-container');
+                if(currentContainer) currentContainer.innerHTML = '<p style="color:red;">Error cargando datos. Verifica el archivo data/phd_students.json</p>';
+            }
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', loadStudents);
-</script>
+        document.addEventListener('DOMContentLoaded', loadStudents);
+    </script>
+
 </body>
 </html>

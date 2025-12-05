@@ -2,31 +2,141 @@
     {
         "name": "Francisco MOLINA SANTIAGO",
         "degree": "Ph.D. Student",
-        "photo": "../images/estudiantes/molina.jpg",
+        "photo": "../images/estudiantes/FcoMOlina.jpg",
         "generation": "Sep 2024 - Ago 2028",
         "thesis": "Development of Low-Computational Cost ADAS Algorithms Using Model Predictive Control (MPC)",
         "supervisor": "Dr. Francisco Ronay López Estrada",
         "graduated": false,
-        "scholar": "https://scholar.google.com"
+        "scholar": "#"
+    },
+    {
+        "name": "Helen DARIAS HERNÁNDEZ",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/helen_jfif.jpg",
+        "generation": "Sep 2024 - Ago 2028",
+        "thesis": "Fault diagnosis of nonhomogeneous multiagent systems",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Alejandro ALVARADO-ALGARIN",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/alex.jpg",
+        "generation": "Sep 2023 - Ago 2027",
+        "thesis": "Robust Fault Tolerant Control of Autonomous Vehicles using LPV Models and Virtual Actuators",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Leonardo GÓMEZ-CORONEL",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/Leonardo.jpg",
+        "generation": "Sep 2023 - Ago 2027",
+        "thesis": "Leak diagnosis in hydraulic networks using neural networks with delays",
+        "supervisor": "Dr. Ildeberto de los Santos-Ruiz",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Francisco RODRIGUEZ-SÁNCHEZ",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/Fco.jpg",
+        "generation": "Sep 2021 - Ago 2025",
+        "thesis": "Control of nonlinear mechatronic systems through deep reinforced learning",
+        "supervisor": "Dr. Ildeberto de los Santos / Dr. Francisco Ronay",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Moisés LUNA-AGUILAR",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/moises.jpg",
+        "generation": "Sep 2021 - Ago 2025",
+        "thesis": "Fault-tolerant control of omnidirectional mobile robots",
+        "supervisor": "Dr. Samuel Gómez-Peñate",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Pedro GASGA GARCÍA",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/Gasga.jpg",
+        "generation": "Sep 2021 - Ago 2025",
+        "thesis": "Estimation of time-varying multiplicative actuator faults using convex observers",
+        "supervisor": "Dr. Samuel Gómez-Peñate",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Esvan de Jesús PÉREZ-PÉREZ",
+        "degree": "Ph.D. Graduate",
+        "photo": "../images/estudiantes/esvan.jpg",
+        "generation": "Gen: 2019 - 2023",
+        "thesis": "Fault diagnosis of wind turbines using machine learning techniques",
+        "supervisor": "Dr. Francisco Ronay López-Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Pedro AGUILAR ÁLVAREZ",
+        "degree": "Ph.D. Graduate",
+        "photo": "../images/estudiantes/peter.jpg",
+        "generation": "Gen: Feb 2019 - Jan 2023",
+        "thesis": "Active predictive vibration control of civil structures",
+        "supervisor": "Dr. Guillermo Valencia-Palomo",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Roberto BERMUDEZ HERNANDEZ",
+        "degree": "Ph.D. Graduate",
+        "photo": "../images/estudiantes/rober_PNG.png",
+        "generation": "Graduated Jan 2023",
+        "thesis": "Predictive control strategies for water-loss reduction in distribution networks",
+        "supervisor": "Dr. Francisco Ronay / Gipsa-Lab",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Norberto URBINA BRITO",
+        "degree": "Ph.D. Graduate",
+        "photo": "../images/estudiantes/Norberto.jpg",
+        "generation": "Gen: 2018 - 2022",
+        "thesis": "Estrategias de control colaborativos en robots móviles mediante enfoque MPC-LPV",
+        "supervisor": "Dr. Guillermo Valencia-Palomo",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Julio Alberto GÚZMAN RABASA",
+        "degree": "Ph.D. Graduate",
+        "photo": "../images/estudiantes/julio.jpg",
+        "generation": "Graduated Sep 2021",
+        "thesis": "Fault diagnosis based PI observers with nonquadratic Lyapunov functions",
+        "supervisor": "Dr. Francisco Ronay López-Estrada",
+        "graduated": true,
+        "scholar": "#"
     },
     {
         "name": "Ildeberto DE LOS SANTOS RUIZ",
         "degree": "Ph.D. Graduate",
-        "photo": "images/ildeberto.jpg",
+        "photo": "../images/estudiantes/ildeberto.jpg",
         "generation": "Graduated June 2021",
         "thesis": "Detection and location of leaks in pipeline networks through deep learning",
         "supervisor": "Dr. Francisco Ronay / Dr. Vicenç Puig",
         "graduated": true,
-        "scholar": "https://scholar.google.com"
+        "scholar": "https://scholar.google.com/citations?user=57203885724"
     },
     {
-        "name": "Pedro Paramo",
+        "name": "Samuel GÓMEZ PEÑATE",
         "degree": "Ph.D. Graduate",
-        "photo": "images/ildeberto.jpg",
-        "generation": "Graduated June 2021",
-        "thesis": "Detection and location of leaks in pipeline networks through deep learning",
-        "supervisor": "Dr. Francisco Ronay / Dr. Vicenç Puig",
+        "photo": "../images/Samuel.jpg",
+        "generation": "Graduated April 2021",
+        "thesis": "Fault-tolerant control of Takagi-Sugeno systems with inexact premise variables",
+        "supervisor": "Dr. Francisco Ronay / Dr. Guillermo Valencia",
         "graduated": true,
-        "scholar": "https://scholar.google.com"
+        "scholar": "#"
     }
 ]
