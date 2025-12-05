@@ -1,12 +1,272 @@
 [
     {
-        "name": "Juan PÉREZ (Ejemplo)",
+        "name": "Ing. Cristel Amairani Díaz Escalante",
         "degree": "M.Sc. Student",
-        "photo": "images/default-user.png",
-        "generation": "Sep 2023 - Ago 2025",
-        "thesis": "Control de motores eléctricos...",
-        "supervisor": "Dr. Guillermo Valencia",
+        "photo": "../images/estudiantes/Cristel.png",
+        "generation": "Current",
+        "thesis": "Diagnosis of leaks in water pipes using time-delayed state observers",
+        "supervisor": "Dr. Francisco Ronay López Estrada/ Dr. Raúl Villafuerte Segura",
         "graduated": false,
+        "scholar": "#"
+    },
+     {
+        "name": "Ing. Jośe Pablo Sánchez Morales",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Pablo.jpeg",
+        "generation": "Current",
+        "thesis": "Design of a control system for BLDC motors in an electric vehicle",
+        "supervisor": "Dr. Joaquin Dominguez Zenteno/ Dr. Jesús Medrano Hermosillo",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Jesús Rodrigo Martínez Trujillo",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Rodrigo.png",
+        "generation": "Current",
+        "thesis": "Design and implementation of a robust adaptive cruise control system for a three-wheeled electric vehicle",
+        "supervisor": "Dr. Samuel Gómez Peñate",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Marío Carreño Vallejo ",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Mario.png",
+        "generation": "Current",
+        "thesis": "Development of planning and navigation strategies for a fumigation robot using visual feedback",
+        "supervisor": "Dr.José Armando Fragoso Mandujano",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Lianet Consuegra Morales",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Lianet.png",
+        "generation": "Current",
+        "thesis": "Control of lateral dynamics of a electric vehicle using MPC-LPV techniques",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Yasmani González Cárdenas",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Yasmani.jpg",
+        "generation": "Current",
+        "thesis": "Collaborative control of a group of non-holonomic robots in a Leader-follower configuration",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Luis Daniel López Cansino",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Daniel.jpg",
+        "generation": "Current",
+        "thesis": "Path following control of omnidirectional mobile robots with Mecanum wheels",
+        "supervisor": "Dr. Samuel Gómez Peñate",
+        "graduated": false,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Luis Adán Sánchez Mejía",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/Adan.jpg",
+        "generation": "Current",
+        "thesis": "Adaptive observer for position estimation using acceleration measurements",
+        "supervisor": "Dr. Ildeberto de los Santos Ruiz",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Ing. Jesús Cabrera García",
+        "degree": "M.Sc. Student",
+        "photo": "../images/estudiantes/JCabrera.jpg",
+        "generation": "Current",
+        "thesis": "State-of-charge estimation of lithium batteries of an electric warehouse vehicle",
+        "supervisor": "M. C. José Ángel Zepeda Hernández / Dr. Jesús Manuel Pérez López",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Francisco MOLINA SANTIAGO",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/FcoMOlina.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Autonomous navigation of a differential-drive robot in a warehouse environment",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Víctor David Castillo González",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Victor.jpg",
+        "generation": "Graduated (International Fellowship)",
+        "thesis": "Integral sliding mode control of a 3DOF overhead crane",
+        "supervisor": "Dr. Samuel Gómez Peñate",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Leonardo GÓMEZ CORONEL",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Leonardo.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Digital twin for diagnosis and control of a hydraulic system",
+        "supervisor": "Dr. Ildeberto de los Santos Ruiz / Dra. Flor Lizeth Torres Ortíz",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Hugo Ancheyta López",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/hugo.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Fault estimation of rotor faults of an unmanned aerial vehicle by mean of PI observers",
+        "supervisor": "Dr. Samuel Gómez Peñate",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Alejandro Alvarado Algarín",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/alex.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Design and dynamic parameterization of a 1/10 scale electric vehicle",
+        "supervisor": "Dr. Francisco Ronay López Estrada / Prof. Vicenç Puig",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Marya Johara Márquez Zepeda",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Marya.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Indoor CO2 concentration monitoring and forecasting by deep learning",
+        "supervisor": "Dr. Ildeberto de los Santos Ruiz / M.C. Esvan de Jesús Pérez Pérez",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Pedro Gasga García",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Gasga.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Robust control of a helicopter unmanned aerial vehicle with suspended payload",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Francisco Rodríguez Sánchez",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Fco.jpg",
+        "generation": "Graduated (M.Sc.)",
+        "thesis": "Dynamic characterization of 3DOF mechanical crane",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Abner David Sánchez Jiménez",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Abner.jpg",
+        "generation": "Graduated",
+        "thesis": "Modeling of hydraulic distribution networks using Graph Theory and Hamiltonian formalism",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    
+    {
+        "name": "Helen Darias Hernández",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/helen_jfif.jpg",
+        "generation": "Graduated (International Fellowship)",
+        "thesis": "Collaborative control of mobile vehicles using convex techniques",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada / Dr. Vicenç Puig Cayuela",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Luis Alejandro Méndez López",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/alex.jpg",
+        "generation": "Graduated",
+        "thesis": "Detección de y localización de fallas an actuadores de cuad rotores mediante un enfoque combinando PCA y RNA",
+        "supervisor": "Francisco-Ronay López-Estrada / Ildeberto de los Santos Ruíz",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Antonio de Jesus Jimenez Mendoza",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Tonito.jpg",
+        "generation": "Graduated",
+        "thesis": "Control de un vehículo eléctrico con redes neuronales artificiales",
+        "supervisor": "Ms C. José Ángel Zepeda Hernández",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Oscar de los Santos Estudillo",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/oscar.jpg",
+        "generation": "Graduated",
+        "thesis": "Control tolerante a fallas de una grúa de tres grados de libertad mediante técnicas Takagi-Sugeno",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Arleth Cano Vázquez",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/Arleth.jpg",
+        "generation": "Graduated (CONACYT Project)",
+        "thesis": "Estimation of demands in water distribution networks with unknown input observers",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada / Dra. Flor Lizeth Torres Ortiz",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Noé Moisés Luna Aguilar",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/moises.jpg",
+        "generation": "Graduated",
+        "thesis": "Diseño de un freno regenerativo para motor tipo brushless",
+        "supervisor": "MSc. José Ángel Zepeda Hernández",
+        "graduated": true,
+        "scholar": "#"
+    },
+    {
+        "name": "Luis Beltran Farrera Díaz",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/beltran.jpg",
+        "generation": "Graduated",
+        "thesis": "Fault Tolerant Control For Multiagent Convex Systems",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada / Dr. Mohammed Chadli",
+        "graduated": true,
+        "scholar": "#"
+    },  {
+        "name": "Esvan de Jesús Pérez Pérez",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/swann_PNG.jpg",
+        "generation": "Graduated",
+        "thesis": "Fault diagnosis in pipeline by artificial neuronal networks techniques",
+        "supervisor": " Dr. Francisco-Ronay López-Estrada/ Dra. Lizeth Torres",
+        "graduated": true,
+        "scholar": "#"
+    },
+      {
+        "name": "Roberto Bermudez Hernández",
+        "degree": "M.Sc. Graduate",
+        "photo": "../images/estudiantes/rober_PNG.jpg",
+        "generation": "Graduated",
+        "thesis": "Pipeline leak diagnosis by considering an extended Kalman Filter",
+        "supervisor": "Dr. Francisco-Ronay López-Estrada ",
+        "graduated": true,
         "scholar": "#"
     }
 ]
