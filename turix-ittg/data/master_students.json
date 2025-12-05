@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Juan PÉREZ (Ejemplo)",
+        "degree": "M.Sc. Student",
+        "photo": "images/default-user.png",
+        "generation": "Sep 2023 - Ago 2025",
+        "thesis": "Control de motores eléctricos...",
+        "supervisor": "Dr. Guillermo Valencia",
+        "graduated": false,
+        "scholar": "#"
+    }
+]

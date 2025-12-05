@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Francisco MOLINA SANTIAGO",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/molina.jpg",
+        "generation": "Sep 2024 - Ago 2028",
+        "thesis": "Development of Low-Computational Cost ADAS Algorithms Using Model Predictive Control (MPC)",
+        "supervisor": "Dr. Francisco Ronay López Estrada",
+        "graduated": false,
+        "scholar": "https://scholar.google.com"
+    },
+    {
+        "name": "Ildeberto DE LOS SANTOS RUIZ",
+        "degree": "Ph.D. Graduate",
+        "photo": "images/ildeberto.jpg",
+        "generation": "Graduated June 2021",
+        "thesis": "Detection and location of leaks in pipeline networks through deep learning",
+        "supervisor": "Dr. Francisco Ronay / Dr. Vicenç Puig",
+        "graduated": true,
+        "scholar": "https://scholar.google.com"
+    },
+    {
+        "name": "Pedro Paramo",
+        "degree": "Ph.D. Graduate",
+        "photo": "images/ildeberto.jpg",
+        "generation": "Graduated June 2021",
+        "thesis": "Detection and location of leaks in pipeline networks through deep learning",
+        "supervisor": "Dr. Francisco Ronay / Dr. Vicenç Puig",
+        "graduated": true,
+        "scholar": "https://scholar.google.com"
+    }
+]
