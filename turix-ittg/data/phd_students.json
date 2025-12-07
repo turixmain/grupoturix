@@ -7,6 +7,8 @@
         "thesis": "Optimal predictive control based on LPV models with input reparameterization applied to mechatronic systems",
         "supervisor": "Dr. Guillermo Valencia Palomo",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -17,6 +19,8 @@
         "thesis": "Development of Low-Computational Cost ADAS Algorithms Using Model Predictive Control (MPC)",
         "supervisor": "Dr. Francisco Ronay López Estrada /Dr. Vicenç Puig Cayuela",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -27,7 +31,10 @@
         "thesis": "Fault diagnosis of nonhomogeneous multiagent systems",
         "supervisor": "Dr. Francisco Ronay López Estrada/Dr. Víctor Estrada Manzo",
         "graduated": false,
-        "scholar": "#"
+        "email": "dariashelen93@gmail.com",
+        "orcid": "https://orcid.org/0009-0008-5144-1443",
+        "linkedin": "www.linkedin.com/in/helen-darias-83522b258",
+        "scholar": "https://scholar.google.com/citations?user=MNFshPwAAAAJ&hl=es"
     },
     {
         "name": "Alejandro ALVARADO-ALGARIN",
@@ -37,6 +44,8 @@
         "thesis": "Robust Fault Tolerant Control of Autonomous Vehicles using LPV Models and Virtual Actuators",
         "supervisor": "Dr. Francisco Ronay López Estrada/Dr. Olivier Sename",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -47,12 +56,14 @@
         "thesis": "Leak diagnosis in hydraulic networks using neural networks with delays",
         "supervisor": "Dr. Ildeberto de los Santos-Ruiz/ Dr. Joaquim Blessa",
         "graduated": false,
-        "scholar": "#"
+        "email": "leonardogmzco@hotmail.com",
+        "orcid": "https://orcid.org/0000-0003-1194-2135",
+        "scholar": "https://scholar.google.com/citations?hl=es&user=yYoXhqIAAAAJ"
     },
         {
         "name": "José Ángelz ZEPEDA-HERNÁNDEZ",
         "degree": "Ph.D. Student",
-        "photo": "../images/estudiantes/Zepeda.jpg",
+        "photo": "../images/estudiantes/Zepeda.jpeg",
         "generation": "Sep 2023 - Ago 2027",
         "thesis": "Navegación autónoma de un robot de almacén mediante aprendizaje por refuerzo",
         "supervisor": "Dr. Ildeberto de los Santos-Ruiz/ Dr. Vicena Parra Vega",
@@ -68,6 +79,8 @@
         "thesis": "Control of nonlinear mechatronic systems through deep reinforced learning",
         "supervisor": "Dr. Ildeberto de los Santos ",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -78,6 +91,8 @@
         "thesis": "Fault-tolerant control of omnidirectional mobile robots",
         "supervisor": "Dr. Samuel Gómez-Peñate",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -88,6 +103,8 @@
         "thesis": "Estimation of time-varying multiplicative actuator faults using convex observers",
         "supervisor": "Dr. Samuel Gómez-Peñate",
         "graduated": false,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -98,6 +115,8 @@
         "thesis": "Fault diagnosis of wind turbines using machine learning techniques",
         "supervisor": "Dr. Francisco Ronay López-Estrada",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -108,6 +127,8 @@
         "thesis": "Active predictive vibration control of civil structures",
         "supervisor": "Dr. Guillermo Valencia-Palomo",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -118,6 +139,8 @@
         "thesis": "Predictive control strategies for water-loss reduction in distribution networks",
         "supervisor": "Dr. Francisco Ronay / Gipsa-Lab",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -128,6 +151,8 @@
         "thesis": "Estrategias de control colaborativos en robots móviles mediante enfoque MPC-LPV",
         "supervisor": "Dr. Guillermo Valencia-Palomo",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -138,6 +163,8 @@
         "thesis": "Fault diagnosis based PI observers with nonquadratic Lyapunov functions",
         "supervisor": "Dr. Francisco Ronay López-Estrada",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     },
     {
@@ -148,6 +175,8 @@
         "thesis": "Detection and location of leaks in pipeline networks through deep learning",
         "supervisor": "Dr. Francisco Ronay / Dr. Vicenç Puig",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "https://scholar.google.com/citations?user=57203885724"
     },
     {
@@ -158,6 +187,8 @@
         "thesis": "Fault-tolerant control of Takagi-Sugeno systems with inexact premise variables",
         "supervisor": "Dr. Francisco Ronay / Dr. Guillermo Valencia",
         "graduated": true,
+        "email": "#",
+        "orcid": "#",
         "scholar": "#"
     }
 ]
