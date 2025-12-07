@@ -49,6 +49,17 @@
         "graduated": false,
         "scholar": "#"
     },
+        {
+        "name": "José Ángelz ZEPEDA-HERNÁNDEZ",
+        "degree": "Ph.D. Student",
+        "photo": "../images/estudiantes/Zepeda.jpg",
+        "generation": "Sep 2023 - Ago 2027",
+        "thesis": "Navegación autónoma de un robot de almacén mediante aprendizaje por refuerzo",
+        "supervisor": "Dr. Ildeberto de los Santos-Ruiz/ Dr. Vicena Parra Vega",
+        "graduated": false,
+        "Email": "jose.zh@tuxtla.tecnm.mx",
+        "scholar": "https://scholar.google.com/citations?user=XAu7XYQAAAAJ&hl=en&oi=ao"
+    },
     {
         "name": "Francisco RODRIGUEZ-SÁNCHEZ",
         "degree": "Ph.D. Student",
