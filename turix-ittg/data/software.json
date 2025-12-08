@@ -1,11 +1,20 @@
 [
+      {
+        "name": "Dynamic Systems Laboratory -TURIX ",
+        "description": "Virtual laboratory for dynamic systems (pendulum, bioreactor, mass-spring damper). Simulate physics and learn to control them with LQR and PID.",
+        "image": "data/images/labturix.png",
+        "language": "Python",
+        "tags": ["LPV", "Fault Diagnosis", "Descriptor Systems", "Scilab"],
+        "website": "https://turixlab.lovable.app/",
+        "github": "https://github.com/turixmain/LabTURIX"
+    },
     {
         "name": "DeCaToKi",
-        "description": "Descriptor and LPV Systems Calculation Tool Kit. Scilab Toolbox that includes observer design, stability, control and fault diagnosis functions for descriptor LTI and LPV (convex, Takagi-Sugeno) systems.",
+        "description": "",
         "image": "images/software/decatoki.png",
         "language": "Scilab",
         "tags": ["LPV", "Fault Diagnosis", "Descriptor Systems", "Scilab"],
-        "docs": "https://atoms.scilab.org/toolboxes/DeCaToKi/0.9.1"
+        "website": "https://atoms.scilab.org/toolboxes/DeCaToKi/0.9.1"
     },
     {
         "name": "Pressure Sensor Placement",
@@ -18,6 +27,16 @@
     },
     {
         "name": "Análisis hidráulico y simulación de fugas",
+        "description": "Tutorial completo sobre cómo usar el EPANET-MATLAB Toolkit (EMT) para simular fugas y evaluar su impacto en la presión y caudal de redes de distribución de agua.",
+        "image": "data/images/red.png",
+        "language": "MATLAB",
+        "tags": ["Hydraulics", "EPANET", "Tutorial", "Leak simulation"],
+        "github": "https://github.com/OpenWaterAnalytics/EPANET-Matlab-Toolkit",
+        "docs": "https://medium.com/@ildeberto.dr/an%C3%A1lisis-hidr%C3%A1ulico-y-simulaci%C3%B3n-de-fugas-en-redes-de-distribuci%C3%B3n-de-agua-XXXXX"
+          
+    },
+       {
+        "name": "Simulación de Biorreactor de Cultivo Continuo",
         "description": "Tutorial completo sobre cómo usar el EPANET-MATLAB Toolkit (EMT) para simular fugas y evaluar su impacto en la presión y caudal de redes de distribución de agua.",
         "image": "data/images/red.png",
         "language": "MATLAB",

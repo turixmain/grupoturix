@@ -11,7 +11,8 @@
     <style>
         /* --- VARIABLES --- */
         :root {
-            --primary: #0a2e52; --accent: #00d2ff; --bg-dark: #0b0f19;
+            --primary: #0a2e52; --accent: #00d2ff; --accent-grad: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --dark: #1a1a1a; --bg-dark: #0b0f19;
             --glass: rgba(11, 15, 25, 0.95); --card-bg: #151a25; --text-main: #ffffff;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,7 +20,7 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* HEADER & NAV (Igual al resto) */
+        /* HEADER & NAV */
         .top-bar {
             position: sticky; top: 0; width: 100%; padding: 10px 5%; display: flex; justify-content: space-between;
             align-items: center; background: var(--glass); backdrop-filter: blur(10px); z-index: 1000;
@@ -54,15 +55,13 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;
         }
 
-        /* TARJETA DE SOFTWARE */
+        /* TARJETA */
         .soft-card {
             background: var(--card-bg); border-radius: 20px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; position: relative;
             display: flex; flex-direction: column;
         }
-        .soft-card:hover {
-            transform: translateY(-10px); box-shadow: 0 0 30px rgba(0, 210, 255, 0.15); border-color: var(--accent);
-        }
+        .soft-card:hover { transform: translateY(-10px); box-shadow: 0 0 30px rgba(0, 210, 255, 0.15); border-color: var(--accent); }
 
         .soft-img {
             width: 100%; height: 200px; overflow: hidden; position: relative;
@@ -71,7 +70,7 @@
         .soft-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .soft-card:hover .soft-img img { transform: scale(1.1); }
 
-        /* Badge de lenguaje flotante */
+        /* Badge de lenguaje */
         .lang-badge {
             position: absolute; top: 15px; right: 15px; padding: 5px 12px; border-radius: 6px;
             font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
@@ -79,6 +78,7 @@
         }
         .lang-python { background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
         .lang-matlab { background: linear-gradient(135deg, #e16737 0%, #cc4818 100%); color: white; }
+        .lang-scilab { background: linear-gradient(135deg, #007dad 0%, #005a7d 100%); color: white; }
         .lang-cpp { background: #00599c; color: white; }
         .lang-default { background: var(--accent); color: var(--bg-dark); }
 
@@ -86,13 +86,10 @@
         .soft-content h3 { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; margin-bottom: 10px; color: white; }
         .soft-content p { color: #aaa; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
 
-        /* Tags pequeños */
         .tags-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
-        .mini-tag {
-            font-size: 0.75rem; color: #fff; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 50px;
-        }
+        .mini-tag { font-size: 0.75rem; color: #fff; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 50px; }
 
-        /* Botones de acción */
+        /* BOTONES */
         .soft-actions {
             display: flex; gap: 15px; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
         }
@@ -136,7 +133,7 @@
                 <li><a href="mastersturix.html">Master Students</a></li>
                 <li><a href="projects-turix.html">Projects</a></li>
                 <li><a href="publications-turix.html">Publications</a></li>
-                
+                <li><a href="software.html" class="active">Software</a></li>
             </ul>
         </nav>
     </div>
@@ -159,11 +156,11 @@
     <script>
         const dbUrl = 'data/software.json';
 
-        // Función para asignar color según lenguaje
         function getLangClass(lang) {
             const l = lang.toLowerCase();
             if(l.includes('python')) return 'lang-python';
             if(l.includes('matlab')) return 'lang-matlab';
+            if(l.includes('scilab')) return 'lang-scilab';
             if(l.includes('c++') || l.includes('cpp')) return 'lang-cpp';
             return 'lang-default';
         }
@@ -176,7 +173,6 @@
                 container.innerHTML = '';
 
                 items.forEach(item => {
-                    // Generar tags
                     let tagsHTML = '';
                     if(item.tags) {
                         item.tags.forEach(tag => {
@@ -184,14 +180,23 @@
                         });
                     }
 
-                    // Determinar links
+                    // Botón GitHub
                     const githubLink = (item.github && item.github !== '#') 
                         ? `<a href="${item.github}" target="_blank" class="btn-code"><i class="fab fa-github"></i> GitHub</a>`
                         : `<span class="btn-code" style="opacity:0.5; cursor:not-allowed;"><i class="fab fa-github"></i> Private</span>`;
 
-                    const docsLink = (item.docs && item.docs !== '#')
-                        ? `<a href="${item.docs}" target="_blank" class="btn-primary"><i class="fas fa-book"></i> Docs</a>`
-                        : `<a href="#" class="btn-primary" style="opacity:0.7;"><i class="fas fa-download"></i> Download</a>`;
+                    // LÓGICA CORREGIDA PARA BOTÓN SECUNDARIO
+                    // 1. Si hay website, muestra Website
+                    // 2. Si no, si hay docs, muestra Docs
+                    // 3. Si no, muestra Info (deshabilitado)
+                    let secondaryLink = '';
+                    if (item.website && item.website !== '#') {
+                        secondaryLink = `<a href="${item.website}" target="_blank" class="btn-primary"><i class="fas fa-globe"></i> Website</a>`;
+                    } else if (item.docs && item.docs !== '#') {
+                        secondaryLink = `<a href="${item.docs}" target="_blank" class="btn-primary"><i class="fas fa-book"></i> Docs</a>`;
+                    } else {
+                        secondaryLink = `<a href="#" class="btn-primary" style="opacity:0.7; pointer-events:none; background:#555;"><i class="fas fa-info-circle"></i> Info</a>`;
+                    }
 
                     const html = `
                         <div class="soft-card">
@@ -206,7 +211,7 @@
                                 
                                 <div class="soft-actions">
                                     ${githubLink}
-                                    ${docsLink}
+                                    ${secondaryLink}
                                 </div>
                             </div>
                         </div>
