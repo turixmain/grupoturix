@@ -1,0 +1,29 @@
+[
+    {
+        "name": "DeCaToKi",
+        "description": "Descriptor and LPV Systems Calculation Tool Kit. Scilab Toolbox that includes observer design, stability, control and fault diagnosis functions for descriptor LTI and LPV (convex, Takagi-Sugeno) systems.",
+        "image": "images/software/decatoki.png",
+        "language": "Scilab",
+        "tags": ["LPV", "Fault Diagnosis", "Descriptor Systems", "Scilab"],
+        "docs": "https://atoms.scilab.org/toolboxes/DeCaToKi/0.9.1"
+    },
+    {
+        "name": "Pressure Sensor Placement",
+        "description": "Data files and MATLAB code for optimal placement of pressure sensors in water distribution networks.",
+        "image": "data/images/network.png",
+        "language": "MATLAB",
+        "tags": ["Water Networks", "Optimization", "Sensors"],
+        "github": "https://github.com/isantosruiz/placement",
+        "docs": "#"
+    },
+    {
+        "name": "Análisis hidráulico y simulación de fugas",
+        "description": "Tutorial completo sobre cómo usar el EPANET-MATLAB Toolkit (EMT) para simular fugas y evaluar su impacto en la presión y caudal de redes de distribución de agua.",
+        "image": "data/images/red.png",
+        "language": "MATLAB",
+        "tags": ["Hydraulics", "EPANET", "Tutorial", "Leak simulation"],
+        "github": "https://github.com/OpenWaterAnalytics/EPANET-Matlab-Toolkit",
+        "docs": "https://medium.com/@ildeberto.dr/an%C3%A1lisis-hidr%C3%A1ulico-y-simulaci%C3%B3n-de-fugas-en-redes-de-distribuci%C3%B3n-de-agua-XXXXX"
+          
+    }
+]
