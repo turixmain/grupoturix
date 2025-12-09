@@ -127,8 +127,7 @@
         <p>&copy; 2024 TURIX DYNAMICS - IT Tuxtla Gutiérrez, México.</p>
     </footer>
 
-    <script>
-        // Ruta al JSON (Como está en la misma carpeta turix-ittg, no lleva ../)
+   <script>
         const dbUrl = 'data/phd_students.json'; 
 
         async function loadStudents() {
@@ -143,9 +142,47 @@
                 if(graduatedContainer) graduatedContainer.innerHTML = '';
 
                 students.forEach(student => {
+                    // --- AQUÍ ESTÁ LA MAGIA DE LOS ICONOS ---
+                    let socialHTML = '<div style="margin-top:15px; display:flex; gap:12px;">';
+
+                    // 1. Email
+                    if (student.email && student.email !== '#') {
+                        socialHTML += `
+                            <a href="mailto:${student.email}" title="Email Contact" style="color:#aaa; font-size:1.1rem; transition:0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#aaa'">
+                                <i class="fas fa-envelope"></i>
+                            </a>`;
+                    }
+
+                    // 2. LinkedIn
+                    if (student.linkedin && student.linkedin !== '#') {
+                        socialHTML += `
+                            <a href="${student.linkedin}" target="_blank" title="LinkedIn Profile" style="color:#aaa; font-size:1.1rem; transition:0.3s;" onmouseover="this.style.color='#0077b5'" onmouseout="this.style.color='#aaa'">
+                                <i class="fab fa-linkedin"></i>
+                            </a>`;
+                    }
+
+                    // 3. ORCID
+                    if (student.orcid && student.orcid !== '#') {
+                        socialHTML += `
+                            <a href="${student.orcid}" target="_blank" title="ORCID Profile" style="color:#aaa; font-size:1.1rem; transition:0.3s;" onmouseover="this.style.color='#a6ce39'" onmouseout="this.style.color='#aaa'">
+                                <i class="fab fa-orcid"></i>
+                            </a>`;
+                    }
+
+                    // 4. Google Scholar
+                    if (student.scholar && student.scholar !== '#') {
+                        socialHTML += `
+                            <a href="${student.scholar}" target="_blank" title="Google Scholar" style="color:#aaa; font-size:1.1rem; transition:0.3s;" onmouseover="this.style.color='#4285F4'" onmouseout="this.style.color='#aaa'">
+                                <i class="fas fa-graduation-cap"></i>
+                            </a>`;
+                    }
+
+                    socialHTML += '</div>';
+                    // ----------------------------------------
+
                     const cardHTML = `
                         <div class="student-card">
-                            <img src="${student.photo}" alt="${student.name}" class="student-img" onerror="this.src='../images/default-user.png'">
+                            <img src="${student.photo}" alt="${student.name}" class="student-img" onerror="this.src='images/default-user.png'">
                             <div class="student-info">
                                 <small style="color:var(--accent); font-weight:bold; letter-spacing:1px; text-transform:uppercase;">${student.degree}</small>
                                 
@@ -154,14 +191,7 @@
                                 <p class="thesis-title">"${student.thesis}"</p>
                                 <span class="supervisor"><strong>Supervisor:</strong> ${student.supervisor}</span>
                                 
-                                ${student.scholar && student.scholar !== '#' ? 
-                                    `<div style="margin-top:10px;">
-                                        <a href="${student.scholar}" target="_blank" style="color:#aaa; font-size:0.8rem; text-decoration:none; transition:0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#aaa'">
-                                            <i class="fas fa-graduation-cap"></i> Google Scholar
-                                        </a>
-                                     </div>` 
-                                    : ''}
-                            </div>
+                                ${socialHTML} </div>
                         </div>
                     `;
 
@@ -174,13 +204,10 @@
 
             } catch (error) {
                 console.error('Error cargando estudiantes:', error);
-                const currentContainer = document.getElementById('current-students-container');
-                if(currentContainer) currentContainer.innerHTML = '<p style="color:red;">Error cargando datos. Verifica el archivo data/phd_students.json</p>';
             }
         }
 
         document.addEventListener('DOMContentLoaded', loadStudents);
     </script>
-
 </body>
 </html>
