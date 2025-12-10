@@ -37,12 +37,18 @@
     },
        {
         "name": "Simulación de Biorreactor de Cultivo Continuo",
-        "description": "Tutorial completo sobre cómo usar el EPANET-MATLAB Toolkit (EMT) para simular fugas y evaluar su impacto en la presión y caudal de redes de distribución de agua.",
-        "image": "data/images/red.png",
-        "language": "MATLAB",
-        "tags": ["Hydraulics", "EPANET", "Tutorial", "Leak simulation"],
-        "github": "https://github.com/OpenWaterAnalytics/EPANET-Matlab-Toolkit",
-        "docs": "https://medium.com/@ildeberto.dr/an%C3%A1lisis-hidr%C3%A1ulico-y-simulaci%C3%B3n-de-fugas-en-redes-de-distribuci%C3%B3n-de-agua-XXXXX"
-          
+        "description": "Simulador virtual de un biorreactor de Cultivo Continuo en Python.",
+        "image": "data/images/Biorreactor.png",
+        "language": "Python",
+        "tags": ["Biorreactor", "CTR Reactor"],
+        "github": "https://github.com/OpenWaterAnalytics/EPANET-Matlab-Toolkit" 
+    },
+    {
+        "name": "PID Tuner",
+        "description": "Advanced PID controller desgin and tunning using multiple methods including Ziegler-Nichos, Cohen-Coon, Tyreus-Luyben and AMIGO",
+        "image": "data/images/pid.png",
+        "language": "Lovable",
+        "tags": ["PID tunner", "PID Controller", "Ziegler-Nichols", "AMIGO-Skogestad"],
+        "website": "https://turixlab.lovable.app/"
     }
 ]
