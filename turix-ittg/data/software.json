@@ -10,7 +10,7 @@
     },
     {
         "name": "DeCaToKi",
-        "description": "",
+        "description": " This work discusses the development of a MATLAB/SCILAB toolbox for systems modeled in the LTI or LPV descriptor framework",
         "image": "images/software/decatoki.png",
         "language": "Scilab",
         "tags": ["LPV", "Fault Diagnosis", "Descriptor Systems", "Scilab"],

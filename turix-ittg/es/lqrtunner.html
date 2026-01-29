@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LQR Studio: Herramienta Educativa</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        :root { --primary: #2980b9; --bg: #f4f6f7; --panel: #ffffff; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        
+        .layout { display: grid; grid-template-columns: 350px 1fr; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        
+        /* Paneles */
+        .panel { background: var(--panel); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h2 { margin-top: 0; font-size: 1.1rem; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        /* Inputs Matriciales */
+        .matrix-input-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        textarea { width: 100%; height: 60px; font-family: monospace; padding: 8px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+        .help-text { font-size: 0.75rem; color: #7f8c8d; margin-top: 2px; }
+
+        /* Sliders */
+        .tuning-controls { display: flex; flex-direction: column; gap: 10px; }
+        .slider-row { display: flex; align-items: center; justify-content: space-between; }
+        input[type=range] { flex-grow: 1; margin: 0 10px; }
+        .val-badge { background: #eee; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; min-width: 40px; text-align: center;}
+
+        /* Explicación Matemática */
+        .math-block { background: #fff; padding: 15px; border-left: 4px solid var(--primary); margin: 10px 0; overflow-x: auto; }
+        .matrix-display { font-family: monospace; white-space: pre; background: #f8f9fa; padding: 10px; border-radius: 4px; font-size: 0.85rem; }
+
+        button.btn-update { width: 100%; background: var(--primary); color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s; }
+        button.btn-update:hover { background: #1f6391; }
+
+        /* Gráficas */
+        .chart-wrapper { height: 350px; position: relative; }
+        
+        .error-msg { color: #c0392b; font-weight: bold; padding: 10px; display: none; background: #fadbd8; border-radius: 4px; margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center; color:#2c3e50;">LQR Studio: Control Óptimo en Espacio de Estados</h1>
+
+<div class="layout">
+    
+    <div class="left-col">
+        <div class="panel">
+            <h2>1. Definir Sistema (Espacio de Estados)</h2>
+            <div id="error-box" class="error-msg"></div>
+            
+            <div class="matrix-input-group">
+                <label>Matriz A (Dinámica del Sistema)</label>
+                <textarea id="input-A">0 1&#10;-2 -1</textarea> <div class="help-text">Sintaxis MATLAB: filas separadas por enter o ;</div>
+            </div>
+
+            <div class="matrix-input-group">
+                <label>Matriz B (Entrada de Control)</label>
+                <textarea id="input-B">0&#10;1</textarea>
+            </div>
+
+            <div class="matrix-input-group">
+                <label>Matriz C (Salida Observada)</label>
+                <textarea id="input-C">1 0</textarea>
+            </div>
+
+            <button class="btn-update" onclick="parseAndInit()">🔄 Cargar Modelo</button>
+        </div>
+
+        <div class="panel" id="tuning-panel">
+            <h2>2. Sintonización LQR (Pesos)</h2>
+            <p style="font-size:0.85rem; color:#666;">Ajusta la importancia de cada estado (Q) vs el costo de energía (R).</p>
+            <div id="sliders-container" class="tuning-controls">
+                </div>
+        </div>
+    </div>
+
+    <div class="right-col">
+        <div class="panel">
+            <h2>3. Respuesta al Escalón (Lazo Cerrado)</h2>
+            <div class="chart-wrapper">
+                <canvas id="responseChart"></canvas>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>4. ¿Cómo funciona esto? (Paso a Paso)</h2>
+            
+            <p><strong>Paso A: Definir la Función de Costo (J)</strong><br>
+            Buscamos minimizar el error en los estados ($x$) y el uso de energía ($u$):</p>
+            <div class="math-block">
+                $$J = \int_{0}^{\infty} (x^T Q x + u^T R u) dt$$
+            </div>
+            
+            <p><strong>Paso B: Tus Matrices de Ponderación Actuales</strong><br>
+            Basado en los sliders, el algoritmo usa:</p>
+            <div style="display:flex; gap:20px;">
+                <div>
+                    <strong>Q (Penalización de Estados):</strong>
+                    <div id="disp-Q" class="matrix-display">[ ... ]</div>
+                </div>
+                <div>
+                    <strong>R (Costo de Entrada):</strong>
+                    <div id="disp-R" class="matrix-display">[ ... ]</div>
+                </div>
+            </div>
+
+            <p><strong>Paso C: Resolver la Ecuación de Riccati</strong><br>
+            El navegador resuelve numéricamente la ecuación para encontrar la matriz $P$:</p>
+            <div class="math-block">
+                $$A^T P + P A - P B R^{-1} B^T P + Q = 0$$
+            </div>
+
+            <p><strong>Paso D: Calcular la Ganancia Óptima (K)</strong><br>
+            Finalmente, la ley de control $u = -Kx$ se calcula como $K = R^{-1}B^TP$:</p>
+            <div class="math-block" style="background:#e8f8f5; border-color:#1abc9c;">
+                $$K_{calculada} = \mathbf{\begin{bmatrix} <span id="disp-K">...</span> \end{bmatrix}}$$
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- VARIABLES GLOBALES ---
+    let chart;
+    let sysA, sysB, sysC; // Matrices MathJS
+    let nStates, nInputs;
+    
+    // Configuración Inicial de MathJS
+    const { matrix, multiply, transpose, inv, add, subtract, identity } = math;
+
+    // --- INICIALIZACIÓN ---
+    window.onload = function() {
+        initChart();
+        parseAndInit(); // Carga inicial
+    };
+
+    function initChart() {
+        const ctx = document.getElementById('responseChart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    { label: 'Salida (y)', data: [], borderColor: '#2980b9', borderWidth: 2.5, pointRadius: 0 },
+                    { label: 'Referencia (r)', data: [], borderColor: '#333', borderDash: [5,5], borderWidth: 1, pointRadius: 0 },
+                    { label: 'Control (u)', data: [], borderColor: '#e74c3c', borderWidth: 1.5, pointRadius: 0, yAxisID: 'y_control' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false,
+                interaction: { mode: 'index', intersect: false },
+                scales: {
+                    x: { title: { display: true, text: 'Tiempo (s)' } },
+                    y: { title: { display: true, text: 'Amplitud Salida' } },
+                    y_control: { position: 'right', title: { display: true, text: 'Esfuerzo Control' }, grid: { drawOnChartArea: false } }
+                }
+            }
+        });
+    }
+
+    // --- PARSEO DE ENTRADA ---
+    function parseAndInit() {
+        const errBox = document.getElementById('error-box');
+        errBox.style.display = 'none';
+
+        try {
+            // Función auxiliar para leer formato Matlab "[1 2; 3 4]" o líneas
+            const parseMat = (str) => {
+                let s = str.trim().replace(/\[|\]/g, ''); // Quitar corchetes
+                let rows = s.split(/;|\n/); // Separar por ; o enter
+                return rows.map(r => r.trim().split(/\s+/).map(Number)); // Separar por espacios
+            };
+
+            const rawA = parseMat(document.getElementById('input-A').value);
+            const rawB = parseMat(document.getElementById('input-B').value);
+            const rawC = parseMat(document.getElementById('input-C').value);
+
+            // Convertir a objetos MathJS para validación
+            sysA = matrix(rawA);
+            sysB = matrix(rawB);
+            sysC = matrix(rawC);
+
+            const sizeA = sysA.size();
+            nStates = sizeA[0];
+            const sizeB = sysB.size();
+            nInputs = sizeB[1];
+
+            // Validaciones básicas
+            if(sizeA[0] !== sizeA[1]) throw "La matriz A debe ser cuadrada.";
+            if(sizeB[0] !== nStates) throw `La matriz B debe tener ${nStates} filas.`;
+            
+            // Generar Sliders dinámicamente
+            createSliders(nStates);
+            
+            // Ejecutar primer cálculo
+            updateLQR();
+
+        } catch (e) {
+            errBox.innerText = "Error en matrices: " + e;
+            errBox.style.display = 'block';
+        }
+    }
+
+    // --- CREACIÓN DE SLIDERS DINÁMICOS ---
+    function createSliders(n) {
+        const container = document.getElementById('sliders-container');
+        container.innerHTML = ''; // Limpiar
+
+        // Sliders para Diagonal Q (uno por estado)
+        for(let i=0; i<n; i++) {
+            const row = document.createElement('div');
+            row.className = 'slider-row';
+            row.innerHTML = `
+                <label style="width:120px">Q<sub>${i+1},${i+1}</sub> (Estado ${i+1})</label>
+                <input type="range" id="slider-q${i}" min="0" max="100" value="${i===0 ? 10 : 1}" step="0.1" oninput="updateLQR()">
+                <span class="val-badge" id="val-q${i}">10</span>
+            `;
+            container.appendChild(row);
+        }
+
+        // Slider para R (asumimos SISO o R diagonal igual para simplificar UI)
+        const rowR = document.createElement('div');
+        rowR.className = 'slider-row';
+        rowR.innerHTML = `
+            <label style="width:120px; color:#c0392b">R (Costo Energía)</label>
+            <input type="range" id="slider-r" min="0.01" max="10" value="1" step="0.01" oninput="updateLQR()">
+            <span class="val-badge" id="val-r">1</span>
+        `;
+        container.appendChild(rowR);
+    }
+
+    // --- NÚCLEO MATEMÁTICO: SOLVER LQR ---
+    function updateLQR() {
+        // 1. Construir Q y R desde sliders
+        let q_diag = [];
+        for(let i=0; i<nStates; i++) {
+            let val = parseFloat(document.getElementById(`slider-q${i}`).value);
+            q_diag.push(val);
+            document.getElementById(`val-q${i}`).innerText = val;
+        }
+        let r_val = parseFloat(document.getElementById('slider-r').value);
+        document.getElementById('val-r').innerText = r_val;
+
+        const Q = math.diag(q_diag);
+        const R = matrix([[r_val]]); // Simplificación para SISO, escalar 1x1
+
+        // 2. Mostrar matrices en sección educativa
+        document.getElementById('disp-Q').innerText = formatMatrix(Q);
+        document.getElementById('disp-R').innerText = formatMatrix(R);
+
+        // 3. Resolver Riccati (Integración temporal hasta estado estacionario)
+        // dP/dt = A'P + PA - P B R^-1 B' P + Q = 0
+        let P = Q; // Condición inicial
+        const dt = 0.005;
+        const Rinv = inv(R);
+        
+        // Iteraciones para convergencia (Pseudo-simulación de la Ecuación Diferencial de Riccati)
+        for(let k=0; k<2000; k++) {
+            // Termino cuadrático: P * B * Rinv * B' * P
+            let termQuad = multiply(P, sysB, Rinv, transpose(sysB), P);
+            
+            // Termino lineal: A'P + PA
+            let termLin = add(multiply(transpose(sysA), P), multiply(P, sysA));
+            
+            // Derivada
+            let dP = add(subtract(termLin, termQuad), Q);
+            
+            // Euler update
+            P = add(P, multiply(dP, dt));
+        }
+
+        // 4. Calcular K = R^-1 B' P
+        const K = multiply(Rinv, transpose(sysB), P);
+        
+        // Mostrar K
+        document.getElementById('disp-K').innerText = K.toArray()[0].map(v => v.toFixed(3)).join(" &nbsp; ");
+
+        // 5. Calcular Prealimentación N (Para seguimiento de referencia)
+        // N = -1 / (C * (A-BK)^-1 * B)
+        // A_cl = A - B*K
+        const BK = multiply(sysB, K);
+        const A_cl = subtract(sysA, BK);
+        
+        let N_bar = 1;
+        try {
+            const CAclInvB = multiply(sysC, inv(A_cl), sysB).get([0,0]);
+            N_bar = -1 / CAclInvB;
+        } catch(e) { N_bar = 0; } // Si es singular
+
+        // 6. Simular Respuesta temporal
+        simulateResponse(A_cl, N_bar, K);
+    }
+
+    function simulateResponse(A_cl, N, K) {
+        let t = 0, dt = 0.02, T_final = 10;
+        let x = math.zeros(nStates, 1); // Estado inicial 0
+        let y_arr = [], u_arr = [], t_arr = [], ref_arr = [];
+        let ref = 1; // Escalón unitario
+
+        for(let i=0; i <= T_final/dt; i++) {
+            // Salida y = Cx
+            let y = multiply(sysC, x).get([0,0]);
+            
+            // Control u = -Kx + N*r
+            let u_feedback = multiply(K, x).get([0,0]);
+            let u = -u_feedback + N * ref;
+
+            // Derivada dx = A_cl*x + B*N*r
+            // dx = (A-BK)x + B*N*r
+            let dx = add(multiply(A_cl, x), multiply(sysB, N*ref));
+
+            // Euler Integration
+            x = add(x, multiply(dx, dt));
+
+            t_arr.push(t.toFixed(2));
+            y_arr.push(y);
+            u_arr.push(u);
+            ref_arr.push(ref);
+            t += dt;
+        }
+
+        // Actualizar ChartJS
+        chart.data.labels = t_arr;
+        chart.data.datasets[0].data = y_arr;
+        chart.data.datasets[1].data = ref_arr;
+        chart.data.datasets[2].data = u_arr;
+        chart.update();
+    }
+
+    // Auxiliar para formatear texto de matrices
+    function formatMatrix(m) {
+        return m.toArray().map(row => 
+            row.map(val => val.toFixed(2).padStart(6)).join("  ")
+        ).join("\n");
+    }
+
+</script>
+
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+  };
+</script>
+
+</body>
+</html>
