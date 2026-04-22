@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TURIX DYNAMICS | Capacitación Avanzada en Ingeniería</title>
+  <meta name="description" content="Oferta de cursos de alta especialización en MATLAB, Simulink, Python, IA, automatización, SolidWorks, LabVIEW, PLC, diagnóstico de fallas, termodinámica, EPANET y escritura científica." />
+  <link rel="alternate" hreflang="es" href="https://www.grupoturix.com/capacitacion.html" />
+  <link rel="alternate" hreflang="en" href="https://www.grupoturix.com/en/training.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.grupoturix.com/capacitacion.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0a2e52;
+      --primary-2: #123e6e;
+      --accent: #00d2ff;
+      --accent-2: #3a7bd5;
+      --bg: #f4f7fb;
+      --text: #22303c;
+      --muted: #64748b;
+      --white: #ffffff;
+      --border: rgba(10, 46, 82, 0.08);
+      --shadow: 0 18px 50px rgba(10, 46, 82, 0.12);
+      --shadow-soft: 0 10px 30px rgba(10, 46, 82, 0.08);
+      --gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+      --radius: 24px;
+      --container: 1220px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 84px 0; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--accent-2);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 34px;
+      height: 2px;
+      background: var(--gradient);
+      border-radius: 999px;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.08; }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 34px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: var(--primary);
+      max-width: 760px;
+    }
+
+    .section-subtitle {
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.03rem;
+    }
+
+    header {
+      position: relative;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 210, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(58, 123, 213, 0.22), transparent 22%),
+        linear-gradient(135deg, #082643 0%, #0a2e52 45%, #123e6e 100%);
+      overflow: hidden;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 46, 82, 0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .top-bar-inner {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+      min-height: 84px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo-container img {
+      height: 60px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    .brand-name h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .brand-name span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      color: #8fe7ff;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-menu ul {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+
+    .nav-menu a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active { color: #ffffff; }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after { width: 100%; }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .lang-switch a {
+      min-width: 42px;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.86);
+    }
+
+    .lang-switch a.active {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .hero {
+      padding: 84px 0 124px;
+      position: relative;
+    }
+
+    .hero-grid {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #bfefff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy h2 {
+      font-size: clamp(2.8rem, 6vw, 4.7rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+      max-width: 820px;
+    }
+
+    .hero-copy .lead {
+      font-size: 1.14rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.86);
+      max-width: 780px;
+      margin-bottom: 28px;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero-highlights span {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 14px 30px rgba(0, 210, 255, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.97);
+      color: var(--text);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: var(--gradient);
+    }
+
+    .hero-card h3 {
+      font-size: 1.35rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: var(--muted);
+      line-height: 1.72;
+      margin-bottom: 18px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .stat-box {
+      background: #f6faff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .stat-box span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .overview-strip {
+      margin-top: -64px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .overview-grid,
+    .area-grid,
+    .course-grid,
+    .proof-grid,
+    .offer-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .overview-grid {
+      background: var(--white);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mini-card,
+    .area-card,
+    .course-card,
+    .proof-card,
+    .offer-card,
+    .cta-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-card,
+    .area-card,
+    .course-card,
+    .proof-card,
+    .offer-card {
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .mini-card:hover,
+    .area-card:hover,
+    .course-card:hover,
+    .proof-card:hover,
+    .offer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(58, 123, 213, 0.24);
+    }
+
+    .icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(58,123,213,0.12);
+      color: var(--primary);
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+    }
+
+    .mini-card h3,
+    .area-card h3,
+    .course-card h3,
+    .proof-card h3,
+    .offer-card h3 {
+      font-size: 1.14rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .mini-card p,
+    .area-card p,
+    .course-card p,
+    .proof-card p,
+    .offer-card p {
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 0.97rem;
+    }
+
+    .card-bullets,
+    .course-topics,
+    .check-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .card-bullets li,
+    .course-topics li,
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .card-bullets i,
+    .course-topics i,
+    .check-list i {
+      color: var(--accent-2);
+      margin-top: 4px;
+    }
+
+    .alt-bg {
+      background: linear-gradient(180deg, #eef5fb 0%, #f8fbff 100%);
+      border-top: 1px solid rgba(10, 46, 82, 0.05);
+      border-bottom: 1px solid rgba(10, 46, 82, 0.05);
+    }
+
+    .area-grid { grid-template-columns: repeat(3, 1fr); }
+    .course-grid { grid-template-columns: repeat(2, 1fr); }
+    .proof-grid { grid-template-columns: repeat(3, 1fr); }
+    .offer-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .area-card .pill,
+    .course-meta span,
+    .audience-tags span {
+      display: inline-flex;
+      align-items: center;
+      background: #eef5ff;
+      color: var(--primary-2);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin: 10px 8px 0 0;
+    }
+
+    .course-card.featured {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card.featured::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: var(--gradient);
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .course-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .course-footer small {
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 260px;
+    }
+
+    .course-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--primary-2);
+    }
+
+    .highlight-panel {
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(rgba(10,46,82,0.74), rgba(10,46,82,0.82)), url('images/galeria/20251126_092958.jpg') center/cover;
+      box-shadow: var(--shadow);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      color: white;
+      min-height: 100%;
+    }
+
+    .highlight-panel h3 {
+      font-size: 1.95rem;
+      margin-bottom: 12px;
+    }
+
+    .highlight-panel p {
+      line-height: 1.8;
+      color: rgba(255,255,255,0.9);
+      max-width: 480px;
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .cta-section { padding: 0 0 90px; }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0a2e52 0%, #123e6e 50%, #1f5da1 100%);
+      color: white;
+      border-radius: 30px;
+      padding: 42px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(0,210,255,0.25), transparent 65%);
+    }
+
+    .cta-copy,
+    .cta-actions { position: relative; z-index: 1; }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .cta-box p {
+      color: rgba(255,255,255,0.86);
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    footer {
+      background: #081f37;
+      color: rgba(255,255,255,0.72);
+      padding: 36px 0;
+      text-align: center;
+      font-size: 0.95rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer p + p {
+      margin-top: 8px;
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .split-grid,
+      .cta-box { grid-template-columns: 1fr; }
+      .overview-grid,
+      .area-grid,
+      .course-grid,
+      .proof-grid,
+      .offer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .top-bar-inner {
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-wrap {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .nav-menu ul { justify-content: flex-start; gap: 16px; }
+      .hero { padding-top: 50px; padding-bottom: 90px; }
+      .overview-strip { margin-top: -38px; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-stats { grid-template-columns: 1fr; }
+      .section { padding: 64px 0; }
+      .hero-copy h2 { letter-spacing: -1px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .mini-card,
+      .area-card,
+      .course-card,
+      .proof-card,
+      .offer-card,
+      .cta-box,
+      .hero-card { padding-left: 22px; padding-right: 22px; }
+      .nav-wrap { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="top-bar-inner">
+        <div class="logo-container">
+          <img src="images/TURIX.png" alt="TURIX DYNAMICS Logo">
+          <div class="brand-name">
+            <h1>TURIX DYNAMICS</h1>
+            <span>Capacitación avanzada en ingeniería</span>
+          </div>
+        </div>
+
+        <div class="nav-wrap">
+          <nav class="nav-menu">
+            <ul>
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="servicios.html">Servicios</a></li>
+              <li><a href="turix-ittg/projects-turix.html">Proyectos</a></li>
+              <li><a href="turix-ittg/software.html">Software</a></li>
+               <li><a href="../turix-ittg/mastersturix.html">Master Students</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </nav>
+
+          <div class="lang-switch" aria-label="Selector de idioma">
+            <a href="/capacitacion.html" class="active">ES</a>
+            <a href="/en/training.html">EN</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-badge">
+            <i class="fa-solid fa-graduation-cap"></i>
+            Cursos de alta especialización con valor técnico real
+          </div>
+          <h2>Programas de capacitación que sí conectan con la ingeniería que hoy se necesita</h2>
+          <p class="lead">
+            Ofertamos cursos de alto valor en MATLAB, Simulink, Python, automatización, PLC, LabVIEW, SolidWorks, inteligencia artificial, diagnóstico de fallas, termodinámica, hidráulica, EPANET y escritura científica. Cada programa está pensado para que el participante no solo aprenda: pueda aplicar, resolver y producir resultados reales.
+          </p>
+          <div class="hero-highlights">
+            <span>Para ingenieros y empresas</span>
+            <span>Modalidad abierta o cerrada</span>
+            <span>Formación hands-on</span>
+            <span>Capacitación corporativa</span>
+            <span>Oferta escalable por áreas</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#catalogo" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Ver catálogo</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> Solicitar propuesta</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>Una oferta construida para vender mejor y resolver mejor</h3>
+          <p>
+            En lugar de mostrar cursos sueltos, la estrategia correcta es organizarlos por áreas estratégicas. Eso hace que la oferta se vea más sólida, más profesional y mucho más atractiva para universidades, empresas, centros tecnológicos y equipos de formación.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-box">
+              <strong>Software técnico</strong>
+              <span>MATLAB, Simulink, Python, EES, EPANET, LabVIEW, SolidWorks y más.</span>
+            </div>
+            <div class="stat-box">
+              <strong>Áreas escalables</strong>
+              <span>La oferta puede crecer sin perder orden ni claridad comercial.</span>
+            </div>
+            <div class="stat-box">
+              <strong>Formato vendible</strong>
+              <span>Cursos que se entienden rápido, se distinguen y se pueden contratar.</span>
+            </div>
+            <div class="stat-box">
+              <strong>Valor aplicado</strong>
+              <span>Temas que sirven para industria, investigación, docencia y desarrollo tecnológico.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <section class="overview-strip">
+    <div class="container">
+      <div class="overview-grid">
+        <article class="mini-card">
+          <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
+          <h3>Oferta por áreas</h3>
+          <p>La oferta se organiza por líneas estratégicas para que el cliente identifique rápidamente lo que necesita.</p>
+        </article>
+        <article class="mini-card">
+          <div class="icon-box"><i class="fa-solid fa-people-group"></i></div>
+          <h3>Venta más clara</h3>
+          <p>Una estructura comercial ordenada aumenta la percepción de valor y facilita la contratación.</p>
+        </article>
+        <article class="mini-card">
+          <div class="icon-box"><i class="fa-solid fa-gears"></i></div>
+          <h3>Formación aplicada</h3>
+          <p>Los cursos se presentan con herramientas, casos de uso, modalidades y orientación práctica.</p>
+        </article>
+        <article class="mini-card">
+          <div class="icon-box"><i class="fa-solid fa-building"></i></div>
+          <h3>Listo para empresas</h3>
+          <p>La página habla tanto a personas interesadas como a instituciones que buscan programas cerrados.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="estrategia">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Estrategia comercial</div>
+            <h2 class="section-title">Así se debe vender la capacitación de TURIX: por áreas de valor, no como una lista dispersa</h2>
+          </div>
+          <p class="section-subtitle">
+            Del banco de cursos se identifican líneas suficientemente fuertes para construir una oferta atractiva. Algunas responden a las fortalezas históricas de TURIX y otras amplían la propuesta con software, automatización, diseño y formación científica. El resultado es una página que vende mejor porque organiza, segmenta y prioriza lo que cada cliente busca.
+          </p>
+        </div>
+
+        <div class="split-grid">
+          <div class="highlight-panel">
+            <div class="eyebrow" style="color:#bfefff;">Mensaje de valor</div>
+            <h3>Capacitación que combina conocimiento especializado con una presentación que invita a contratar</h3>
+            <p>
+              El visitante no quiere descifrar una base de datos de cursos. Quiere entender rápido qué puede aprender, para qué le sirve y por qué vale la pena contratarlo. Esta estructura hace exactamente eso.
+            </p>
+          </div>
+
+          <div class="offer-grid">
+            <article class="offer-card">
+              <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+              <h3>Oferta técnica clara</h3>
+              <p>Se agrupan cursos similares para que la página se vea robusta y profesional desde el primer vistazo.</p>
+            </article>
+            <article class="offer-card">
+              <div class="icon-box"><i class="fa-solid fa-bullseye"></i></div>
+              <h3>Mejor conversión</h3>
+              <p>Con títulos más vendibles, beneficios visibles y categorías bien pensadas, sube el interés por solicitar información.</p>
+            </article>
+            <article class="offer-card">
+              <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
+              <h3>Mayor percepción de nivel</h3>
+              <p>Una oferta ordenada transmite especialización, experiencia y seriedad institucional.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-bg" id="areas">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Áreas estratégicas</div>
+            <h2 class="section-title">Seis líneas para estructurar el catálogo y hacerlo más atractivo para contratar</h2>
+          </div>
+          <p class="section-subtitle">
+            Estas áreas salen de los cursos del Excel, pero están organizadas con criterio de marketing y posicionamiento: lo técnico se mantiene, pero ahora la oferta también comunica valor, especialización y aplicabilidad.
+          </p>
+        </div>
+
+        <div class="area-grid">
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-square-root-variable"></i></div>
+            <h3>Simulación, modelado y análisis computacional</h3>
+            <p>Ideal para quienes necesitan dominar herramientas numéricas, modelar sistemas y simular procesos con enfoque ingenieril.</p>
+            <span class="pill">MATLAB</span>
+            <span class="pill">Simulink</span>
+            <span class="pill">Python</span>
+            <span class="pill">Kalman</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Programación con MATLAB</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Modelado y simulación con Simulink</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Análisis numérico aplicado a ingeniería mecatrónica en Python</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Filtro de Kalman y estimación de estados</span></li>
+            </ul>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+            <h3>Inteligencia artificial, datos y diagnóstico</h3>
+            <p>Una línea muy vendible porque conecta IA con problemas reales de control, energía, monitoreo y detección de fallas.</p>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">Deep Learning</span>
+            <span class="pill">Diagnóstico</span>
+            <span class="pill">EPANET</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Aprendizaje automático</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Introducción a la IA y algoritmos aplicados</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Redes neuronales profundas para diagnóstico de fugas</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Diagnóstico de fallas basado en observadores de estado</span></li>
+            </ul>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-industry"></i></div>
+            <h3>Automatización, control industrial e instrumentación</h3>
+            <p>Perfecta para empresas y centros de formación técnica que buscan cursos con aplicación directa en planta y laboratorio.</p>
+            <span class="pill">PLC</span>
+            <span class="pill">SCADA</span>
+            <span class="pill">LabVIEW</span>
+            <span class="pill">Arduino</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Instrumentación virtual con LabVIEW y Arduino</span></li>
+              <li><i class="fa-solid fa-check"></i><span>PLC básico y PLC avanzado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Sistemas SCADA</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Control de máquinas eléctricas, neumática y electroneumática</span></li>
+            </ul>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-cubes"></i></div>
+            <h3>Diseño digital y desarrollo de producto</h3>
+            <p>Una línea muy útil para captar estudiantes, centros de manufactura, diseño y programas de certificación profesional.</p>
+            <span class="pill">SolidWorks</span>
+            <span class="pill">CSWA</span>
+            <span class="pill">Modelado 3D</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Curso de SolidWorks desde cero</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SolidWorks para certificación CSWA</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Ruta de formación profesional y avanzada en modelado 3D</span></li>
+            </ul>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-fire-flame-curved"></i></div>
+            <h3>Energía, termodinámica y fluidos</h3>
+            <p>Una línea especializada con alto valor académico e industrial para energía, procesos térmicos e hidráulicos.</p>
+            <span class="pill">CoolProp</span>
+            <span class="pill">EES</span>
+            <span class="pill">EPANET</span>
+            <span class="pill">Hidráulica</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Fundamentos de termodinámica y análisis de fluidos con Python</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Aplicaciones de la termodinámica con EES</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Simulación de redes hidráulicas con EPANET-MATLAB Toolkit</span></li>
+            </ul>
+          </article>
+
+          <article class="area-card">
+            <div class="icon-box"><i class="fa-solid fa-pen-nib"></i></div>
+            <h3>Escritura científica y formulación de proyectos</h3>
+            <p>Una línea ideal para posgrado, cuerpos académicos, investigadores y grupos que necesitan fortalecer productividad científica.</p>
+            <span class="pill">LaTeX</span>
+            <span class="pill">Overleaf</span>
+            <span class="pill">Publicación</span>
+            <ul class="card-bullets">
+              <li><i class="fa-solid fa-check"></i><span>Escritura de textos científicos con LaTeX</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Escritura científica y formulación de proyectos de investigación</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="catalogo">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Cursos para ofertar</div>
+            <h2 class="section-title">Una selección de cursos con alto potencial de contratación</h2>
+          </div>
+          <p class="section-subtitle">
+            Aquí conviene destacar primero los cursos que más fácilmente generan interés comercial: software demandado, aplicación clara, resultados rápidos y utilidad para empresas, universidades o grupos técnicos.
+          </p>
+        </div>
+
+        <div class="course-grid">
+          <article class="course-card featured">
+            <div class="icon-box"><i class="fa-solid fa-square-root-variable"></i></div>
+            <h3>Programación con MATLAB</h3>
+            <p>Uno de los cursos más vendibles porque resuelve una necesidad transversal: análisis, programación, visualización y trabajo técnico con datos y modelos.</p>
+            <div class="course-meta">
+              <span>Muy demandado</span>
+              <span>Ingeniería</span>
+              <span>Universidades / empresas</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>Matrices, tipos de datos y programación</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Importación, análisis y visualización de datos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Funciones, ciclos y automatización básica</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal como curso abierto, corporativo o base para rutas más avanzadas.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="course-card featured">
+            <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Modelado y simulación de sistemas dinámicos con Simulink</h3>
+            <p>Curso premium para control, mecatrónica, energía y sistemas físicos. Tiene mucho valor percibido porque conecta teoría con simulación aplicada.</p>
+            <div class="course-meta">
+              <span>Especializado</span>
+              <span>Simscape / Stateflow</span>
+              <span>Alto valor</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>Modelado continuo y discreto</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Simscape para sistemas físicos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Eventos discretos y lógica con Stateflow</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal para laboratorios, docentes, investigadores y equipos de desarrollo.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="course-card featured">
+            <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
+            <h3>Automatización e instrumentación aplicada</h3>
+            <p>Una línea pensada para venderse muy bien a industria, centros de formación y educación tecnológica: PLC, SCADA, LabVIEW, Arduino y control industrial.</p>
+            <div class="course-meta">
+              <span>Industria</span>
+              <span>Hands-on</span>
+              <span>Capacitación cerrada</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>PLC básico y avanzado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SCADA e integración</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Instrumentación virtual con LabVIEW y Arduino</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal para empresas que buscan entrenamiento operativo y técnico.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+            <h3>Aprendizaje automático e IA para ingeniería</h3>
+            <p>Una línea de alta atracción comercial porque asocia IA con aplicaciones reales, no con promesas vacías.</p>
+            <div class="course-meta">
+              <span>IA aplicada</span>
+              <span>Datos</span>
+              <span>Diagnóstico</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>Fundamentos de machine learning</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Extracción de características y evaluación</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Introducción a redes neuronales profundas</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal para actualización profesional y programas de innovación.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="icon-box"><i class="fa-solid fa-cubes"></i></div>
+            <h3>SolidWorks desde cero y ruta CSWA</h3>
+            <p>Muy atractivo para estudiantes, manufactura, diseño mecánico y programas de certificación con salida laboral clara.</p>
+            <div class="course-meta">
+              <span>Diseño 3D</span>
+              <span>CSWA</span>
+              <span>Alta conversión</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>Interfaz, modelado 3D y ensambles</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Dibujo 2D y documentación</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Preparación para certificación</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal para captar audiencias amplias y rutas de especialización progresiva.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="icon-box"><i class="fa-solid fa-pen-nib"></i></div>
+            <h3>LaTeX, escritura científica y formulación de proyectos</h3>
+            <p>Una oferta muy valiosa para posgrados, cuerpos académicos y grupos de investigación que quieren producir mejor y más rápido.</p>
+            <div class="course-meta">
+              <span>Posgrado</span>
+              <span>Productividad científica</span>
+              <span>Overleaf</span>
+            </div>
+            <ul class="course-topics">
+              <li><i class="fa-solid fa-check"></i><span>Documentos científicos con LaTeX</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Referencias, ecuaciones y trabajo colaborativo</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Formulación y presentación de proyectos</span></li>
+            </ul>
+            <div class="course-footer">
+              <small>Ideal para universidades, maestrías, doctorados y talleres especializados.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-bg" id="como-vender">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Cómo ofertarlos</div>
+            <h2 class="section-title">La página debe hablarle a quien compra, no solo a quien enseña</h2>
+          </div>
+          <p class="section-subtitle">
+            Para elevar la contratación, la web no debe centrarse solo en temarios. Debe mostrar beneficios, públicos objetivo, modalidades y resultados esperados. Esa es la diferencia entre una lista de cursos y una oferta comercial seria.
+          </p>
+        </div>
+
+        <div class="proof-grid">
+          <article class="proof-card">
+            <div class="icon-box"><i class="fa-solid fa-user-tie"></i></div>
+            <h3>Habla en beneficios</h3>
+            <p>No solo “qué se verá”, sino qué capacidad desarrolla el participante y qué problema puede resolver después del curso.</p>
+          </article>
+          <article class="proof-card">
+            <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+            <h3>Segmenta al comprador</h3>
+            <p>Diferencia cursos para estudiantes, docentes, empresas, laboratorios, posgrado o centros tecnológicos.</p>
+          </article>
+          <article class="proof-card">
+            <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+            <h3>Haz visible la contratación</h3>
+            <p>Botones claros, mensajes tipo “solicitar propuesta” y formatos de capacitación abierta, cerrada o a la medida.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publico">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Públicos y modalidades</div>
+            <h2 class="section-title">Una misma oferta, distintos formatos de venta</h2>
+          </div>
+          <p class="section-subtitle">
+            Este bloque ayuda mucho a convertir porque hace que el visitante se identifique: persona, universidad o empresa. También deja claro que TURIX puede personalizar la capacitación.
+          </p>
+        </div>
+
+        <div class="offer-grid">
+          <article class="offer-card">
+            <div class="icon-box"><i class="fa-solid fa-user-graduate"></i></div>
+            <h3>Cursos abiertos</h3>
+            <p>Para estudiantes, ingenieros y profesionistas que buscan actualizarse en herramientas de alto valor técnico.</p>
+            <div class="audience-tags">
+              <span>Estudiantes</span><span>Ingenieros</span><span>Profesionales</span>
+            </div>
+          </article>
+          <article class="offer-card">
+            <div class="icon-box"><i class="fa-solid fa-building"></i></div>
+            <h3>Capacitación corporativa</h3>
+            <p>Para empresas, laboratorios, centros tecnológicos y áreas de formación que requieren programas cerrados o a la medida.</p>
+            <div class="audience-tags">
+              <span>Empresas</span><span>Laboratorios</span><span>Equipos técnicos</span>
+            </div>
+          </article>
+          <article class="offer-card">
+            <div class="icon-box"><i class="fa-solid fa-university"></i></div>
+            <h3>Programas institucionales</h3>
+            <p>Para universidades, posgrados, academias y cuerpos académicos que buscan rutas temáticas o talleres intensivos.</p>
+            <div class="audience-tags">
+              <span>Universidades</span><span>Posgrado</span><span>Docentes</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section" id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-copy">
+            <div class="eyebrow" style="color:#bfefff;">Contacto comercial</div>
+            <h2>Convierte esta oferta en cursos que la gente quiera contratar</h2>
+            <p>
+              Si buscas una propuesta para empresa, universidad, posgrado o grupo técnico, TURIX puede estructurar programas abiertos, cerrados o a la medida. El objetivo no es solo impartir cursos: es construir una oferta formativa con verdadero valor percibido y aplicación real.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a href="mailto:control4everyone@gmail.com?subject=Solicitud%20de%20capacitaci%C3%B3n%20TURIX" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Solicitar propuesta</a>
+            <a href="mailto:control4everyone@gmail.com?subject=Cat%C3%A1logo%20de%20cursos%20TURIX" class="btn btn-secondary"><i class="fa-solid fa-file-lines"></i> Pedir catálogo</a>
+            <a href="projects-turix.html" class="btn btn-secondary"><i class="fa-solid fa-diagram-project"></i> Ver respaldo tecnológico</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 TURIX DYNAMICS - Capacitación Avanzada en Ingeniería</p>
+    <p>Transformamos conocimiento en tecnología funcional.</p>
+  </footer>
+</body>
+</html>
