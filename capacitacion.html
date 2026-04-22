@@ -814,125 +814,10 @@
       color: rgba(255,255,255,0.45);
     }
 
-    /* ─── MEJORAS MODERNAS: CTAs de alto impacto ─── */
-    .btn-primary {
-      background: var(--gradient);
-      color: white;
-      box-shadow: 0 14px 30px rgba(0, 210, 255, 0.30);
-      font-size: 0.95rem;
-      letter-spacing: 0.2px;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0);
-      transition: background 0.25s ease;
-    }
-    .btn-primary:hover {
-      box-shadow: 0 18px 40px rgba(0, 210, 255, 0.45);
-      transform: translateY(-3px);
-    }
-    .btn-primary:hover::after { background: rgba(255,255,255,0.08); }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.16);
-      border-color: rgba(255,255,255,0.28);
-    }
-
-    /* Botones de sección (fondo claro) */
-    .section .btn-primary,
-    .cta-box .btn-primary {
-      box-shadow: 0 14px 35px rgba(0, 210, 255, 0.35);
-    }
-
-    /* ─── SECCIÓN: Beneficios Clave (nueva) ─── */
-    .benefits-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 60%, #1f5da1 100%);
-      color: white;
-      padding: 80px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .benefits-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 50%, rgba(0,210,255,0.18), transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(58,123,213,0.22), transparent 30%);
-      pointer-events: none;
-    }
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      position: relative;
-      z-index: 1;
-    }
-    .benefit-item {
-      text-align: center;
-      padding: 32px 20px;
-      border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.10);
-      transition: transform 0.25s ease, background 0.25s ease;
-    }
-    .benefit-item:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.12);
-    }
-    .benefit-icon {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      display: block;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .benefit-item h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    .benefit-item p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.6;
-    }
-
-    /* ─── Animación de entrada suave ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── Mejoras visuales generales ─── */
-    .course-link:hover { gap: 12px; color: var(--accent-2); }
-    .course-link { transition: gap 0.2s ease, color 0.2s ease; }
-
-    .faq-card h3 { font-size: 1.02rem; line-height: 1.4; }
-
     @media (max-width: 1180px) {
-      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 720px) {
-      .benefits-grid { grid-template-columns: 1fr; }
-      .benefits-section { padding: 60px 0; }
-    }
+      .hero-grid,
+      .feature-wrap,
+      .cta-box { grid-template-columns: 1fr; }
       .overview-grid,
       .area-grid,
       .course-grid,
@@ -1020,23 +905,22 @@
         <div class="hero-copy">
           <div class="hero-badge">
             <i class="fa-solid fa-graduation-cap"></i>
-            Formación de élite · Ingeniería aplicada · Resultados reales
+            Formación tecnológica con aplicación real
           </div>
-          <!-- AIDA: ATENCIÓN — Headline de alto impacto -->
-          <h2>Deja de aprender teoría. Empieza a dominar tecnología que transforma proyectos reales.</h2>
+          <h2>Capacitación especializada que conecta herramientas, ingeniería y resultados</h2>
           <p class="lead">
-            En TURIX Dynamics no vendemos cursos, construimos capacidades. Cada programa nace de proyectos reales en control, simulación, robótica, IA y automatización. Tu equipo aprende, practica y aplica desde el primer día — en laboratorio, industria, posgrado o docencia.
+            En TURIX Dynamics la capacitación no se presenta como una lista aislada de cursos, sino como una extensión natural de nuestra experiencia en control, simulación, robótica, automatización, inteligencia artificial y desarrollo tecnológico. Diseñamos programas para que el participante aprenda, practique y transfiera lo visto a proyectos, laboratorio, docencia o industria.
           </p>
           <div class="hero-highlights">
-            <span>🎓 Universidades y posgrado</span>
-            <span>🏭 Empresas y laboratorios</span>
-            <span>⚙️ Cursos abiertos o a la medida</span>
-            <span>🗺️ Rutas de formación progresivas</span>
-            <span>💡 100% aplicado — cero relleno</span>
+            <span>Universidades y posgrado</span>
+            <span>Empresas y laboratorios</span>
+            <span>Cursos abiertos o cerrados</span>
+            <span>Rutas por áreas estratégicas</span>
+            <span>Enfoque práctico y técnico</span>
           </div>
           <div class="hero-actions">
-            <a href="#catalogo" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Explorar el catálogo completo</a>
-            <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> Quiero una propuesta a mi medida</a>
+            <a href="#catalogo" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Ver cursos</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> Solicitar propuesta</a>
           </div>
           <div class="trust-strip">
             <span class="trust-pill"><i class="fa-solid fa-building-columns"></i> Programas para instituciones</span>
@@ -1046,30 +930,29 @@
         </div>
 
         <div class="hero-card">
-          <!-- SUGERENCIA DE IMAGEN: Ingeniero usando MATLAB o LabVIEW en laboratorio real, pantallas con gráficas de simulación -->
           <div class="hero-card-image">
             <img src="images/w2.jpg" alt="Capacitación tecnológica de TURIX Dynamics">
           </div>
-          <h3>Aprendes de ingenieros que hacen, no solo que explican.</h3>
+          <h3>Una oferta formativa respaldada por experiencia aplicada</h3>
           <p>
-            TURIX desarrolla proyectos reales en automatización, IA y simulación. Sus instructores no leen diapositivas — resuelven problemas de ingeniería todos los días. Eso se nota en cada clase, ejercicio y caso de estudio.
+            TURIX no solo capacita: también desarrolla, implementa y acompaña soluciones tecnológicas. Por eso la formación tiene más peso comercial y técnico; cada curso puede vincularse con necesidades reales de universidades, centros tecnológicos, industria, investigadores y profesionales.
           </p>
           <div class="hero-stats">
             <div class="stat-box">
-              <strong>Herramientas de industria</strong>
-              <span>MATLAB, Python, LabVIEW, PLCs, SolidWorks — lo que realmente usa el mercado laboral.</span>
+              <strong>Capacitación</strong>
+              <span>Formación técnica con herramientas de alto valor profesional.</span>
             </div>
             <div class="stat-box">
-              <strong>Aplicación desde el día 1</strong>
-              <span>Mini-proyectos y casos reales que funcionan en tu laboratorio, empresa o aula.</span>
+              <strong>Aplicación real</strong>
+              <span>Casos, ejercicios y enfoques útiles para laboratorio, docencia e industria.</span>
             </div>
             <div class="stat-box">
-              <strong>Escala sin límite</strong>
-              <span>Desde un taller de 4 h hasta un diplomado modular completo a la medida.</span>
+              <strong>Oferta escalable</strong>
+              <span>Cursos, talleres, rutas intensivas y programas a la medida.</span>
             </div>
             <div class="stat-box">
-              <strong>Credibilidad técnica real</strong>
-              <span>Cada programa respaldado por proyectos, software propio e ingeniería aplicada.</span>
+              <strong>Respaldo tecnológico</strong>
+              <span>La propuesta se sostiene con proyectos, software y experiencia en ingeniería aplicada.</span>
             </div>
           </div>
         </div>
@@ -1082,55 +965,24 @@
       <div class="overview-grid">
         <article class="mini-card">
           <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
-          <h3>7 líneas estratégicas</h3>
-          <p>Simulación, IA, automatización, diseño, energía, investigación y docencia — elige el área que impulsa tu carrera o empresa.</p>
+          <h3>Oferta por áreas</h3>
+          <p>Los cursos están organizados por líneas estratégicas para facilitar la selección y permitir construir rutas de formación claras según objetivos técnicos.</p>
         </article>
         <article class="mini-card">
           <div class="icon-box"><i class="fa-solid fa-gears"></i></div>
-          <h3>Cero relleno, todo práctica</h3>
-          <p>Fundamentos + software especializado + ejercicios reales = habilidades que aplicas al terminar la sesión.</p>
+          <h3>Enfoque aplicado</h3>
+          <p>Cada programa combina fundamentos, software especializado y ejercicios prácticos orientados a resolver problemas reales de ingeniería.</p>
         </article>
         <article class="mini-card">
           <div class="icon-box"><i class="fa-solid fa-users"></i></div>
-          <h3>Para todos los perfiles técnicos</h3>
-          <p>Estudiantes, ingenieros, investigadores, docentes y equipos corporativos — cada programa se ajusta a tu nivel y objetivos.</p>
+          <h3>Distintos públicos</h3>
+          <p>Los contenidos se ajustan a estudiantes, docentes, investigadores, instituciones y equipos técnicos de empresas o centros tecnológicos.</p>
         </article>
         <article class="mini-card">
           <div class="icon-box"><i class="fa-solid fa-building"></i></div>
-          <h3>Listo para contratar hoy</h3>
-          <p>Cursos abiertos, capacitación cerrada para tu empresa o diplomado institucional personalizado — solicita propuesta en minutos.</p>
+          <h3>Listo para contratar</h3>
+          <p>Disponibilidad en cursos abiertos, capacitación cerrada para instituciones y programas diseñados a la medida para empresas.</p>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="benefits-section" id="beneficios">
-    <div class="container">
-      <div style="text-align:center; margin-bottom:48px; position:relative; z-index:1;">
-        <div class="eyebrow" style="color:#bfefff; justify-content:center;">Beneficios clave</div>
-        <h2 class="section-title" style="color:white; max-width:700px; margin:0 auto;">Lo que cambia en tu trabajo, equipo o institución después de capacitarte con TURIX</h2>
-      </div>
-      <div class="benefits-grid">
-        <div class="benefit-item animate-on-scroll">
-          <span class="benefit-icon"><i class="fa-solid fa-rocket"></i></span>
-          <h3>Productividad inmediata</h3>
-          <p>Aplica lo aprendido desde la primera semana — herramientas reales, ejercicios reales, resultados reales.</p>
-        </div>
-        <div class="benefit-item animate-on-scroll">
-          <span class="benefit-icon"><i class="fa-solid fa-trophy"></i></span>
-          <h3>Ventaja competitiva técnica</h3>
-          <p>Domina MATLAB, IA, PLCs o SolidWorks y posiciona tu perfil o empresa por encima del promedio del mercado.</p>
-        </div>
-        <div class="benefit-item animate-on-scroll">
-          <span class="benefit-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
-          <h3>Formación que escala contigo</h3>
-          <p>Cursos individuales, rutas progresivas o diplomados completos — la propuesta crece con tus necesidades.</p>
-        </div>
-        <div class="benefit-item animate-on-scroll">
-          <span class="benefit-icon"><i class="fa-solid fa-shield-halved"></i></span>
-          <h3>Respaldo técnico sólido</h3>
-          <p>Cada programa está respaldado por proyectos reales de ingeniería — no teoría desconectada de la práctica.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1140,47 +992,46 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="eyebrow">Por qué TURIX es diferente</div>
-            <h2 class="section-title">Tecnología que aprendes hoy, resultados que entregas mañana</h2>
+            <div class="eyebrow">Visión de capacitación</div>
+            <h2 class="section-title">Formación que integra ingeniería, software y aplicación real</h2>
           </div>
           <p class="section-subtitle">
-            Aquí no hay diapositivas estáticas ni teoría desconectada. Cada programa nace directo de proyectos activos en ingeniería aplicada — por eso la formación tiene más densidad técnica, más utilidad práctica y más impacto real en tu trabajo.
+            La capacitación en TURIX está diseñada como una extensión directa de su actividad tecnológica: proyectos, simulación, desarrollo e implementación. Por eso, cada programa no solo transmite conocimiento, sino que ayuda a entender cómo se aplica en escenarios reales de ingeniería, industria, investigación y docencia.
           </p>
         </div>
 
         <div class="feature-wrap">
           <div class="feature-panel">
-            <!-- SUGERENCIA DE IMAGEN: Pantalla dividida mostrando código MATLAB y resultado de simulación en tiempo real -->
-            <div class="eyebrow" style="color:#bfefff;">Nuestra promesa</div>
-            <h3>Conocimiento que se lleva puesto — no conocimiento que se olvida.</h3>
+            <div class="eyebrow" style="color:#bfefff;">Mensaje de marca</div>
+            <h3>Tecnología que se aprende, se domina y se lleva a resultados</h3>
             <p>
-              Cada sesión está diseñada para que el participante salga con algo concreto: un modelo funcional, un script probado, un sistema configurado. No memorización — dominio real. No certificados vacíos — habilidades que convencen en entrevistas, proyectos y presentaciones.
+              Esa es la idea central de esta oferta: convertir conocimiento especializado en capacidades útiles para resolver, diseñar, modelar, implementar o comunicar mejor. La capacitación no se ve aislada; se percibe como parte de una plataforma tecnológica sólida.
             </p>
           </div>
 
           <div class="cards-grid">
             <article class="feature-card">
               <div class="icon-box"><i class="fa-solid fa-wave-square"></i></div>
-              <h3>Domina Control y Simulación</h3>
-              <p>Modela sistemas dinámicos, simula procesos complejos y diseña controladores con las mismas herramientas que usan los mejores laboratorios del mundo.</p>
+              <h3>Control y simulación</h3>
+              <p>Formación en herramientas y metodologías para modelar sistemas dinámicos, simular procesos y desarrollar soluciones con criterio ingenieril.</p>
             </article>
 
             <article class="feature-card">
               <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
-              <h3>Automatiza. Controla. Escala.</h3>
-              <p>Desde sensores hasta SCADA — aprende a conectar, programar e integrar sistemas industriales reales con criterio de ingeniería profesional.</p>
+              <h3>Automatización y robótica</h3>
+              <p>Capacitación alineada con integración de sensores, sistemas industriales, instrumentación, PLC, SCADA y plataformas de desarrollo.</p>
             </article>
 
             <article class="feature-card">
               <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
-              <h3>IA que resuelve problemas reales</h3>
-              <p>Entrena modelos para diagnóstico, clasificación y monitoreo. No solo aprendes Machine Learning — lo aplicas a procesos industriales y de investigación.</p>
+              <h3>IA y analítica aplicada</h3>
+              <p>Programas que conectan datos, algoritmos y problemas reales de diagnóstico, monitoreo, clasificación y apoyo a la toma de decisiones.</p>
             </article>
 
             <article class="feature-card">
               <div class="icon-box"><i class="fa-solid fa-chalkboard-user"></i></div>
-              <h3>Transforma tu aula con metodología probada</h3>
-              <p>ABP, aula invertida y gamificación con TIC — convierte tus clases en experiencias que los alumnos recuerdan y aplican mucho después del examen.</p>
+              <h3>Innovación educativa y formación docente</h3>
+              <p>Capacitación enfocada en metodologías activas, uso de TIC y diseño de experiencias de aprendizaje para educación básica, media superior y superior.</p>
             </article>
           </div>
         </div>
@@ -1191,37 +1042,37 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="eyebrow">Cómo aprendes con TURIX</div>
-            <h2 class="section-title">4 pasos. Del concepto al resultado aplicado. Sin atajos.</h2>
+            <div class="eyebrow">Cómo se trabaja</div>
+            <h2 class="section-title">Del conocimiento a los resultados: así se aprende en TURIX</h2>
           </div>
           <p class="section-subtitle">
-            No basta con ver un demo. Nuestra metodología asegura que cada participante entienda, practique y aplique — en ese orden, sin saltarse etapas.
+            Nuestra metodología combina fundamentos, demostración y práctica aplicada para asegurar que cada participante pueda implementar lo aprendido en contextos reales.
           </p>
         </div>
 
         <div class="method-grid">
           <article class="method-card">
             <div class="icon-box"><i class="fa-solid fa-book"></i></div>
-            <h3>1. Base sólida, rápido</h3>
-            <p>Los fundamentos esenciales en el tiempo mínimo necesario — sin rodeos. Entiendes el "por qué" antes de tocar la herramienta.</p>
+            <h3>Fundamentos claros</h3>
+            <p>Se construye una base sólida para comprender conceptos, herramientas y criterios de uso desde un enfoque práctico.</p>
           </article>
 
           <article class="method-card">
             <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
-            <h3>2. Ves cómo se hace de verdad</h3>
-            <p>Flujos de trabajo reales, configuraciones en vivo y resolución paso a paso de problemas que encontrarás en tu contexto.</p>
+            <h3>Demostración guiada</h3>
+            <p>Se presentan flujos reales de trabajo, configuración de herramientas y resolución paso a paso en escenarios aplicados.</p>
           </article>
 
           <article class="method-card">
             <div class="icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-            <h3>3. Manos a la obra — tú lo haces</h3>
-            <p>Ejercicios, mini-casos y retos alineados con tu industria, posgrado o laboratorio. Aprendes haciendo, no memorizando.</p>
+            <h3>Práctica aplicada</h3>
+            <p>El participante desarrolla habilidades mediante ejercicios, mini casos y problemas alineados con situaciones reales.</p>
           </article>
 
           <article class="method-card">
             <div class="icon-box"><i class="fa-solid fa-diagram-project"></i></div>
-            <h3>4. Sales con algo funcional</h3>
-            <p>El conocimiento aterriza en resultados concretos: un modelo, un sistema, una propuesta — algo que entregas y demuestras.</p>
+            <h3>Resultados en entorno real</h3>
+            <p>El conocimiento se transfiere a contextos reales como industria, laboratorio, investigación o docencia.</p>
           </article>
         </div>
       </div>
@@ -1232,102 +1083,95 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Áreas estratégicas</div>
-            <h2 class="section-title">7 líneas de formación. Una para cada desafío técnico que enfrentas.</h2>
+            <h2 class="section-title">Siete líneas para estructurar el catálogo y volverlo más claro, sólido y contratable</h2>
           </div>
           <p class="section-subtitle">
-            Simulación, IA, automatización, diseño de producto, energía, investigación y docencia — catálogo estructurado para que encuentres exactamente lo que necesitas y construyas una ruta de formación con sentido.
+            En lugar de mostrar una lista dispersa, la capacitación se organiza en bloques que responden a necesidades reales de software, automatización, diseño, investigación, innovación educativa y desarrollo tecnológico.
           </p>
         </div>
 
         <div class="area-grid">
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Gráfica de simulación en MATLAB o Simulink con respuesta dinámica de sistema -->
             <div class="icon-box"><i class="fa-solid fa-square-root-variable"></i></div>
-            <h3>Simulación, Modelado y Análisis Computacional</h3>
-            <p>Deja de adivinar — modela, simula y valida tus sistemas antes de tocar el hardware. MATLAB, Simulink y Python para resultados que convencen.</p>
+            <h3>Simulación, modelado y análisis computacional</h3>
+            <p>Ideal para dominar herramientas numéricas, modelar sistemas y simular procesos con enfoque ingenieril.</p>
             <span class="pill">MATLAB</span><span class="pill">Simulink</span><span class="pill">Python</span><span class="pill">Kalman</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>Programación con MATLAB desde cero hasta nivel avanzado</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Modelado y simulación de sistemas dinámicos con Simulink</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Programación con MATLAB</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Modelado y simulación con Simulink</span></li>
               <li><i class="fa-solid fa-check"></i><span>Análisis numérico aplicado con Python</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Visualización de red neuronal o dashboard de clasificación de datos industriales -->
             <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
-            <h3>Inteligencia Artificial, Datos y Diagnóstico</h3>
-            <p>Convierte datos en decisiones. Detecta fallas antes de que ocurran, clasifica señales y automatiza el diagnóstico con IA real en ingeniería.</p>
+            <h3>Inteligencia artificial, datos y diagnóstico</h3>
+            <p>Conecta analítica e IA con problemas reales de monitoreo, clasificación, mantenimiento y toma de decisiones.</p>
             <span class="pill">Machine Learning</span><span class="pill">Deep Learning</span><span class="pill">Diagnóstico</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>Machine learning aplicado directamente a ingeniería</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Procesamiento y evaluación de datos industriales</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Redes neuronales para clasificación y diagnóstico predictivo</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Machine learning para ingeniería</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Procesamiento y evaluación de datos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Redes neuronales para clasificación y diagnóstico</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Panel de PLC conectado a proceso industrial o SCADA en pantalla -->
             <div class="icon-box"><i class="fa-solid fa-industry"></i></div>
-            <h3>Automatización, Control Industrial e Instrumentación</h3>
-            <p>De PLC básico a SCADA completo — aprende a controlar procesos industriales reales con las herramientas que exigen las plantas y laboratorios hoy.</p>
+            <h3>Automatización, control industrial e instrumentación</h3>
+            <p>Perfecta para empresas y centros tecnológicos que buscan aplicación directa en planta, laboratorio o mantenimiento.</p>
             <span class="pill">PLC</span><span class="pill">SCADA</span><span class="pill">LabVIEW</span><span class="pill">Arduino</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>PLC básico, intermedio y avanzado con casos de planta real</span></li>
-              <li><i class="fa-solid fa-check"></i><span>SCADA e integración de sistemas de supervisión</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Instrumentación virtual y adquisición de datos con LabVIEW</span></li>
+              <li><i class="fa-solid fa-check"></i><span>PLC básico, intermedio y avanzado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SCADA e integración</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Instrumentación virtual y adquisición de datos</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Modelo 3D en SolidWorks con despiece y planos técnicos -->
             <div class="icon-box"><i class="fa-solid fa-cubes"></i></div>
-            <h3>Diseño Digital y Desarrollo de Producto</h3>
-            <p>Del boceto al prototipo certificado. Domina SolidWorks, obtén tu certificación CSWA y diseña piezas que se fabrican, no solo que se ven bien en pantalla.</p>
+            <h3>Diseño digital y desarrollo de producto</h3>
+            <p>Una línea ideal para manufactura, prototipado, diseño mecánico y certificación profesional.</p>
             <span class="pill">SolidWorks</span><span class="pill">CSWA</span><span class="pill">Modelado 3D</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>SolidWorks desde cero — piezas, ensamblajes y planos</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Documentación técnica lista para manufactura</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Preparación intensiva para certificación CSWA</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SolidWorks desde cero</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Ensamblajes y documentación técnica</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Preparación para certificación CSWA</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Diagrama termodinámico o simulación de red hidráulica EPANET -->
             <div class="icon-box"><i class="fa-solid fa-fire-flame-curved"></i></div>
-            <h3>Energía, Termodinámica y Fluidos</h3>
-            <p>Analiza, simula y optimiza sistemas térmicos e hidráulicos con software especializado. Resultados que mejoran eficiencia energética y diseño de procesos.</p>
+            <h3>Energía, termodinámica y fluidos</h3>
+            <p>Especializada para procesos térmicos, hidráulica, simulación de redes y análisis aplicado a energía.</p>
             <span class="pill">CoolProp</span><span class="pill">EES</span><span class="pill">EPANET</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>Termodinámica aplicada con CoolProp y EES</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Análisis de fluidos y simulación hidráulica de redes</span></li>
-              <li><i class="fa-solid fa-check"></i><span>EPANET y herramientas para diseño de infraestructura</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Termodinámica aplicada con software</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Análisis de fluidos y simulación hidráulica</span></li>
+              <li><i class="fa-solid fa-check"></i><span>EPANET y herramientas complementarias</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Artículo científico en LaTeX con gráficas y fórmulas bien formateadas -->
             <div class="icon-box"><i class="fa-solid fa-pen-nib"></i></div>
-            <h3>Escritura Científica y Formulación de Proyectos</h3>
-            <p>Publica más rápido, con mejor calidad y sin el caos de Word. LaTeX y Overleaf para producir artículos, tesis y propuestas que impresionan a los comités.</p>
+            <h3>Escritura científica y formulación de proyectos</h3>
+            <p>Dirigida a posgrado, investigación y cuerpos académicos que buscan fortalecer productividad y calidad documental.</p>
             <span class="pill">LaTeX</span><span class="pill">Overleaf</span><span class="pill">Publicación</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>Redacción y maquetado de artículos científicos con LaTeX</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Gestión de referencias, colaboración y control de versiones</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Formulación de propuestas de investigación ganadoras</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Redacción de artículos con LaTeX</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Formato, referencias y colaboración</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Formulación de propuestas y proyectos</span></li>
             </ul>
           </article>
 
           <article class="area-card">
-            <!-- SUGERENCIA DE IMAGEN: Aula dinámica con equipos trabajando en proyectos, tecnología visible en pantallas -->
             <div class="icon-box"><i class="fa-solid fa-school"></i></div>
-            <h3>Innovación Educativa y Formación Docente</h3>
-            <p>Transforma tu aula en un espacio donde los alumnos aprenden haciendo. ABP, gamificación y TIC estratégico para clases que dejan huella académica real.</p>
+            <h3>Innovación educativa y formación docente</h3>
+            <p>Una línea con alto valor institucional para fortalecer enseñanza, diseño didáctico y uso estratégico de tecnologías educativas.</p>
             <span class="pill">ABP</span><span class="pill">Aula invertida</span><span class="pill">Gamificación</span><span class="pill">TIC</span>
             <ul class="card-bullets">
-              <li><i class="fa-solid fa-check"></i><span>Metodologías activas para educación media superior y universitaria</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Aprendizaje basado en problemas y proyectos reales</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Evaluación formativa, auténtica y centrada en competencias</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Metodologías activas para educación superior</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Aprendizaje basado en problemas y proyectos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Evaluación formativa, auténtica y diseño centrado en el estudiante</span></li>
             </ul>
           </article>
         </div>
@@ -1339,46 +1183,46 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Rutas sugeridas</div>
-            <h2 class="section-title">No solo un curso — una ruta completa hacia el dominio técnico.</h2>
+            <h2 class="section-title">Rutas de formación diseñadas para avanzar con mayor claridad y mejores resultados</h2>
           </div>
           <p class="section-subtitle">
-            Las rutas combinan cursos progresivos para que avances de fundamentos a dominio avanzado sin saltar pasos. Ideal para quienes buscan una transformación real, no solo un certificado más.
+            Además de cursos individuales, ofrecemos rutas estructuradas que permiten desarrollar habilidades de forma progresiva y aplicarlas en contextos reales de ingeniería, industria y educación.
           </p>
         </div>
 
         <div class="route-grid">
           <article class="route-card">
             <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
-            <h3>Ruta: De Cero a Experto en Simulación y Control</h3>
-            <p>Para quien quiere ir más allá de la teoría — domina MATLAB, Simulink y control aplicado en una secuencia que tiene sentido.</p>
+            <h3>Ruta en simulación y control</h3>
+            <p>Ideal para estudiantes, docentes e ingenieros que desean fortalecer modelado, simulación y análisis de sistemas dinámicos.</p>
             <div class="route-tags"><span>MATLAB</span><span>Simulink</span><span>Control</span></div>
             <ul class="check-list">
-              <li><i class="fa-solid fa-check"></i><span>Programación sólida con MATLAB</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Programación con MATLAB</span></li>
               <li><i class="fa-solid fa-check"></i><span>Modelado y simulación con Simulink</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Estimación de estados y control aplicado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Estimación, análisis o control aplicado</span></li>
             </ul>
           </article>
 
           <article class="route-card">
             <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
-            <h3>Ruta: Automatización Industrial de Alto Impacto</h3>
-            <p>La ruta que exigen las plantas reales — desde el PLC hasta el SCADA, con LabVIEW para adquisición de datos en vivo.</p>
+            <h3>Ruta para automatización e industria</h3>
+            <p>Especialmente útil para empresas, laboratorios y centros de capacitación que requieren formación práctica en integración y operación.</p>
             <div class="route-tags"><span>PLC</span><span>SCADA</span><span>LabVIEW</span></div>
             <ul class="check-list">
-              <li><i class="fa-solid fa-check"></i><span>PLC básico hasta avanzado con casos reales</span></li>
-              <li><i class="fa-solid fa-check"></i><span>SCADA e integración de sistemas de supervisión</span></li>
+              <li><i class="fa-solid fa-check"></i><span>PLC básico o intermedio</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SCADA e integración</span></li>
               <li><i class="fa-solid fa-check"></i><span>Instrumentación y adquisición de datos</span></li>
             </ul>
           </article>
 
           <article class="route-card">
             <div class="icon-box"><i class="fa-solid fa-chalkboard"></i></div>
-            <h3>Ruta: Docente de Alto Desempeño con Metodologías Activas</h3>
-            <p>Para instituciones que ya no conforman con la clase tradicional — diseña experiencias de aprendizaje que transforman resultados académicos.</p>
+            <h3>Ruta de innovación educativa</h3>
+            <p>Muy atractiva para instituciones que desean fortalecer capacitación docente con impacto inmediato en el aula.</p>
             <div class="route-tags"><span>ABP</span><span>TIC</span><span>Evaluación</span></div>
             <ul class="check-list">
-              <li><i class="fa-solid fa-check"></i><span>Metodologías activas con impacto comprobado</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Aula invertida y gamificación estratégica</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Metodologías activas</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Aula invertida y gamificación</span></li>
               <li><i class="fa-solid fa-check"></i><span>Diseño de actividades y evaluación auténtica</span></li>
             </ul>
           </article>
@@ -1391,122 +1235,122 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Cursos destacados</div>
-            <h2 class="section-title">Los cursos que más transforman carreras y equipos técnicos</h2>
+            <h2 class="section-title">Una selección de cursos con alto potencial de contratación</h2>
           </div>
           <p class="section-subtitle">
-            Alta demanda, aplicación inmediata y dominio real de herramientas que el mercado laboral exige hoy — seleccionados por impacto y valor comprobado.
+            Aquí se priorizan programas que combinan demanda, claridad de aplicación y buena percepción de valor para instituciones, empresas y profesionales.
           </p>
         </div>
 
         <div class="course-grid">
           <article class="course-card featured">
-            <div class="badge-soft"><i class="fa-solid fa-star"></i> Más solicitado</div>
+            <div class="badge-soft"><i class="fa-solid fa-star"></i> Alta demanda</div>
             <div class="icon-box"><i class="fa-solid fa-square-root-variable"></i></div>
-            <h3>Domina MATLAB — El lenguaje de la ingeniería moderna</h3>
-            <p>Automatiza cálculos, visualiza datos y desarrolla algoritmos que serían imposibles en Excel. El curso más versátil de nuestra oferta.</p>
+            <h3>Programación con MATLAB</h3>
+            <p>Un curso transversal para análisis, automatización, visualización y trabajo técnico con datos, modelos y algoritmos.</p>
             <div class="course-meta">
-              <span>Alta demanda</span><span>Ingeniería</span><span>Universidades / empresas</span>
+              <span>Muy demandado</span><span>Ingeniería</span><span>Universidades / empresas</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>Matrices, estructuras y programación eficiente</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Visualización profesional y análisis de datos</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Scripts, funciones y automatización desde el día 1</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Matrices, estructuras y programación</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Visualización y análisis de datos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Funciones, scripts y automatización básica</span></li>
             </ul>
             <div class="course-footer">
-              <small>Abierto, corporativo o institucional. Desde 8 horas.</small>
-              <a href="#contact" class="course-link">¡Quiero este curso! <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal como curso base, abierto o corporativo.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
 
           <article class="course-card featured">
             <div class="badge-soft"><i class="fa-solid fa-bolt"></i> Alto valor técnico</div>
             <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
-            <h3>Simulink: Modela sistemas reales antes de construirlos</h3>
-            <p>Reduce errores de diseño, valida comportamientos y prototipa virtualmente. El estándar de la industria aeroespacial, automotriz y de control.</p>
+            <h3>Modelado y simulación con Simulink</h3>
+            <p>Curso de alto valor para control, mecatrónica, sistemas físicos, docencia, prototipado y desarrollo de modelos.</p>
             <div class="course-meta">
-              <span>Especializado</span><span>Simscape / Stateflow</span><span>Ingeniería avanzada</span>
+              <span>Especializado</span><span>Simscape / Stateflow</span><span>Alto valor</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>Modelado continuo, discreto y multidomain</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Simscape para sistemas físicos reales</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Validación de modelos y lógica con Stateflow</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Modelado continuo y discreto</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Introducción a Simscape</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Eventos, lógica y validación de modelos</span></li>
             </ul>
             <div class="course-footer">
-              <small>Para laboratorios, docentes e ingenieros de desarrollo.</small>
-              <a href="#contact" class="course-link">Solicitar este programa <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal para laboratorios, docentes e ingenieros de desarrollo.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
 
           <article class="course-card featured">
             <div class="badge-soft"><i class="fa-solid fa-industry"></i> Para industria</div>
             <div class="icon-box"><i class="fa-solid fa-robot"></i></div>
-            <h3>PLC, SCADA y LabVIEW: Automatiza procesos industriales reales</h3>
-            <p>Aprende a programar, integrar y supervisar sistemas industriales con las herramientas que exigen las plantas de manufactura hoy.</p>
+            <h3>Automatización e instrumentación aplicada</h3>
+            <p>Una oferta pensada para centros de formación, plantas, laboratorios y equipos técnicos que requieren entrenamiento práctico.</p>
             <div class="course-meta">
-              <span>Industria</span><span>Hands-on</span><span>Corporativo o laboratorio</span>
+              <span>Industria</span><span>Hands-on</span><span>Capacitación cerrada</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>PLC básico hasta avanzado — lógica real de planta</span></li>
-              <li><i class="fa-solid fa-check"></i><span>SCADA: supervisión e integración de procesos</span></li>
-              <li><i class="fa-solid fa-check"></i><span>LabVIEW y Arduino para adquisición de datos en vivo</span></li>
+              <li><i class="fa-solid fa-check"></i><span>PLC básico y avanzado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>SCADA e integración</span></li>
+              <li><i class="fa-solid fa-check"></i><span>LabVIEW, Arduino e instrumentación</span></li>
             </ul>
             <div class="course-footer">
-              <small>Capacitación operativa y técnica de alto impacto productivo.</small>
-              <a href="#contact" class="course-link">Cotizar para mi empresa <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal para capacitación operativa y técnica de alto valor.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
 
           <article class="course-card">
             <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
-            <h3>Machine Learning e IA para ingenieros — No para científicos de datos</h3>
-            <p>IA aplicada directamente a tus problemas técnicos: diagnóstico predictivo, clasificación de señales y análisis de datos de planta o laboratorio.</p>
+            <h3>Aprendizaje automático e IA para ingeniería</h3>
+            <p>Una propuesta atractiva porque vincula analítica, algoritmos y soluciones reales en lugar de una narrativa genérica sobre IA.</p>
             <div class="course-meta">
-              <span>IA aplicada</span><span>Datos industriales</span><span>Diagnóstico predictivo</span>
+              <span>IA aplicada</span><span>Datos</span><span>Diagnóstico</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>Machine learning orientado a problemas de ingeniería</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Preparación, limpieza y evaluación de datos reales</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Redes neuronales profundas aplicadas a diagnóstico</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Machine learning para problemas técnicos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Preparación y evaluación de datos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Introducción a redes neuronales profundas</span></li>
             </ul>
             <div class="course-footer">
-              <small>Para actualización profesional e innovación tecnológica.</small>
-              <a href="#contact" class="course-link">Quiero aplicar IA en mi trabajo <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal para actualización profesional e innovación aplicada.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
 
           <article class="course-card">
             <div class="icon-box"><i class="fa-solid fa-cubes"></i></div>
-            <h3>SolidWorks + Certificación CSWA: Diseña piezas que se fabrican</h3>
-            <p>Del boceto a planos técnicos listos para producción — con preparación incluida para la certificación CSWA que las empresas piden en el CV.</p>
+            <h3>SolidWorks desde cero y ruta CSWA</h3>
+            <p>Muy valioso para estudiantes, manufactura, diseño mecánico y programas que buscan una salida profesional concreta.</p>
             <div class="course-meta">
-              <span>Diseño 3D</span><span>Certificación CSWA</span><span>Manufactura</span>
+              <span>Diseño 3D</span><span>CSWA</span><span>Alta conversión</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>Modelado 3D sólido, ensambles y análisis</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Planos técnicos y documentación para manufactura</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Simulacros y estrategia para pasar el examen CSWA</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Interfaz, modelado 3D y ensambles</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Dibujo y documentación técnica</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Preparación para certificación</span></li>
             </ul>
             <div class="course-footer">
-              <small>Certificación internacional que potencia tu perfil profesional.</small>
-              <a href="#contact" class="course-link">¡Quiero certificarme! <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal para captar audiencias amplias y rutas progresivas.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
 
           <article class="course-card">
             <div class="icon-box"><i class="fa-solid fa-chalkboard-user"></i></div>
-            <h3>Innovación Docente con Metodologías Activas — Aulas que funcionan</h3>
-            <p>ABP, aula invertida y gamificación no son buzzwords — son técnicas probadas que mejoran el aprendizaje y el engagement de tus alumnos de forma medible.</p>
+            <h3>Metodologías activas e innovación docente</h3>
+            <p>Una línea con gran potencial institucional para universidades, bachilleratos y programas de actualización docente.</p>
             <div class="course-meta">
-              <span>Docencia superior</span><span>Metodologías activas</span><span>TIC estratégico</span>
+              <span>Docencia</span><span>Metodologías activas</span><span>TIC</span>
             </div>
             <ul class="course-topics">
-              <li><i class="fa-solid fa-check"></i><span>ABP y proyectos que conectan con la realidad</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Aula invertida y gamificación bien aplicada</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Evaluación auténtica y diseño centrado en el estudiante</span></li>
+              <li><i class="fa-solid fa-check"></i><span>ABP y aprendizaje basado en proyectos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Aula invertida y gamificación</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Diseño de actividades y evaluación auténtica</span></li>
             </ul>
             <div class="course-footer">
-              <small>Ideal para programas institucionales de actualización docente.</small>
-              <a href="#contact" class="course-link">Transformar mi docencia <i class="fa-solid fa-arrow-right"></i></a>
+              <small>Ideal para programas masivos o institucionales.</small>
+              <a href="#contact" class="course-link">Solicitar propuesta <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </article>
         </div>
@@ -1518,21 +1362,21 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Catálogo ampliado</div>
-            <h2 class="section-title">¿No encontraste tu tema? El catálogo completo es más amplio de lo que crees.</h2>
+            <h2 class="section-title">Más temas para construir propuestas a la medida</h2>
           </div>
           <p class="section-subtitle">
-            Software avanzado, procesos industriales, investigación académica — construimos propuestas a la medida combinando los temas que tu organización necesita.
+            Esta sección permite mostrar amplitud sin volver pesada la página. Sirve para que el visitante perciba variedad, pero llegue más rápido al contacto o a los cursos destacados.
           </p>
         </div>
 
         <div class="course-list-grid">
           <article class="course-list-card">
             <div class="icon-box"><i class="fa-solid fa-terminal"></i></div>
-            <h3>Software y Programación Técnica</h3>
-            <p>Automatiza análisis, construye modelos y trabaja con datos reales usando las herramientas estándar de la ingeniería moderna.</p>
+            <h3>Software y programación</h3>
+            <p>Temas orientados a análisis, automatización, prototipado y trabajo técnico con datos y modelos.</p>
             <div class="course-list-tags"><span>MATLAB</span><span>Python</span><span>Simulink</span></div>
             <ul class="course-list">
-              <li><i class="fa-solid fa-check"></i><span>Programación avanzada con MATLAB</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Programación con MATLAB</span></li>
               <li><i class="fa-solid fa-check"></i><span>Modelado y simulación con Simulink</span></li>
               <li><i class="fa-solid fa-check"></i><span>Análisis numérico con Python</span></li>
               <li><i class="fa-solid fa-check"></i><span>Filtro de Kalman y estimación de estados</span></li>
@@ -1541,26 +1385,26 @@
 
           <article class="course-list-card">
             <div class="icon-box"><i class="fa-solid fa-gears"></i></div>
-            <h3>Industria, Instrumentación y Control</h3>
-            <p>Formación directa para planta, laboratorio y centros técnicos — lo que las empresas realmente buscan en sus operadores e ingenieros.</p>
+            <h3>Industria, instrumentación y control</h3>
+            <p>Una línea muy atractiva para empresas, laboratorios y centros técnicos.</p>
             <div class="course-list-tags"><span>PLC</span><span>SCADA</span><span>LabVIEW</span></div>
             <ul class="course-list">
-              <li><i class="fa-solid fa-check"></i><span>PLC básico, intermedio y avanzado</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Sistemas SCADA completos</span></li>
+              <li><i class="fa-solid fa-check"></i><span>PLC básico y avanzado</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Sistemas SCADA</span></li>
               <li><i class="fa-solid fa-check"></i><span>Instrumentación virtual con LabVIEW</span></li>
-              <li><i class="fa-solid fa-check"></i><span>Neumática y electroneumática aplicada</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Neumática y electroneumática</span></li>
             </ul>
           </article>
 
           <article class="course-list-card">
             <div class="icon-box"><i class="fa-solid fa-lightbulb"></i></div>
-            <h3>Investigación y Desarrollo Académico</h3>
-            <p>Para universidades y posgrados que quieren elevar la calidad de publicaciones, proyectos y el desempeño de sus cuerpos académicos.</p>
+            <h3>Docencia, investigación y desarrollo académico</h3>
+            <p>Programas con gran potencial para universidades, posgrados y actualización docente.</p>
             <div class="course-list-tags"><span>LaTeX</span><span>Docencia</span><span>Proyectos</span></div>
             <ul class="course-list">
-              <li><i class="fa-solid fa-check"></i><span>Escritura científica profesional con LaTeX</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Escritura científica con LaTeX</span></li>
               <li><i class="fa-solid fa-check"></i><span>Formulación de proyectos de investigación</span></li>
-              <li><i class="fa-solid fa-check"></i><span>TIC integrado en metodologías activas</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Uso de TIC en metodologías activas</span></li>
               <li><i class="fa-solid fa-check"></i><span>Evaluación formativa y auténtica</span></li>
             </ul>
           </article>
@@ -1572,34 +1416,34 @@
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="eyebrow">¿Para quién es esto?</div>
-            <h2 class="section-title">Si trabajas con tecnología, investigas o enseñas — esta capacitación es tuya.</h2>
+            <div class="eyebrow">Públicos y formatos</div>
+            <h2 class="section-title">Formatos de capacitación adaptados a cada necesidad</h2>
           </div>
           <p class="section-subtitle">
-            Cada formato está diseñado para que encuentres exactamente lo que necesitas, con la profundidad técnica y la flexibilidad operativa adecuada a tu contexto.
+            Este bloque ayuda a convertir porque permite que cada visitante se identifique rápido y entienda que TURIX puede adaptar la capacitación al contexto que necesita.
           </p>
         </div>
 
         <div class="trust-grid">
           <article class="trust-card">
             <div class="icon-box"><i class="fa-solid fa-user-graduate"></i></div>
-            <h3>Profesionales y estudiantes</h3>
-            <p>Actualízate en herramientas reales que el mercado laboral exige hoy — y diferénciate desde el primer día de trabajo o defensa de tesis.</p>
+            <h3>Cursos abiertos</h3>
+            <p>Para estudiantes, ingenieros y profesionistas que buscan actualizarse en herramientas, software o metodologías específicas.</p>
           </article>
           <article class="trust-card">
             <div class="icon-box"><i class="fa-solid fa-building"></i></div>
-            <h3>Empresas y laboratorios</h3>
-            <p>Capacitación cerrada a la medida para tu equipo técnico — sin adaptarse a cursos genéricos, con casos directos de tu industria.</p>
+            <h3>Capacitación corporativa</h3>
+            <p>Para empresas, laboratorios, centros tecnológicos y equipos que requieren entrenamiento cerrado o a la medida.</p>
           </article>
           <article class="trust-card">
             <div class="icon-box"><i class="fa-solid fa-university"></i></div>
-            <h3>Universidades e instituciones</h3>
-            <p>Diplomados, talleres y rutas temáticas para fortalecer la formación de tus estudiantes, docentes o cuerpos académicos.</p>
+            <h3>Programas institucionales</h3>
+            <p>Para universidades, posgrados, academias y cuerpos académicos que necesitan talleres, diplomados o rutas temáticas.</p>
           </article>
           <article class="trust-card">
             <div class="icon-box"><i class="fa-solid fa-calendar-days"></i></div>
-            <h3>Presencial, virtual o híbrido</h3>
-            <p>Formato flexible de 4 a 40+ horas — diseñado para encajar en tu calendario, no para que tu calendario se adapte a nosotros.</p>
+            <h3>Formatos flexibles</h3>
+            <p>Presencial, virtual o híbrido, en cursos de 4, 8, 12 o más horas, según los objetivos y el perfil del grupo.</p>
           </article>
         </div>
       </div>
@@ -1610,28 +1454,28 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Por qué TURIX</div>
-            <h2 class="section-title">No somos un centro de capacitación. Somos ingenieros que enseñan lo que hacen.</h2>
+            <h2 class="section-title">Por qué elegir TURIX para tu capacitación</h2>
           </div>
           <p class="section-subtitle">
-            Cualquiera puede organizar un curso. TURIX respalda cada programa con proyectos reales, software desarrollado en casa y años de experiencia aplicada en ingeniería. Esa diferencia se siente desde la primera sesión.
+            Nuestra propuesta formativa se respalda en experiencia aplicada, proyectos reales y dominio de herramientas especializadas. Eso permite ofrecer una capacitación con mayor credibilidad, profundidad técnica y utilidad práctica.
           </p>
         </div>
 
         <div class="proof-grid">
           <article class="proof-card">
             <div class="icon-box"><i class="fa-solid fa-bullseye"></i></div>
-            <h3>Instructores que resuelven problemas reales hoy</h3>
-            <p>No contratamos expositores — nuestros formadores trabajan activamente en proyectos de ingeniería aplicada, automatización y desarrollo tecnológico. Lo que enseñan, lo hacen.</p>
+            <h3>Posicionamiento claro</h3>
+            <p>TURIX ofrece formación especializada respaldada por experiencia real en ingeniería aplicada, desarrollo tecnológico y capacitación.</p>
           </article>
           <article class="proof-card">
             <div class="icon-box"><i class="fa-solid fa-handshake-angle"></i></div>
-            <h3>Propuestas que se ajustan a tu presupuesto y objetivos</h3>
-            <p>Sin paquetes inflexibles. Construimos la propuesta según tus participantes, nivel técnico, duración y modalidad — universidad, empresa o laboratorio.</p>
+            <h3>Mayor valor comercial</h3>
+            <p>La capacitación se vuelve más atractiva para universidades, empresas, laboratorios y equipos que buscan algo serio y útil.</p>
           </article>
           <article class="proof-card">
             <div class="icon-box"><i class="fa-solid fa-medal"></i></div>
-            <h3>Credibilidad técnica que las otras opciones no tienen</h3>
-            <p>Proyectos publicados, software propio y trayectoria en ingeniería aplicada respaldan cada programa. No solo certificados — evidencia concreta de lo que somos capaces.</p>
+            <h3>Credibilidad técnica</h3>
+            <p>Los proyectos, el software y la trayectoria aplicada sostienen el discurso de formación con una base mucho más sólida.</p>
           </article>
         </div>
       </div>
@@ -1642,25 +1486,25 @@
         <div class="section-header">
           <div>
             <div class="eyebrow">Preguntas frecuentes</div>
-            <h2 class="section-title">Resuelve tus dudas ahora y da el siguiente paso con confianza.</h2>
+            <h2 class="section-title">Información que ayuda a tomar la decisión más rápido</h2>
           </div>
           <p class="section-subtitle">
-            Las respuestas directas que necesitas antes de solicitar una propuesta.
+            Un bloque breve de preguntas frecuentes reduce fricción, aclara dudas comunes y empuja al visitante hacia la solicitud de propuesta.
           </p>
         </div>
 
         <div class="faq-grid">
           <article class="faq-card">
-            <h3>¿Los cursos pueden adaptarse a mi empresa o institución?</h3>
-            <p>Sí, siempre. TURIX estructura programas cerrados y a la medida según número de participantes, nivel técnico, duración, modalidad y objetivos específicos. No hay paquete fijo — hay una propuesta pensada para ti.</p>
+            <h3>¿Los cursos pueden adaptarse a una institución o empresa?</h3>
+            <p>Sí. TURIX puede estructurar programas cerrados o a la medida según número de participantes, nivel técnico, duración, modalidad y objetivos.</p>
           </article>
           <article class="faq-card">
-            <h3>¿Puedo tomar los cursos en línea, presencial o híbrido?</h3>
-            <p>Las tres modalidades están disponibles. Definimos el formato más adecuado según el tipo de curso, el perfil del grupo y los recursos disponibles — sin sacrificar calidad técnica.</p>
+            <h3>¿La capacitación puede impartirse en línea o de forma presencial?</h3>
+            <p>Sí. Hay opción presencial, virtual o híbrida, dependiendo del tipo de curso, el perfil del grupo y los recursos disponibles.</p>
           </article>
           <article class="faq-card">
-            <h3>¿Puedo combinar varios temas en una sola propuesta?</h3>
-            <p>Sí. Es posible integrar rutas, talleres intensivos o bloques modulares para construir una propuesta completa — ideal para instituciones que buscan un impacto formativo mayor con un solo proveedor.</p>
+            <h3>¿Se pueden combinar varios temas en una sola propuesta?</h3>
+            <p>Sí. Es posible integrar rutas, talleres intensivos o bloques modulares para construir una propuesta más completa y ajustada al contexto del cliente.</p>
           </article>
         </div>
       </div>
@@ -1670,17 +1514,16 @@
       <div class="container">
         <div class="cta-box">
           <div class="cta-copy">
-            <div class="eyebrow" style="color:#bfefff;">¿Listo para el siguiente paso?</div>
-            <!-- SUGERENCIA DE IMAGEN: Ingeniero o equipo de trabajo recibiendo capacitación dinámica, ambiente profesional -->
-            <h2>Tu equipo puede dominar la tecnología que cambia resultados — en semanas, no años.</h2>
+            <div class="eyebrow" style="color:#bfefff;">Contacto</div>
+            <h2>Diseñemos una propuesta de capacitación con el nivel técnico que tu organización necesita</h2>
             <p>
-              Cuéntanos qué necesitas: un curso puntual, un diplomado modular para tu institución o un programa de actualización para tu equipo de ingeniería. TURIX construye la propuesta técnica con el nivel de profundidad que tus objetivos requieren.
+              Ya sea que busques un curso abierto, una capacitación cerrada para tu equipo o un programa institucional por rutas temáticas, TURIX Dynamics puede estructurar una propuesta clara, aplicable y alineada con tus objetivos de formación.
             </p>
           </div>
           <div class="cta-actions">
-            <a href="mailto:control4everyone@gmail.com?subject=Solicitud%20de%20capacitaci%C3%B3n%20TURIX" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> ¡Quiero mi propuesta ahora!</a>
-            <a href="mailto:control4everyone@gmail.com?subject=Informaci%C3%B3n%20de%20cursos%20TURIX" class="btn btn-secondary"><i class="fa-solid fa-file-lines"></i> Pedir información sin compromiso</a>
-            <a href="projects-turix.html" class="btn btn-secondary"><i class="fa-solid fa-diagram-project"></i> Ver proyectos que respaldan esto</a>
+            <a href="mailto:control4everyone@gmail.com?subject=Solicitud%20de%20capacitaci%C3%B3n%20TURIX" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> Solicitar propuesta</a>
+            <a href="mailto:control4everyone@gmail.com?subject=Informaci%C3%B3n%20de%20cursos%20TURIX" class="btn btn-secondary"><i class="fa-solid fa-file-lines"></i> Pedir información</a>
+            <a href="projects-turix.html" class="btn btn-secondary"><i class="fa-solid fa-diagram-project"></i> Ver proyectos</a>
           </div>
         </div>
       </div>
@@ -1689,25 +1532,7 @@
 
   <footer>
     <p>&copy; 2026 TURIX Dynamics</p>
-    <p>Ingeniería aplicada · Capacitación de alto impacto · Tecnología que transforma.</p>
+    <p>Transformamos conocimiento en tecnología funcional.</p>
   </footer>
-  <script>
-    // Animación de entrada suave al hacer scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.animate-on-scroll, .mini-card, .area-card, .course-card, .proof-card, .route-card, .method-card, .trust-card, .faq-card, .course-list-card, .feature-card').forEach(el => {
-      el.classList.add('animate-on-scroll');
-      observer.observe(el);
-    });
-  </script>
 </body>
 </html>
