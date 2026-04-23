@@ -1,0 +1,111 @@
+[
+  {
+    "name": "Detección y localización de fugas en tuberías",
+    "description": "Algoritmos híbridos (basados en modelos + datos) que detectan fugas en tiempo real. Implementado en banco de pruebas de 250m con sensores de presión y flujo. Reduce pérdidas hasta un 90% y evita daños ambientales.",
+    "image": "data/images/waterleak.png",
+    "tech": "MATLAB",
+    "tags": ["EKF", "Descriptor systems", "SCADA", "Machine Learning"],
+    "website": "#",
+    "github": "https://github.com/turixmain/leak-detection",
+    "docs": "https://turix.com/docs/leak-detection"
+  },
+  {
+    "name": "Control y diagnóstico basado en modelos Takagi-Sugeno",
+    "description": "Diseño de sistemas de tolerancia a fallos ante variables inciertas (sensores con offset, baja resolución, cambios climáticos). Aumenta la fiabilidad en procesos industriales no lineales.",
+    "image": "data/images/ftc.jpg",
+    "tech": "MATLAB",
+    "tags": ["Takagi-Sugeno", "Fault Tolerant Control", "LMI"],
+    "website": "#",
+    "github": "https://github.com/turixmain/takagi-sugeno-fdi"
+  },
+    {
+    "name": "Diagnóstico y control tolerante a fallos en UAVs",
+    "description": "Sistema de detección de fallos en actuadores y sensores para drones multirrotor. Basado en modelos predictivos y validado en simuladores y plataformas reales. Aumenta la seguridad en vuelos urbanos.",
+    "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80",
+    "tech": "C++",
+    "tags": ["UAV", "Fault Diagnosis", "FTC", "ROS"],
+    "website": "#",
+    "github": "https://github.com/turixmain/uav-fdi"
+  },
+  {
+    "name": "Sistema de Control de Estabilidad ADAS",
+    "description": "Algoritmo de control activo que previene derrapes y vuelcos en vehículos comerciales. Fusión de sensores inerciales y actuación sobre frenos individuales. Mejora la estabilidad lateral en curvas críticas.",
+    "image": "data/images/esc.webp",
+    "tech": "C++",
+    "tags": ["ADAS", "Vehicle dynamics", "ESP", "Embedded"],
+    "website": "#",
+    "github": "https://github.com/turixmain/adas-stability"
+  },
+  {
+    "name": "Sistema de Mantenimiento de Carril (LKS)",
+    "description": "Visión artificial + control predictivo para mantener el vehículo centrado en el carril. Funciona en condiciones de baja visibilidad y curvas pronunciadas. Precisión de ±5 cm.",
+    "image": "data/images/lks.jpg",
+    "tech": "Python",
+    "tags": ["Lane keeping", "Computer vision", "MPC", "OpenCV"],
+    "website": "#",
+    "github": "https://github.com/turixmain/lane-keeping"
+  },
+  {
+    "name": "Robot autónomo para almacenes inteligentes",
+    "description": "Navegación SLAM + planificación de rutas óptimas para logística interna. Integra sensores LiDAR y cámaras. Aumenta la productividad en centros de distribución hasta un 40%.",
+    "image": "data/images/Turixw2.jpg",
+    "tech": "ROS",
+    "tags": ["Warehouse robotics", "SLAM", "Path planning", "Autonomous navigation"],
+    "website": "#",
+    "github": "https://github.com/turixmain/warehouse-robot"
+  },
+  {
+    "name": "Robótica móvil para entornos industriales",
+    "description": "Plataforma modular con capacidades de seguimiento de personas, evitación de obstáculos y transporte de cargas. Ideal para fábricas 4.0 y laboratorios.",
+    "image": "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?auto=format&fit=crop&q=80",
+    "tech": "ROS",
+    "tags": ["Mobile robotics", "Navigation2", "Obstacle avoidance"],
+    "website": "#",
+    "github": "https://github.com/turixmain/mobile-robot"
+  },
+  {
+    "name": "Driver para motores BLDC/PMSM de hasta 5kW",
+    "description": "Controlador de bajo costo con FOC (Field Oriented Control) y conmutación sin sensores. Diseñado para vehículos eléctricos ligeros, e-bikes y maquinaria industrial.",
+    "image": "data/images/driver.avif",
+    "tech": "Embedded",
+    "tags": ["BLDC", "PMSM", "FOC", "STM32", "Power electronics"],
+    "website": "#",
+    "github": "https://github.com/turixmain/bldc-driver"
+  },
+  {
+    "name": "Sistema de seguridad para aerogeneradores",
+    "description": "Detección temprana de fallos en palas, multiplicadora y generador mediante análisis de vibraciones y temperatura. Previene accidentes catastróficos y reduce costes de mantenimiento un 30%.",
+    "image": "data/images/turbine.jpg",
+    "tech": "MATLAB",
+    "tags": ["Wind turbine", "Condition monitoring", "Predictive maintenance"],
+    "website": "#",
+    "github": "https://github.com/turixmain/wind-turbine-safety"
+  },
+  {
+    "name": "Control colaborativo de robots (CoBots)",
+    "description": "Algoritmos para que robots industriales y humanos compartan el mismo espacio de trabajo de forma segura. Incluye planificación de trayectorias en tiempo real y detección de colisiones.",
+    "image": "data/images/cobots.webp",
+    "tech": "ROS",
+    "tags": ["Collaborative robotics", "Safety", "Real-time control", "Human-robot interaction"],
+    "website": "#",
+    "github": "https://github.com/turixmain/cobot-control"
+  },
+  {
+    "name": "Visión artificial para inspección industrial",
+    "description": "Sistema de detección de defectos en piezas manufacturadas usando redes neuronales convolucionales (CNN). Precisión > 99% y velocidad de inspección en línea.",
+    "image": "data/images/vision.jpeg",
+    "tech": "Python",
+    "tags": ["Computer vision", "Deep learning", "Quality control", "CNN"],
+    "website": "#",
+    "github": "https://github.com/turixmain/industrial-vision"
+  },
+  {
+    "name": "Robots autónomos de fumigación y riego",
+    "description": "Plataforma robótica terrestre para agricultura de precisión. Navega autónomamente, detecta zonas con plagas o estrés hídrico y aplica dosis localizadas. Ahorro del 60% en agroquímicos.",
+    "image": "data/images/TurixF1.jpeg",
+    "tech": "ROS",
+    "tags": ["Agri-robotics", "Precision farming", "Autonomous spraying", "Computer vision"],
+    "website": "#",
+    "github": "https://github.com/turixmain/agri-robot"
+  }
+]
