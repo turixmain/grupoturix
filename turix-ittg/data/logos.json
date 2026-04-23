@@ -1,0 +1,32 @@
+[{
+  "name": "Invemex",
+  "image": "turix-ittg/data/images/logos/unnamed.jpg",
+  "url": "https://www.invemex.com"
+},
+{
+  "name": "UPC",
+  "image": "turix-ittg/data/images/logos/upc.png",
+  "url": "https://www.iri.upc.edu/"
+},
+{
+  "name": "UGA",
+  "image": "turix-ittg/data/images/logos/uga.png",
+  "url": "https://www.gipsa-lab.grenoble-inp.fr/en"
+},
+{
+  "name": "ITTG",
+  "image": "turix-ittg/data/images/logos/ittg.png",
+  "url": "https://tuxtla.tecnm.mx/"
+},
+{
+  "name": "AMS",
+  "image": "turix-ittg/data/images/logos/ams.png",
+  "url": "https://ams-latam.com/"
+},
+{
+  "name": "UNTELS",
+  "image": "turix-ittg/data/images/logos/untels.jpg",
+  "url": "https://www.untels.edu.pe/"
+ }
+
+]
