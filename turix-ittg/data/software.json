@@ -50,7 +50,7 @@
         "language": "Lovable",
         "tags": ["PID tunner", "PID Controller", "Ziegler-Nichols", "AMIGO-Skogestad"],
         "website": "https://turixlab.lovable.app/"
-    }
+    },
 {
   "name": "Ball and Beam Laboratory",
   "description": "Advanced PID controller design of a Ball and Beam system using Frequency Method",
