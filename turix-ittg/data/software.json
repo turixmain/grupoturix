@@ -51,4 +51,12 @@
         "tags": ["PID tunner", "PID Controller", "Ziegler-Nichols", "AMIGO-Skogestad"],
         "website": "https://turixlab.lovable.app/"
     }
+{
+  "name": "Ball and Beam Laboratory",
+  "description": "Advanced PID controller design of a Ball and Beam system using Frequency Method",
+  "image": "data/images/ballandbeam.png",
+  "language": "Python",
+  "tags": ["PID tuner", "PID Controller", "Frequency Method", "Control Systems"],
+  "website": "https://grupoturix.github.io/turix-ittg/BallAndBeamModelo.html"
+}
 ]
