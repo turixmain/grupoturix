@@ -179,17 +179,5 @@
         "email": "#",
         "orcid": "#",
         "scholar": "https://scholar.google.com/citations?user=57203885724"
-    },
-    {
-        "name": "Samuel GÓMEZ PEÑATE",
-        "degree": "Ph.D. Graduate",
-        "photo": "../images/Samuel.jpg",
-        "generation": "Graduated April 2021",
-        "thesis": "Fault-tolerant control of Takagi-Sugeno systems with inexact premise variables",
-        "supervisor": "Dr. Francisco Ronay / Dr. Guillermo Valencia",
-        "graduated": true,
-        "email": "#",
-        "orcid": "#",
-        "scholar": "#"
     }
 ]
