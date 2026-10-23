@@ -1,0 +1,1420 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Laboratorio Ball and Beam</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']},
+  startup:{pageReady:function(){return MathJax.startup.defaultPageReady().then(function(){window.__mj=true;});}}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+/* Layout: columna de escenario y gráficas (izquierda) + columna de lección y controles (derecha); en móvil todo apila. */
+:root{
+  --bg:#e8ecf2; --surface:#f8fafc; --surface2:#edf1f7; --ink:#13203a; --muted:#566277; --line:#cfd7e3; --grid:#dde3ec;
+  --accent:#0b5fd1; --accent-ink:#ffffff; --ref:#0f8a5f; --ball:#d4430b; --ghost:#7a879f;
+  --p:#c27a00; --i:#0d8aa0; --d:#a8329a; --warn:#c2260c; --ok:#0f8a5f; --beam:#2a3a5c; --support:#9aa8bf; --servo:#6b7a96;
+  --f-display:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --f-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1120; --surface:#111a2e; --surface2:#17223a; --ink:#e7ecf6; --muted:#9aa6bd; --line:#26344f; --grid:#1d2a44;
+    --accent:#5aa2ff; --accent-ink:#06101f; --ref:#3ddc9b; --ball:#ff7a45; --ghost:#8190ac;
+    --p:#f0b43c; --i:#4cc9e0; --d:#e079d3; --warn:#ff6b5a; --ok:#3ddc9b; --beam:#c5d0e6; --support:#3a4a69; --servo:#52627f; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a1120; --surface:#111a2e; --surface2:#17223a; --ink:#e7ecf6; --muted:#9aa6bd; --line:#26344f; --grid:#1d2a44;
+  --accent:#5aa2ff; --accent-ink:#06101f; --ref:#3ddc9b; --ball:#ff7a45; --ghost:#8190ac;
+  --p:#f0b43c; --i:#4cc9e0; --d:#e079d3; --warn:#ff6b5a; --ok:#3ddc9b; --beam:#c5d0e6; --support:#3a4a69; --servo:#52627f; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;
+  padding-block:0 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:.005em}
+h2{font-size:24px;line-height:1.15}
+h3{font-size:19px}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+sub,sup{line-height:0}
+.wrap{max-width:1320px;margin:0 auto}
+header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-block:18px 14px}
+.brand h1{font-size:30px;line-height:1.05}
+.brand p{color:var(--muted);font-size:13px;margin-top:2px}
+.run{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:6px 10px;cursor:pointer;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500;font-size:13px;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:4px 9px;font-size:12px}
+.btn[disabled]{opacity:.45;cursor:default}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,400px);gap:16px;align-items:start}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card>.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.label{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.manual{margin-top:12px;padding:10px 12px;border:1px solid var(--accent);border-radius:10px;background:var(--surface2)}
+.stage canvas{width:100%;aspect-ratio:21/8;display:block;border-radius:8px;background:var(--surface2)}
+.readouts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.readouts span b{font-weight:500;color:var(--muted);margin-right:5px}
+.badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.badge.warn{background:var(--warn);color:#fff}
+.plots canvas{width:100%;display:block}
+#cv-pos{height:210px}#cv-ctl{height:190px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;margin:8px 0 12px;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:6px}
+.legend i.dash{border-top-style:dashed;border-top-width:2px}
+.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:16px}
+#cv-poles{width:100%;height:210px;display:block;border-radius:8px;background:var(--surface2)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:13px;align-items:baseline}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:12.5px}
+.note{font-size:12.5px;color:var(--muted)}
+.ctl{display:grid;gap:4px;padding:8px 0}
+.ctl+.ctl{border-top:1px dashed var(--line)}
+.ctl label{font-weight:500;font-size:13.5px}
+.ctl-in{display:grid;grid-template-columns:minmax(0,1fr) 76px auto;gap:10px;align-items:center}
+.ctl-in .unit{font-size:11px;color:var(--muted);min-width:54px;font-family:var(--f-mono)}
+input[type=range]{width:100%;accent-color:var(--accent);height:26px;margin:0}
+input[type=number]{width:76px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.gains .ctl label{font-size:15px}
+.gains input[type=range]{height:34px}
+.chk{display:flex;gap:8px;align-items:flex-start;padding:6px 0;cursor:pointer;font-size:13.5px}
+.chk input{margin-top:3px;accent-color:var(--accent);width:16px;height:16px}
+.chk small{display:block;color:var(--muted);font-size:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lesson .stepper{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.lesson .stepper button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--surface2);cursor:pointer;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.lesson .stepper button[aria-current="step"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.lesson .stepper button.seen{color:var(--ink);border-color:var(--muted)}
+.lesson h2{margin:2px 0 6px}
+.lesson ol{margin:10px 0 0;padding-left:20px;display:grid;gap:6px}
+.predict{margin-top:14px;padding:12px;border-radius:8px;background:var(--surface2);border:1px solid var(--line);display:grid;gap:8px}
+.predict .q{font-weight:500}
+.explain{font-size:13.5px;display:grid;gap:8px;padding-top:4px;border-top:1px dashed var(--line)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.nav .grow{flex:1}
+.eq{font-family:var(--f-display);font-style:italic;font-size:1.08em;white-space:nowrap}
+.eqb{font-family:var(--f-display);font-style:italic;font-size:18px;padding:8px 0;overflow-x:auto;white-space:nowrap}
+.sect{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.sect:first-child{margin:0;padding:0;border:0}
+details.fold{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+details.fold summary{cursor:pointer;font-weight:600;font-size:13px;list-style:none;display:flex;justify-content:space-between}
+details.fold summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details.fold[open] summary::after{content:"–"}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11.5px;color:var(--muted);font-weight:600}
+td.mono,.mono{font-family:var(--f-mono)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--muted)}
+.chip.ok{border-color:var(--ok);color:var(--ok)} .chip.bad{border-color:var(--warn);color:var(--warn)}
+.design .calc{display:grid;gap:8px}
+.design .calc .row input[type=number]{width:70px}
+.design .out{font-family:var(--f-mono);font-size:12.5px}
+.model{margin-top:16px}
+.model .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:10px}
+.model h3{margin-bottom:6px}
+.model p+p{margin-top:8px}
+.ref{margin-top:14px;font-size:12px;color:var(--muted)}
+mjx-container{color:inherit}
+mjx-container[jax="SVG"][display="true"]{overflow-x:auto;overflow-y:hidden;max-width:100%;margin:.7em 0 !important}
+.explain mjx-container[display="true"],.model mjx-container[display="true"]{text-align:left !important}
+.model .prose{max-width:80ch;display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.model .prose>*,.explain>*,.model .recipe li{min-width:0;max-width:100%}
+.model .prose>p,.explain>p{overflow-x:auto;overflow-y:hidden}
+.model .recipe,.model details{min-width:0;max-width:100%}
+.model details.fold{padding:12px 0}
+.model details.fold summary{font-family:var(--f-display);font-size:21px;font-weight:400}
+.model .recipe{border:1px solid var(--line);background:var(--surface2);border-radius:10px;padding:14px 16px;margin:14px 0 6px}
+.model .recipe ol{margin:8px 0 0;padding-left:22px;display:grid;gap:6px;max-width:84ch}
+.model .ex{border-left:3px solid var(--accent);padding:6px 12px;background:var(--surface2);border-radius:0 8px 8px 0}
+.model .ex b{font-weight:600}
+.ex-inline{font-weight:600;color:var(--accent)}
+
+:root{--code-bg:#eef2f8;--code-fg:#1b2a47;--tk-c:#5d6f8c;--tk-k:#0b5fd1;--tk-n:#b4540b;--tk-p:#7a3fc4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--code-bg:#0b1322;--code-fg:#dbe4f5;--tk-c:#7f8fae;--tk-k:#6cb0ff;--tk-n:#ffb070;--tk-p:#d59bff}}
+:root[data-theme="dark"]{--code-bg:#0b1322;--code-fg:#dbe4f5;--tk-c:#7f8fae;--tk-k:#6cb0ff;--tk-n:#ffb070;--tk-p:#d59bff}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:9px 14px;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.filt{display:grid;gap:4px;padding:8px 0;border-top:1px dashed var(--line)}
+.filt>label{font-weight:500;font-size:13.5px}
+.codegrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,380px);gap:16px;align-items:start}
+pre.code{margin:0;padding:14px 16px;background:var(--code-bg);color:var(--code-fg);border-radius:10px;overflow:auto;max-height:80vh;font-family:var(--f-mono);font-size:12.5px;line-height:1.55;tab-size:2;border:1px solid var(--line)}
+.tk-c{color:var(--tk-c)}.tk-k{color:var(--tk-k)}.tk-n{color:var(--tk-n)}.tk-p{color:var(--tk-p)}
+.codenotes ol{margin:8px 0 0;padding-left:20px;display:grid;gap:6px;font-size:13.5px}
+.codenotes p+p{margin-top:8px}
+.codenotes .prose{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;font-size:13.5px}
+.codenotes .prose>p{overflow-x:auto;overflow-y:hidden;min-width:0}
+.warn-chip{border-color:var(--warn);color:var(--warn)}
+@media (max-width:980px){
+  .codegrid{grid-template-columns:minmax(0,1fr)}
+  .layout{display:flex;flex-direction:column}
+  .col{display:contents}
+  #k-stage{order:1}#k-gains{order:2}#k-plots{order:3}#k-lesson{order:4}#k-scn{order:5}#k-theory{order:6}#k-real{order:7}#k-design{order:8}
+  .two{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:480px){
+  .ctl-in{grid-template-columns:minmax(0,1fr) 70px}
+  .ctl-in .unit{grid-column:1/-1;margin-top:-4px}
+  .brand h1{font-size:25px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <h1>Laboratorio Ball and Beam</h1>
+    <p>Sintonía de un PID con modelo no lineal · parámetros del prototipo de Sutera et al., IEEE Trans. Educ. 2026</p>
+  </div>
+  <div class="run">
+    <button class="btn primary" id="btn-play" type="button">Pausar</button>
+    <button class="btn" id="btn-reset" type="button">Reiniciar bola</button>
+    <div class="seg" role="group" aria-label="Velocidad de simulación" id="speed">
+      <button type="button" data-s="0.25" aria-pressed="false">0.25×</button>
+      <button type="button" data-s="0.5" aria-pressed="false">0.5×</button>
+      <button type="button" data-s="1" aria-pressed="true">1×</button>
+      <button type="button" data-s="2" aria-pressed="false">2×</button>
+      <button type="button" data-s="4" aria-pressed="false">4×</button>
+    </div>
+  </div>
+</header>
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button type="button" role="tab" id="tb-sim" aria-selected="true" aria-controls="tab-sim">Simulador</button>
+  <button type="button" role="tab" id="tb-code" aria-selected="false" aria-controls="tab-code">Código Arduino</button>
+</nav>
+
+<div id="tab-sim" role="tabpanel">
+<div class="layout">
+  <div class="col">
+    <section class="card stage" id="k-stage">
+      <div class="head"><span class="label">Planta en tiempo real</span><span id="sat-badge" class="badge warn" hidden>Actuador saturado</span></div>
+      <canvas id="cv-stage" role="img" aria-label="Animación de la viga y la bola"></canvas>
+      <div class="manual" id="manual-bar" hidden>
+        <div class="head" style="margin:0 0 2px"><span class="label">Control manual: tú inclinas la viga</span><button class="btn small" id="btn-closeloop" type="button">Volver a lazo cerrado</button></div>
+        <div id="m-manual"></div>
+        <div class="row" id="manual-quick"><button class="btn small" type="button" data-a="-5">−5°</button><button class="btn small" type="button" data-a="-2">−2°</button><button class="btn small" type="button" data-a="0">0°</button><button class="btn small" type="button" data-a="2">+2°</button><button class="btn small" type="button" data-a="5">+5°</button></div>
+      </div>
+      <div class="readouts" id="readouts">
+        <span><b>d</b><span id="o-d">—</span></span>
+        <span><b>r</b><span id="o-r">—</span></span>
+        <span><b>e</b><span id="o-e">—</span></span>
+        <span><b>α</b><span id="o-a">—</span></span>
+        <span><b>d″</b><span id="o-acc">—</span></span>
+        <span><b>t</b><span id="o-t">—</span></span>
+      </div>
+    </section>
+
+    <section class="card plots" id="k-plots">
+      <div class="head"><span class="label">Posición de la bola</span><span class="note" id="plot-mode">Ventana de 20 s</span></div>
+      <canvas id="cv-pos" role="img" aria-label="Gráfica de posición contra referencia"></canvas>
+      <div class="legend" id="leg-pos">
+        <span><i style="border-color:var(--accent)"></i>d(t) modelo no lineal <b id="lv-d"></b></span>
+        <span><i class="dash" style="border-color:var(--ref)"></i>r(t) referencia</span>
+        <span id="leg-ghost"><i class="dash" style="border-color:var(--ghost)"></i>modelo lineal ideal (Ec. 9)</span>
+        <span id="leg-prev" hidden><i style="border-color:var(--ghost);opacity:.5"></i>ensayo anterior</span>
+      </div>
+      <div class="head"><span class="label">Señal de control (ángulo de viga pedido)</span><span class="note">Aporte de cada término, en grados de viga</span></div>
+      <canvas id="cv-ctl" role="img" aria-label="Gráfica de la señal de control y sus componentes P, I y D"></canvas>
+      <div class="legend">
+        <span><i style="border-color:var(--ink)"></i>u total <b id="lv-u"></b></span>
+        <span><i style="border-color:var(--p)"></i>P <b id="lv-p"></b></span>
+        <span><i style="border-color:var(--i)"></i>I <b id="lv-i"></b></span>
+        <span><i style="border-color:var(--d)"></i>D <b id="lv-dd"></b></span>
+        <span><i class="dash" style="border-color:var(--warn)"></i>límite <b id="lv-sat">±10°</b></span>
+      </div>
+    </section>
+
+    <section class="card" id="k-theory">
+      <div class="head"><h3>Qué predice la teoría</h3><span class="note">Lazo cerrado lineal con las ganancias actuales</span></div>
+      <div class="two">
+        <div>
+          <canvas id="cv-poles" role="img" aria-label="Mapa de polos del lazo cerrado"></canvas>
+          <p class="note" style="margin-top:6px">Polos del lazo cerrado (×). Si cruzan al semiplano derecho el sistema es inestable. La línea punteada marca ζ = 0.7.</p>
+        </div>
+        <div>
+          <dl class="kv" id="theory-kv">
+            <dt>Ganancia de planta G₀</dt><dd id="t-g0">—</dd>
+            <dt>Polos</dt><dd id="t-poles">—</dd>
+            <dt>Frecuencia natural ωₙ</dt><dd id="t-wn">—</dd>
+            <dt>Amortiguamiento ζ</dt><dd id="t-z">—</dd>
+            <dt>Sobreimpulso teórico</dt><dd id="t-mp">—</dd>
+            <dt>Tiempo de asentamiento</dt><dd id="t-ts">—</dd>
+            <dt>Margen de fase</dt><dd id="t-pm">—</dd>
+          </dl>
+          <div class="sect">
+            <div class="head" style="margin-bottom:6px"><span class="label">Ensayo de escalón (medido)</span></div>
+            <div id="trial-now" class="note">Pulsa «Ensayo de escalón» para medir sobreimpulso, tiempo de subida y asentamiento.</div>
+            <div class="chips" id="goal-chips"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sect">
+        <div class="head" style="margin-bottom:6px"><span class="label">Historial de ensayos</span><button class="btn small" id="btn-clear-hist" type="button">Borrar</button></div>
+        <div class="tablewrap"><table id="hist-table"><thead><tr><th>#</th><th>Kp</th><th>Ki</th><th>Kd</th><th>Mp %</th><th>tr s</th><th>ts s</th><th>e∞ mm</th><th>IAE</th></tr></thead><tbody></tbody></table></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section class="card lesson" id="k-lesson">
+      <div class="stepper" id="stepper" role="group" aria-label="Lecciones"></div>
+      <div class="label" id="l-kicker"></div>
+      <h2 id="l-title"></h2>
+      <p id="l-goal" style="margin-top:4px"></p>
+      <ol id="l-steps"></ol>
+      <div class="predict">
+        <span class="label">Predice antes de mover nada</span>
+        <p class="q" id="l-predict"></p>
+        <div class="row"><button class="btn small" id="btn-reveal" type="button" aria-expanded="false">Ver explicación</button></div>
+        <div class="explain" id="l-explain" hidden></div>
+      </div>
+      <div class="nav">
+        <button class="btn" id="btn-prev" type="button">← Anterior</button>
+        <button class="btn small" id="btn-restore" type="button">Restaurar</button>
+        <span class="grow"></span>
+        <button class="btn primary" id="btn-next" type="button">Siguiente →</button>
+      </div>
+    </section>
+
+    <section class="card gains" id="k-gains">
+      <div class="head"><h3>Ganancias del PID</h3><span class="note">El efecto es inmediato</span></div>
+      <div id="m-gains"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn small" id="btn-zero" type="button">Poner en cero</button>
+        <button class="btn small" id="btn-paper" type="button">Valores del artículo</button>
+      </div>
+    </section>
+
+    <section class="card" id="k-scn">
+      <div class="head"><h3>Escenario</h3></div>
+      <div id="m-scn"></div>
+      <label class="chk"><input type="checkbox" id="c-auto"><span>Onda cuadrada automática (±8 cm)<small>La referencia alterna sola, así ves el efecto de cada ganancia sin tocar nada. Si la bola ya está en reposo sobre r, el error es cero y ninguna ganancia cambia lo que se ve.</small></span></label>
+      <div id="m-auto" hidden></div>
+      <label class="chk"><input type="checkbox" id="c-manual"><span>Lazo abierto (control manual)<small>Desconecta el PID y tú inclinas la viga.</small></span></label>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="btn-push" type="button">Empujón a la bola</button>
+        <button class="btn primary" id="btn-trial" type="button">Ensayo de escalón</button>
+      </div>
+      <p class="note" style="margin-top:8px">El ensayo reinicia la bola en «Desde», aplica el escalón a la referencia a los 0.5 s y mide durante 10 s.</p>
+    </section>
+
+    <section class="card" id="k-real">
+      <div class="head"><h3>Realismo del modelo</h3>
+        <div class="seg" role="group" aria-label="Preajuste de realismo"><button type="button" id="p-ideal" aria-pressed="true">Ideal</button><button type="button" id="p-real" aria-pressed="false">Prototipo</button></div>
+      </div>
+      <p class="note">Ideal reproduce el modelo del artículo. Prototipo agrega servo con retardo, muestreo, ruido del sensor y bola hueca.</p>
+      <div id="m-real"></div>
+      <div class="filt">
+        <label id="filt-label">Filtro de la derivada</label>
+        <div class="seg" role="group" aria-labelledby="filt-label"><button type="button" id="f-lp" aria-pressed="true">Pasa-bajas</button><button type="button" id="f-ma" aria-pressed="false">Media móvil</button></div>
+        <div id="m-tauD"></div>
+        <div id="m-maN" hidden></div>
+        <p class="note" id="filt-note"></p>
+      </div>
+      <div id="m-real2"></div>
+      <label class="chk"><input type="checkbox" id="c-quant"><span>Cuantizar sensor a 1 mm<small>El VL53L1X entrega la distancia en milímetros enteros.</small></span></label>
+      <label class="chk"><input type="checkbox" id="c-hollow"><span>Bola hueca (PLA impreso)<small>Cambia la inercia: κ = 1 + J/(m r²) pasa de 1.40 a 1.67.</small></span></label>
+      <label class="chk"><input type="checkbox" id="c-linear"><span>Usar planta lineal<small>Reemplaza sen α por α y quita el término centrífugo.</small></span></label>
+      <label class="chk"><input type="checkbox" id="c-aw" checked><span>Anti-windup (integración condicional)<small>Detiene la integral mientras el actuador está saturado.</small></span></label>
+      <label class="chk"><input type="checkbox" id="c-dmeas" checked><span>Derivada sobre la medición<small>Como la librería PID de Arduino; evita el golpe al cambiar r.</small></span></label>
+      <label class="chk"><input type="checkbox" id="c-ghost" checked><span>Mostrar modelo lineal ideal<small>Curva gris: lo que predice la Ec. (9) sin servo, muestreo, ruido ni saturación.</small></span></label>
+    </section>
+
+    <section class="card design" id="k-design">
+      <div class="head"><h3>Diseño analítico</h3><span class="note">Calcula y aplica</span></div>
+      <div class="calc">
+        <span class="label">Asignación de polos</span>
+        <div class="row">
+          <label>ωₙ <input type="number" id="dp-wn" value="2" min="0.2" max="6" step="0.1"> rad/s</label>
+          <label>ζ <input type="number" id="dp-z" value="0.7" min="0.1" max="2" step="0.05"></label>
+        </div>
+        <div class="out" id="dp-out"></div>
+        <button class="btn small" id="dp-apply" type="button">Aplicar (Ki = 0)</button>
+      </div>
+      <div class="calc sect">
+        <span class="label">Margen de fase (método del artículo)</span>
+        <div class="row">
+          <label>ω<sub>T</sub> <input type="number" id="dm-w" value="2.73" min="0.3" max="8" step="0.05"> rad/s</label>
+          <label>φ <input type="number" id="dm-phi" value="57" min="10" max="85" step="1"> °</label>
+        </div>
+        <div class="out" id="dm-out"></div>
+        <button class="btn small" id="dm-apply" type="button">Aplicar (Ki = 0)</button>
+      </div>
+      <div class="calc sect">
+        <span class="label">Oscilación crítica (Ziegler–Nichols de lazo cerrado)</span>
+        <p class="note">Con Ki = 0, Kd = 0 y la onda cuadrada apagada, deja oscilar la bola 3 ciclos o más y mide.</p>
+        <button class="btn small" id="zn-measure" type="button">Medir periodo T<sub>u</sub></button>
+        <div class="out" id="zn-out">Sin medición.</div>
+        <div class="row">
+          <button class="btn small" id="zn-classic" type="button" disabled>Aplicar ZN clásico</button>
+          <button class="btn small" id="zn-id" type="button" disabled>Diseñar con G₀ medida</button>
+        </div>
+        <div class="out" id="zn-pred"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<section class="card model" id="k-model">
+  <h2>Teoría paso a paso</h2>
+  <p class="note">Cada bloque corresponde a algo que puedes mover en el simulador. Los números de ejemplo son del prototipo del artículo (L = 0.6 m, m = 2.7 g, r = 2 cm, l₁ = 4 cm).</p>
+
+  <div class="recipe">
+    <span class="label">Receta de sintonía en seis pasos</span>
+    <ol>
+      <li><b>Conoce la planta.</b> En lazo abierto (lección 2) verifica el sentido de giro y los límites de la viga.</li>
+      <li><b>Mide \(G_0\).</b> Con solo P, mide el periodo de oscilación: \(G_0=(2\pi/T_u)^2/K_p\) (lección 9).</li>
+      <li><b>Traduce requisitos a \(\omega_n\) y \(\zeta\).</b> \(\zeta\approx0.7\) da cerca de 5 % de sobreimpulso, y \(\omega_n\approx4/(\zeta\,t_s)\) para el asentamiento deseado. Ejemplo: \(t_s=3\) s y \(\zeta=0.7\) dan \(\omega_n=1.9\) rad/s.</li>
+      <li><b>Calcula P y D.</b> \(K_p=\omega_n^2/G_0\) y \(K_d=2\zeta\omega_n/G_0\), con \(K_i=0\). Para el ejemplo: \(K_p=7.8\), \(K_d=5.7\).</li>
+      <li><b>Prueba con un escalón en «Prototipo».</b> Si el sobreimpulso supera al teórico, los retardos restan fase: sube \(K_d\). Si hay chatter, baja \(K_d\) o sube \(\tau_d\).</li>
+      <li><b>Agrega Ki al final.</b> Usa la menor que elimine el error estacionario en un tiempo aceptable (\(\tau_I\approx K_p/K_i\)) y vuelve a revisar el margen de fase.</li>
+    </ol>
+  </div>
+
+  <details class="fold" open>
+    <summary>1. Ecuación de movimiento (Euler–Lagrange)</summary>
+    <div class="prose">
+      <p>Coordenadas: la posición \(d\) de la bola a lo largo de la viga y el ángulo \(\alpha\) de la viga, que impone el servo. La bola rueda sin deslizar, así que su velocidad angular es \(\omega_b=\dot d/r\). Las energías son \[ T=\tfrac12m\left(\dot d^{2}+d^{2}\dot\alpha^{2}\right)+\tfrac12J\,\omega_b^{2},\qquad V=-m\,g\,d\sin\alpha \] Aquí \(\alpha>0\) baja el extremo libre (el artículo usa el signo contrario). El lagrangiano \(\mathcal L=T-V\) es \[ \mathcal L=\tfrac12\left(m+\tfrac{J}{r^2}\right)\dot d^{2}+\tfrac12m\,d^{2}\dot\alpha^{2}+m\,g\,d\sin\alpha \] Aplicando \(\dfrac{d}{dt}\dfrac{\partial\mathcal L}{\partial\dot d}-\dfrac{\partial\mathcal L}{\partial d}=0\): \[ \left(m+\frac{J}{r^2}\right)\ddot d-m\,d\,\dot\alpha^{2}-m\,g\sin\alpha=0 \quad\Longrightarrow\quad \ddot d=\frac{g\sin\alpha+d\,\dot\alpha^{2}}{\kappa},\quad \kappa=1+\frac{J}{mr^2} \]</p>
+      <p>El simulador agrega fricción viscosa: \(\ddot d=\dfrac{g\sin\alpha+d\dot\alpha^2}{\kappa}-b\,\dot d\). Esfera maciza: \(J=\tfrac25mr^2\), \(\kappa=1.4\). Esfera hueca: \(J=\tfrac23mr^2\), \(\kappa=\tfrac53\).</p>
+      <p class="ex"><b>Ejemplo.</b> Viga a 2° y bola en reposo: \(\ddot d=\dfrac{9.81\cdot\sin2^\circ}{1.4}=0.245\ \text{m/s}^2\). En 1 s recorre 12 cm y alcanza 0.25 m/s.</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>2. Del servo a la viga</summary>
+    <div class="prose">
+      <p>El artículo relaciona el ángulo del servo \(\theta\) con el de la viga por pequeños ángulos (Ec. 2): \[ \alpha=\frac{l_1}{L}\,\theta=\frac{0.04}{0.6}\,\theta=\frac{\theta}{15} \] El simulador usa esta relación para que las ganancias del artículo sigan valiendo. Con ella, \(\alpha=\pm10^\circ\) exige \(\theta=\pm150^\circ\). La geometría descrita en el texto (biela a 30 cm de la bisagra) daría \(l_1/(L/2)=2/15\), es decir \(\theta\approx\pm75^\circ\). Es una simplificación del artículo, útil para discutir en clase.</p>
+      <p>El servo real no es instantáneo. Se modela con un retardo de primer orden y un límite de velocidad: \[ \dot\alpha=\operatorname{sat}\!\left(\frac{\alpha_{cmd}-\alpha}{\tau},\ \pm\dot\alpha_{max}\right),\qquad |\alpha_{cmd}|\le\alpha_{max}=10^\circ \]</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>3. Linealización y función de transferencia</summary>
+    <div class="prose">
+      <p>Para ángulos pequeños, \(\sin\alpha\approx\alpha\) (a 10° el error es 0.5 %) y el término centrífugo \(d\dot\alpha^2\) es pequeño. Ejemplo: \(d=0.5\) m y \(\dot\alpha=0.2\) rad/s dan 0.02 m/s², frente a 0.51 m/s² de gravedad con \(\alpha=3^\circ\). Entonces \[ \ddot d=\frac{g}{\kappa}\,\alpha=\frac{g\,l_1}{\kappa L}\,\theta \quad\Longrightarrow\quad \frac{D(s)}{\Theta(s)}=\frac{G_0}{s^2},\qquad G_0=\frac{g\,l_1}{\kappa\,L} \]</p>
+      <p class="ex"><b>Ejemplo numérico.</b> Bola maciza: \(G_0=\dfrac{9.81\cdot0.04}{1.4\cdot0.6}=0.4671\ \dfrac{\text{m}}{\text{s}^2\,\text{rad}}\). Bola hueca: \(G_0=\dfrac{9.81\cdot0.04}{\tfrac53\cdot0.6}=0.392\). Significa que 1 rad de servo produce 0.467 m/s² de aceleración.</p>
+      <p>Es un doble integrador: dos polos en el origen. El artículo imprime \(J=1.728\cdot10^{-6}\) kg·m², que equivale a usar el diámetro como radio (daría \(G_0=0.25\)). El valor consistente con \(r=2\) cm es \(J=4.32\cdot10^{-7}\) y reproduce 0.4671 y la Fig. 9.</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>4. El controlador PID y qué hace cada ganancia</summary>
+    <div class="prose">
+      <p>En tiempo continuo, con \(e=r-d\): \[ u(t)=K_p\,e(t)+K_i\!\int_0^t e(\tau)\,d\tau+K_d\,\frac{de}{dt} \] En el simulador es discreto con periodo \(T_s\), derivada sobre la medición \(y\) (como la librería PID de Arduino) y filtrada con constante \(\tau_d\): \[ u_k=K_p\,e_k+I_k-K_d\,\dot y^{f}_k,\qquad I_k=I_{k-1}+K_iT_s\,e_k \] \[ \dot y^{f}_k=\dot y^{f}_{k-1}+\frac{T_s}{\tau_d+T_s}\left(\frac{y_k-y_{k-1}}{T_s}-\dot y^{f}_{k-1}\right) \] La salida \(u\) es el ángulo del servo \(\theta\) en radianes, con \(e\) en metros.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Al subir…</th><th>Tiempo de subida</th><th>Sobreimpulso</th><th>Asentamiento</th><th>Error estacionario</th><th>Ruido</th></tr></thead>
+        <tbody>
+          <tr><td>Kp</td><td>baja</td><td>sube (ζ baja)</td><td>no mejora sola</td><td>sin efecto*</td><td>poco</td></tr>
+          <tr><td>Ki</td><td>poco</td><td>sube</td><td>agrega cola lenta</td><td>lo elimina</td><td>poco</td></tr>
+          <tr><td>Kd</td><td>poco</td><td>baja</td><td>baja hasta ζ≈1</td><td>sin efecto</td><td>lo amplifica</td></tr>
+        </tbody></table></div>
+      <p class="note">*Esta planta es tipo 2: ante un escalón el error final ya es cero con PD. El error aparece con perturbaciones constantes (sección 6).</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>5. Lazo cerrado, polos y sintonía por asignación de polos</summary>
+    <div class="prose">
+      <p>Con derivada sobre la medición, la función de lazo cerrado es \[ \frac{D(s)}{R(s)}=\frac{G_0\,(K_ps+K_i)}{s^3+G_0K_d\,s^2+G_0K_p\,s+G_0K_i} \] Los polos del denominador son los que ves en el mapa. Con \(K_i=0\) queda un sistema de segundo orden: \[ s^2+G_0K_d\,s+G_0K_p=s^2+2\zeta\omega_n s+\omega_n^2 \quad\Rightarrow\quad \omega_n=\sqrt{G_0K_p},\quad \zeta=\frac{G_0K_d}{2\omega_n} \] \[ M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}},\qquad t_s\approx\frac{4}{\zeta\omega_n} \] Para diseñar se invierte: \(K_p=\omega_n^2/G_0\) y \(K_d=2\zeta\omega_n/G_0\).</p>
+      <p class="ex"><b>Ejemplo con las ganancias del artículo</b> (\(K_p=8.39\), \(K_d=4.73\)): \(G_0K_p=3.92\Rightarrow\omega_n=1.98\) rad/s; \(G_0K_d=2.21\Rightarrow\zeta=2.21/(2\cdot1.98)=0.558\); \(M_p=e^{-\pi\cdot0.558/0.830}=12.1\%\); \(t_s\approx4/(0.558\cdot1.98)=3.6\) s. Son los valores de «Qué predice la teoría».</p>
+      <p class="ex"><b>Ejemplo de diseño.</b> Se pide \(M_p\approx5\%\) y \(t_s=3\) s: \(\zeta=0.7\), \(\omega_n=4/(0.7\cdot3)=1.9\) rad/s, \(K_p=1.9^2/0.467=7.8\), \(K_d=2\cdot0.7\cdot1.9/0.467=5.7\). Pruébalo en la calculadora «Asignación de polos».</p>
+      <p>Con \(K_i\) el criterio de Routh–Hurwitz exige \(K_i\lt G_0K_dK_p\) (18.5 con las ganancias del artículo). Es un límite teórico muy holgado: los retardos reales lo reducen mucho.</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>6. Error estacionario, perturbaciones y la acción integral</summary>
+    <div class="prose">
+      <p>Un desnivel \(\alpha_0\) (por ejemplo, el «bias» del servo) suma una inclinación constante \(\alpha=\tfrac{l_1}{L}\theta+\alpha_0\). En reposo \(\ddot d=0\), así que \(\tfrac{l_1}{L}\theta=-\alpha_0\). Con PD, \(\theta=K_pe\): \[ e_\infty=-\frac{L}{l_1}\,\frac{\alpha_0}{K_p} \] Con integral el error tiende a cero con un polo lento en \(s\approx-K_i/K_p\) (constante de tiempo \(\tau_I\approx K_p/K_i\)).</p>
+      <p class="ex"><b>Ejemplo.</b> \(\alpha_0=1^\circ\), \(K_p=8.39\): \(e_\infty=-15\cdot0.01745/8.39=-3.1\) cm. Con \(K_i=0.8\): \(\tau_I\approx10\) s.</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>7. Margen de fase (método del artículo)</summary>
+    <div class="prose">
+      <p>Con PD ideal, el lazo abierto es \(L(j\omega)=\dfrac{G_0}{(j\omega)^2}\,(K_p+jK_d\omega)\), cuya fase es \[ \angle L(j\omega)=-180^\circ+\arctan\frac{K_d\,\omega}{K_p} \] El margen de fase es \(\varphi=\arctan\!\left(K_d\omega_c/K_p\right)\) en la frecuencia de cruce \(\omega_c\), donde \(G_0\sqrt{K_p^2+K_d^2\omega_c^2}=\omega_c^2\). Para fijar \(\varphi\) en \(\omega_T\): \[ K_p=\frac{\cos\varphi}{|P(j\omega_T)|},\qquad K_d=\frac{\sin\varphi}{|P(j\omega_T)|\,\omega_T},\qquad |P(j\omega_T)|=\frac{G_0}{\omega_T^{2}} \] Regla práctica: \(\zeta\approx\varphi/100\) para \(\varphi<60^\circ\).</p>
+      <p class="ex"><b>Ejemplo del artículo</b> (\(\omega_T=2.73\) rad/s, \(\varphi=57^\circ\)): \(|P|=0.4671/7.45=0.0627\); \(K_p=0.545/0.0627=8.69\); \(K_d=0.839/(0.0627\cdot2.73)=4.90\). El artículo reporta 8.39 y 4.73. Con esas ganancias el simulador calcula \(\varphi=56^\circ\), muy cerca de 57°.</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>8. Ruido, retardos y saturación</summary>
+    <div class="prose">
+      <p><b>Ruido.</b> La derivada amplifica el ruido del sensor: \[ \sigma_\alpha\approx\frac{l_1}{L}\,K_d\,\frac{\sqrt2\,\sigma}{T_s} \] Con \(K_d=4.73\), \(\sigma=3\) mm y \(T_s=30\) ms: 0.045 rad \(\approx2.5^\circ\) de chatter.</p>
+      <p><b>Media móvil.</b> En lugar de un pasa-bajas se promedian las últimas \(N\) lecturas y se deriva el promedio. La diferencia de dos promedios consecutivos se simplifica a \[ \dot y_k\approx\frac{\bar y_k-\bar y_{k-1}}{T_s}=\frac{y_k-y_{k-N}}{N\,T_s},\qquad \sigma_{\dot y}\approx\frac{\sqrt2\,\sigma}{N\,T_s} \] Es decir, el ruido de la derivada baja \(N\) veces respecto de la diferencia simple, y el retardo de la derivada es \(\approx N\,T_s/2\). Ejemplo: \(\sigma=3\) mm y \(T_s=30\) ms dan \(0.141\) m/s sin filtro y \(0.028\) m/s con \(N=5\), con un retardo de 75 ms que a \(\omega_c=2.7\) rad/s resta unos \(12^\circ\) de fase. En el simulador, \(N=5\) baja el chatter de 2.6° a 0.6°.</p>
+      <p><b>Retardos.</b> Servo (\(\tau\)), muestreo (\(T_s/2\)), sensor (\(t_d\)) y filtro (\(\tau_d\)) restan fase a la frecuencia de cruce: \(\Delta\varphi\approx\omega_c(\tau+T_s/2+t_d+\tau_d)\). Con \(\omega_c=2.7\) rad/s y \(60+15+30+30\) ms, \(\Delta\varphi\approx20^\circ\): el margen de 56° baja a unos 36°.</p>
+      <p><b>Saturación y windup.</b> El actuador limita \(|\alpha|\le\alpha_{max}\). Mientras satura, el integrador sigue acumulando error. La integración condicional detiene \(I_k\) cuando \(|u|>u_{max}\) y \(\operatorname{sgn}(e)=\operatorname{sgn}(u)\).</p>
+    </div>
+  </details>
+
+  <details class="fold" open>
+    <summary>9. Ziegler–Nichols de lazo cerrado en esta planta</summary>
+    <div class="prose">
+      <p>La regla pide subir \(K_p\) hasta una oscilación sostenida (\(K_u\), \(T_u\)) y fija \(K_p=0.6K_u\), \(T_i=T_u/2\), \(T_d=T_u/8\). En una planta \(G_0/s^2\) no hay \(K_u\) bien definida: con solo P la fase es \(-180^\circ\) a toda frecuencia y la oscilación aparece con cualquier \(K_p\). Del periodo sí se obtiene la planta: \[ T_u=\frac{2\pi}{\sqrt{G_0K_p}}\quad\Rightarrow\quad G_0=\frac{(2\pi/T_u)^2}{K_p} \]</p>
+      <p class="ex"><b>Ejemplo.</b> \(K_p=3\) y \(T_u=5.31\) s dan \(G_0=0.467\). Aplicar ZN clásico (\(K_p=1.8\), \(K_i=0.68\), \(K_d=1.19\)) deja polos en \(-0.08\pm0.88j\), es decir \(\zeta=0.09\) y 43 % de sobreimpulso. Diseñar con \(G_0\) medida, \(\omega_n=2\) y \(\zeta=0.7\) da \(K_p=8.57\), \(K_d=6.0\) y 4.6 % de sobreimpulso.</p>
+    </div>
+  </details>
+
+  <details class="fold">
+    <summary>Parámetros y alcance del modelo</summary>
+    <div class="cols">
+      <div class="tablewrap"><table>
+        <thead><tr><th>Símbolo</th><th>Valor</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>\(L\)</td><td>0.60 m</td><td style="text-align:left">Longitud de viga</td></tr>
+          <tr><td>\(m\)</td><td>2.7 g</td><td style="text-align:left">Masa de la bola</td></tr>
+          <tr><td>\(r\)</td><td>2 cm</td><td style="text-align:left">Radio de la bola</td></tr>
+          <tr><td>\(l_1\)</td><td>4 cm</td><td style="text-align:left">Brazo del servo</td></tr>
+          <tr><td>\(l_2\)</td><td>10.5 cm</td><td style="text-align:left">Biela</td></tr>
+          <tr><td>\(g\)</td><td>9.81 m/s²</td><td style="text-align:left">Gravedad</td></tr>
+          <tr><td>\(J\)</td><td>\(4.32\cdot10^{-7}\) kg m²</td><td style="text-align:left">\(\tfrac25mr^2\) (esfera maciza)</td></tr>
+          <tr><td>\(\alpha_{max}\)</td><td>±10°</td><td style="text-align:left">Inclinación máxima (ajustable)</td></tr>
+        </tbody></table></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Efecto</th><th>Lineal ideal</th><th>Simulador</th></tr></thead>
+        <tbody>
+          <tr><td>\(\sin\alpha\) y término centrífugo</td><td>no</td><td>sí</td></tr>
+          <tr><td>Servo con retardo y límite de velocidad</td><td>no</td><td>sí</td></tr>
+          <tr><td>Saturación y windup</td><td>no</td><td>sí</td></tr>
+          <tr><td>Muestreo y retardo del sensor</td><td>no</td><td>sí</td></tr>
+          <tr><td>Ruido gaussiano y cuantización</td><td>no</td><td>sí</td></tr>
+          <tr><td>Fricción de rodadura</td><td>sí</td><td>sí</td></tr>
+          <tr><td>Desnivel de calibración</td><td>sí</td><td>sí</td></tr>
+          <tr><td>Bola hueca (\(\kappa=5/3\))</td><td>sí</td><td>sí</td></tr>
+        </tbody></table></div>
+    </div>
+  </details>
+  <p class="ref">Sutera, Guastella, Cancelliere, Muscato. «Design and Implementation of a Ball and Beam Control System Using a PID Controller». IEEE Transactions on Education 69(1), 2026.</p>
+</section>
+</div>
+
+<div id="tab-code" role="tabpanel" hidden>
+<div class="codegrid">
+  <section class="card">
+    <div class="head"><h3>Sketch para Arduino UNO</h3>
+      <div class="row"><button class="btn primary small" id="btn-copy-code" type="button">Copiar código</button><span class="note" id="copy-msg" aria-live="polite"></span></div>
+    </div>
+    <p class="note" style="margin-bottom:8px">Se genera con las ganancias y las opciones que tengas en la pestaña Simulador. Cámbialas allá y vuelve aquí.</p>
+    <div class="chips" id="code-chips" style="margin:0 0 10px"></div>
+    <pre class="code" id="code-pre" tabindex="0" aria-label="Código Arduino generado"><code id="code-src"></code></pre>
+  </section>
+  <div class="col codenotes">
+    <section class="card">
+      <h3>Puesta en marcha en el banco</h3>
+      <ol>
+        <li>Instala las librerías <b>VL53L1X</b> de Pololu y <b>Servo</b>. Conecta el sensor por I²C y el servo al pin 9.</li>
+        <li>Con la viga horizontal (usa un nivel) ajusta <code>SERVO_CENTER_DEG</code> hasta que el sensor y la viga queden alineados. Un error de 1° ahí es el desnivel de la lección 5.</li>
+        <li>Abre el Serial Plotter a 115200. Con <code>KP = KI = KD = 0</code> verifica que la distancia leída sea correcta.</li>
+        <li>Si el servo se mueve al lado contrario, cambia <code>SERVO_SIGN</code> a <code>+1</code>.</li>
+        <li>Mide el recorrido útil del servo y ponlo en <code>SERVO_REACH_DEG</code>. El anti-windup usa ese límite.</li>
+        <li>Sube Kp, luego Kd y al final Ki, en el mismo orden que las lecciones.</li>
+      </ol>
+    </section>
+    <section class="card">
+      <h3>Correspondencia con el simulador</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Simulador</th><th>Código</th></tr></thead>
+        <tbody>
+          <tr><td>Controlador discreto</td><td style="text-align:left"><code>pidStep()</code></td></tr>
+          <tr><td>Filtro de la derivada</td><td style="text-align:left"><code>dFilt</code></td></tr>
+          <tr><td>Anti-windup</td><td style="text-align:left"><code>iTerm</code> y <code>saturado</code></td></tr>
+          <tr><td>Saturación de la viga</td><td style="text-align:left"><code>THETA_MAX</code></td></tr>
+          <tr><td>Servo y desnivel</td><td style="text-align:left"><code>SERVO_CENTER_DEG</code></td></tr>
+          <tr><td>Periodo T<sub>s</sub></td><td style="text-align:left"><code>TS_MS</code></td></tr>
+        </tbody></table></div>
+    </section>
+    <section class="card">
+      <h3>Qué se verificó y qué no</h3>
+      <p class="note" id="verify-note"></p>
+    </section>
+    <section class="card">
+      <h3>Media móvil frente a pasa-bajas</h3>
+      <div class="prose" id="ma-theory"></div>
+    </section>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+/*CORE-START*/
+const PHYS = {L:0.6, m:0.0027, r:0.02, l1:0.04, l2:0.105, g:9.81};
+const DEG = Math.PI/180;
+const clamp = (x,a,b)=>Math.max(a,Math.min(b,x));
+const kappaOf = h => 1 + (h ? 2/3 : 2/5);
+const plantGain = h => PHYS.g*(PHYS.l1/PHYS.L)/kappaOf(h);
+function randn(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+function closedLoopPoles(G0,kp,ki,kd){
+  const a=G0*kd,b=G0*kp,c=G0*ki;
+  if(c<1e-9){
+    const disc=a*a-4*b;
+    if(disc>=0){const s=Math.sqrt(disc);return [{re:(-a+s)/2,im:0},{re:(-a-s)/2,im:0}];}
+    const s=Math.sqrt(-disc)/2;return [{re:-a/2,im:s},{re:-a/2,im:-s}];
+  }
+  // Durand-Kerner para s^3 + a s^2 + b s + c
+  let z=[[1,0],[0.4,0.9],[-0.65,0.72]];
+  const mul=(p,q)=>[p[0]*q[0]-p[1]*q[1],p[0]*q[1]+p[1]*q[0]];
+  const sub=(p,q)=>[p[0]-q[0],p[1]-q[1]];
+  const div=(p,q)=>{const d=q[0]*q[0]+q[1]*q[1];return [(p[0]*q[0]+p[1]*q[1])/d,(p[1]*q[0]-p[0]*q[1])/d];};
+  for(let it=0;it<200;it++){
+    for(let k=0;k<3;k++){
+      const s=z[k],s2=mul(s,s),s3=mul(s2,s);
+      const f=[s3[0]+a*s2[0]+b*s[0]+c,s3[1]+a*s2[1]+b*s[1]];
+      let den=[1,0];
+      for(let j=0;j<3;j++)if(j!==k)den=mul(den,sub(s,z[j]));
+      const dz=div(f,den);z[k]=sub(z[k],dz);
+    }
+  }
+  return z.map(p=>({re:p[0],im:Math.abs(p[1])<1e-7?0:p[1]}));
+}
+function analyze(G0,kp,ki,kd){
+  const poles=closedLoopPoles(G0,kp,ki,kd);
+  const maxRe=Math.max(...poles.map(p=>p.re));
+  const stable=maxRe<-1e-6;
+  const pair=poles.find(p=>p.im>1e-6);
+  let wn=null,zeta=null,Mp=null,ts=null;
+  if(pair){
+    wn=Math.hypot(pair.re,pair.im);zeta=Math.max(0,-pair.re/wn);
+    Mp=zeta<1?Math.exp(-Math.PI*zeta/Math.sqrt(1-zeta*zeta))*100:0;
+    ts=zeta>1e-3?4/(zeta*wn):Infinity;
+  }else{
+    const slow=Math.max(...poles.map(p=>p.re));
+    Mp=0;ts=slow<-1e-6?4/Math.abs(slow):Infinity;
+    if(kp>0){wn=Math.sqrt(G0*kp);zeta=G0*kd/(2*wn);}
+  }
+  return {poles,stable,wn,zeta,Mp,ts,maxRe};
+}
+function phaseMargin(G0,kp,ki,kd){
+  if(kp<=0&&kd<=0&&ki<=0)return null;
+  let prev=null,res=null;
+  for(let k=0;k<4000;k++){
+    const w=0.01*Math.pow(10000,k/3999);
+    const re=kp,im=w*kd-ki/w;
+    const g=G0*Math.hypot(re,im)/(w*w)-1;
+    if(prev!==null&&prev>0&&g<=0)res={wc:w,pm:Math.atan2(im,re)/DEG};
+    prev=g;
+  }
+  return res;
+}
+
+class Sim{
+  constructor(){
+    this.h=0.001;
+    this.cfg={kp:8.3867,ki:0.001,kd:4.7305,ref:0.35,hollow:false,linear:false,tau:0.001,rateMax:300*DEG,
+      Ts:0.005,delay:0,noise:0,quant:0,fric:0,offset:0,aw:true,dMeas:true,tauD:0,dMode:'lp',maN:5,manual:false,alphaManual:0,satDeg:10,ghost:true,auto:false,autoT:10};
+    this.reset(0.10);
+  }
+  reset(d0){
+    this.t=0;this.n=0;this.d=d0;this.v=0;this.alpha=0;this.alphaDot=0;
+    this.I=0;this.P=0;this.D=0;this.u=0;this.acmd=0;this.sat=false;
+    this.yPrev=d0;this.ePrev=this.cfg.ref-d0;this.dF=0;this.eF=0;this.maBuf=new Float64Array(64);this.maI=0;this.maPrev=0;this._lm=null;
+    this.buf=new Float64Array(4096).fill(d0);this.bi=0;
+    this.dG=d0;this.vG=0;this.IG=0;this.acc=0;this.roll=0;
+  }
+  measure(){
+    const c=this.cfg,k=Math.round(c.delay/this.h);
+    let y=this.buf[(this.bi-1-k)&4095];
+    if(c.noise>0)y+=c.noise*randn();
+    if(c.quant>0)y=Math.round(y/c.quant)*c.quant;
+    return y;
+  }
+  control(){
+    const c=this.cfg,Ts=Math.max(this.h,Math.round(c.Ts/this.h)*this.h);
+    const satRad=c.satDeg*DEG;
+    if(c.manual){
+      this.P=this.D=this.I=0;this.u=0;
+      this.acmd=clamp(c.alphaManual,-satRad,satRad);this.sat=false;
+      this.yPrev=this.measure();return;
+    }
+    const y=this.measure(),e=c.ref-y;
+    const af=Ts/(c.tauD+Ts);
+    let D;
+    const sig=c.dMeas?y:e;
+    if(c.dMode==='ma'){
+      // media móvil de N muestras y diferencia de las medias
+      const N=clamp(Math.round(c.maN),1,60);
+      if(this._lm!=='ma'){this.maBuf.fill(sig);this.maPrev=sig;this.dF=0;this._lm='ma';}
+      this.maBuf[this.maI]=sig;this.maI=(this.maI+1)%64;
+      let sum=0;for(let j=1;j<=N;j++)sum+=this.maBuf[(this.maI-j+64)%64];
+      const avg=sum/N;this.dF=(avg-this.maPrev)/Ts;this.maPrev=avg;
+    }else{
+      if(this._lm==='ma'){this._lm='lp';this.dF=0;this.yPrev=y;this.ePrev=e;}
+      const ds=(sig-(c.dMeas?this.yPrev:this.ePrev))/Ts;this.dF+=af*(ds-this.dF);
+    }
+    D=c.dMeas?-c.kd*this.dF:c.kd*this.dF;
+    this.yPrev=y;this.ePrev=e;
+    const P=c.kp*e;
+    const k=PHYS.l1/PHYS.L,thMax=satRad/k;
+    const Inew=this.I+c.ki*Ts*e;
+    const uTent=P+Inew+D;
+    const sat=Math.abs(uTent)>thMax;
+    if(!(c.aw&&sat&&Math.sign(e)===Math.sign(uTent)))this.I=clamp(Inew,-20,20);
+    this.I=clamp(this.I,c.aw?-thMax:-20,c.aw?thMax:20);
+    this.P=P;this.D=D;
+    this.u=P+this.I+D;
+    this.sat=Math.abs(this.u)>thMax;
+    this.acmd=clamp(this.u*k,-satRad,satRad);
+  }
+  deriv(s,acmd){
+    const c=this.cfg,kap=kappaOf(c.hollow);
+    const [d,v,al]=s;
+    const ad=clamp((acmd-al)/Math.max(c.tau,this.h),-c.rateMax,c.rateMax);
+    const ae=al+c.offset;
+    const a=c.linear?PHYS.g*ae/kap-c.fric*v:(PHYS.g*Math.sin(ae)+d*ad*ad)/kap-c.fric*v;
+    return [v,a,ad];
+  }
+  step(){
+    const c=this.cfg,h=this.h;
+    const nCtl=Math.max(1,Math.round(c.Ts/h));
+    if(this.n%nCtl===0)this.control();
+    const s=[this.d,this.v,this.alpha],u=this.acmd;
+    const k1=this.deriv(s,u);
+    const k2=this.deriv(s.map((x,i)=>x+0.5*h*k1[i]),u);
+    const k3=this.deriv(s.map((x,i)=>x+0.5*h*k2[i]),u);
+    const k4=this.deriv(s.map((x,i)=>x+h*k3[i]),u);
+    const ns=s.map((x,i)=>x+h/6*(k1[i]+2*k2[i]+2*k3[i]+k4[i]));
+    this.acc=k1[1];this.alphaDot=k1[2];
+    this.d=ns[0];this.v=ns[1];this.alpha=ns[2];
+    const lo=PHYS.r,hi=PHYS.L-PHYS.r;
+    if(this.d<lo){this.d=lo;if(this.v<0)this.v=0;}
+    if(this.d>hi){this.d=hi;if(this.v>0)this.v=0;}
+    this.roll+=this.v*h/PHYS.r;
+    this.buf[this.bi]=this.d;this.bi=(this.bi+1)&4095;
+    // modelo lineal ideal (fantasma)
+    const G0=plantGain(c.hollow),eG=c.ref-this.dG;
+    this.IG=clamp(this.IG+c.ki*eG*h,-20,20);
+    const uG=c.manual?0:c.kp*eG+this.IG-c.kd*this.vG;
+    const aG=G0*uG+PHYS.g*c.offset/kappaOf(c.hollow)-c.fric*this.vG;
+    this.vG+=aG*h;this.dG+=this.vG*h;
+    if(this.dG<lo){this.dG=lo;if(this.vG<0)this.vG=0;}
+    if(this.dG>hi){this.dG=hi;if(this.vG>0)this.vG=0;}
+    this.n++;this.t=this.n*h;
+  }
+}
+function trialMetrics(h,from,target,tStep){
+  const step=target-from,dir=Math.sign(step)||1,A=Math.abs(step);
+  const tail=h.filter(p=>p.t>=9);
+  const yinf=tail.reduce((s,p)=>s+p.d,0)/Math.max(1,tail.length);
+  let peak=-Infinity;
+  for(const p of h)if(p.t>=tStep)peak=Math.max(peak,(p.d-from)*dir);
+  const Mp=A>0?Math.max(0,(peak-A)/A*100):0;
+  let t10=null,t90=null;
+  for(const p of h){if(p.t<tStep)continue;const q=(p.d-from)*dir;if(t10===null&&q>=0.1*A)t10=p.t;if(t90===null&&q>=0.9*A){t90=p.t;break;}}
+  const band=Math.max(0.02*A,0.002);
+  let ts=0,settled=true;
+  for(let i=h.length-1;i>=0;i--){const p=h[i];if(p.t<tStep)break;if(Math.abs(p.d-target)>band){if(i===h.length-1)settled=false;else ts=h[i+1].t-tStep;break;}}
+  let iae=0;for(const p of h)if(p.t>=tStep)iae+=Math.abs(p.r-p.d)*0.02;
+  return {Mp,tr:(t10!==null&&t90!==null)?t90-t10:null,ts:settled?ts:null,ess:(target-yinf)*1000,iae};
+}
+function estimateOsc(h,ref,band=0.005){
+  const cr=[];let side=0,prev=null;
+  for(const p of h){
+    const sd=p.d<ref-band?-1:(p.d>ref+band?1:0);
+    if(sd!==0){
+      if(side===-1&&sd===1&&prev)cr.push(prev.t);
+      side=sd;
+    }
+    if(p.d<ref+band)prev=p;
+  }
+  if(cr.length<3)return null;
+  const use=cr.slice(-6),per=[];
+  for(let i=1;i<use.length;i++)per.push(use[i]-use[i-1]);
+  const Tu=per.reduce((a,b)=>a+b,0)/per.length;
+  const amp=[];
+  for(let i=1;i<use.length;i++){let m=0;for(const p of h)if(p.t>=use[i-1]&&p.t<use[i])m=Math.max(m,Math.abs(p.d-ref));amp.push(m);}
+  const growth=amp[0]>1e-4?Math.pow(amp[amp.length-1]/amp[0],1/Math.max(1,amp.length-1)):1;
+  return {Tu,n:per.length,growth,amp:amp[amp.length-1]};
+}
+/*CORE-END*/
+
+/* ------------------------- Interfaz ------------------------- */
+const $=id=>document.getElementById(id);
+const sim=new Sim();
+const app={from:0.15,target:0.35,start:0.10};
+let playing=true,speed=1,accT=0,lastT=performance.now(),hist=[],trial=null,prevTrial=null,trialRows=[],lessonIdx=0,seen=new Set([0]),needTheory=true,needHist=false;
+const KANG=(PHYS.l1/PHYS.L)/DEG;
+
+const CTL={
+  kp:{label:'Proporcional K<sub>p</sub>',unit:'rad/m',min:0,max:25,step:0.05,dec:2,scale:1},
+  ki:{label:'Integral K<sub>i</sub>',unit:'rad/(m·s)',min:0,max:1.5,step:0.005,dec:3,scale:1},
+  kd:{label:'Derivativo K<sub>d</sub>',unit:'rad·s/m',min:0,max:15,step:0.05,dec:2,scale:1},
+  ref:{label:'Referencia r',unit:'cm',min:10,max:55,step:1,dec:0,scale:0.01},
+  from:{label:'Escalón desde',unit:'cm',min:10,max:55,step:1,dec:0,scale:0.01},
+  alphaManual:{label:'Ángulo de viga α',unit:'°',min:-10,max:10,step:0.1,dec:1,scale:DEG},
+  tau:{label:'Retardo del servo τ',unit:'ms',min:1,max:200,step:1,dec:0,scale:0.001},
+  rateMax:{label:'Velocidad máx. de viga',unit:'°/s',min:10,max:300,step:5,dec:0,scale:DEG},
+  Ts:{label:'Periodo de muestreo T<sub>s</sub>',unit:'ms',min:5,max:60,step:1,dec:0,scale:0.001},
+  delay:{label:'Retardo del sensor',unit:'ms',min:0,max:100,step:1,dec:0,scale:0.001},
+  noise:{label:'Ruido del sensor σ',unit:'mm',min:0,max:5,step:0.1,dec:1,scale:0.001},
+  fric:{label:'Fricción de rodadura b',unit:'1/s',min:0,max:1,step:0.01,dec:2,scale:1},
+  offset:{label:'Desnivel de calibración',unit:'°',min:-3,max:3,step:0.1,dec:1,scale:DEG},
+  autoT:{label:'Periodo de la onda cuadrada',unit:'s',min:4,max:24,step:1,dec:0,scale:1},
+  satDeg:{label:'Límite de la viga ±',unit:'°',min:2,max:10,step:0.5,dec:1,scale:1},
+  maN:{label:'Ventana N de la media móvil',unit:'muestras',min:1,max:15,step:1,dec:0,scale:1},
+  tauD:{label:'Constante τ<sub>d</sub> del pasa-bajas',unit:'ms',min:0,max:200,step:5,dec:0,scale:0.001}
+};
+const BOOL={auto:'c-auto',hollow:'c-hollow',linear:'c-linear',aw:'c-aw',dMeas:'c-dmeas',ghost:'c-ghost',manual:'c-manual',quant:'c-quant'};
+
+function mount(id,keys){
+  $(id).innerHTML=keys.map(k=>{const c=CTL[k];return `<div class="ctl"><label for="r-${k}">${c.label}</label><div class="ctl-in"><input id="r-${k}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.min}"><input id="n-${k}" type="number" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.min}" aria-label="${c.label.replace(/<[^>]+>/g,'')}"><span class="unit">${c.unit}</span></div></div>`;}).join('');
+  keys.forEach(k=>{
+    const r=$('r-'+k),n=$('n-'+k);
+    r.addEventListener('input',()=>setVal(k,parseFloat(r.value)));
+    n.addEventListener('change',()=>{let v=parseFloat(n.value);if(isNaN(v))v=CTL[k].min;setVal(k,v);});
+  });
+}
+function setVal(k,v){
+  if(trial&&trial.done&&(k==='kp'||k==='ki'||k==='kd')&&!applying)resetBall();
+  const c=CTL[k];v=clamp(v,c.min,c.max);
+  $('r-'+k).value=v;$('n-'+k).value=v.toFixed(c.dec);
+  const x=v*c.scale;
+  if(k==='from')app.from=x;
+  else if(k==='ref'){app.target=x;if(!trial)sim.cfg.ref=x;else{trial.target=x;if(trial.stepped)sim.cfg.ref=x;}}
+  else sim.cfg[k]=x;
+  needTheory=true;
+}
+function setBool(k,v){
+  $(BOOL[k]).checked=v;
+  sim.cfg[k]=k==='quant'?(v?0.001:0):v;
+  if(k==='manual'){$('manual-bar').hidden=!v;sim.I=0;}
+  if(k==='auto')$('m-auto').hidden=!v;
+  needTheory=true;
+}
+mount('m-gains',['kp','ki','kd']);
+mount('m-scn',['ref','from']);
+mount('m-manual',['alphaManual']);
+mount('m-auto',['autoT']);
+mount('m-real',['tau','rateMax','Ts','delay','noise']);
+mount('m-tauD',['tauD']);
+mount('m-maN',['maN']);
+mount('m-real2',['fric','offset','satDeg']);
+Object.keys(BOOL).forEach(k=>$(BOOL[k]).addEventListener('change',e=>setBool(k,e.target.checked)));
+
+let applying=false;
+function setDMode(m){
+  sim.cfg.dMode=m;
+  $('f-lp').setAttribute('aria-pressed',m==='lp');$('f-ma').setAttribute('aria-pressed',m==='ma');
+  $('m-tauD').hidden=m!=='lp';$('m-maN').hidden=m!=='ma';
+  needTheory=true;
+}
+$('f-lp').onclick=()=>setDMode('lp');
+$('f-ma').onclick=()=>setDMode('ma');
+const IDEAL={satDeg:10,tau:1,rateMax:300,Ts:5,delay:0,noise:0,tauD:0,fric:0,hollow:false,quant:false,linear:false};
+const REAL={satDeg:10,tau:60,rateMax:40,Ts:30,delay:30,noise:1.5,tauD:30,fric:0.05,hollow:true,quant:true,linear:false};
+function applyReal(p){
+  for(const k in p){if(typeof p[k]==='boolean')setBool(k,p[k]);else setVal(k,p[k]);}
+  const real=p===REAL;
+  $('p-ideal').setAttribute('aria-pressed',!real);$('p-real').setAttribute('aria-pressed',real);
+}
+$('p-ideal').onclick=()=>{applyReal(IDEAL);};
+$('p-real').onclick=()=>{applyReal(REAL);};
+
+/* ------------------------- Lecciones ------------------------- */
+const LESSONS=[
+{short:'Lazo',title:'El lazo cerrado funcionando',
+ goal:'Reconocer cada elemento del sistema: el sensor mide d, el PID calcula el ángulo, el servo inclina la viga y la gravedad mueve la bola.',
+ steps:['Observa cómo la bola llega a la línea verde (la referencia r) y se detiene.','La referencia alterna sola cada 5 s (onda cuadrada). Mueve las ganancias y compara cómo responde la bola a cada cambio.','Pulsa «Empujón a la bola» y mira cómo el control lo corrige.','Compara la curva azul (modelo no lineal) con la gris (modelo lineal ideal).'],
+ predict:'Antes de tocar las ganancias, ¿qué crees que hace cada una de ellas: Kp, Ki y Kd?',
+ explain:String.raw`<p>El lazo cerrado tiene cinco elementos: el sensor ToF mide la posición \(d\), se calcula el error \(e=r-d\), el PID produce el ángulo del servo \(\theta\), la viga se inclina \(\alpha=\tfrac{l_1}{L}\theta\) y la gravedad acelera la bola.</p>\[ r\;\to\;(\,e=r-d\,)\;\to\;\text{PID}\;\xrightarrow{\;\theta\;}\;\text{servo + viga}\;\xrightarrow{\;\alpha\;}\;\ddot d=\tfrac{g}{\kappa}\sin\alpha\;\to\;d \]<p>Las ganancias iniciales son las del artículo: \(K_p=8.39\), \(K_d=4.73\), \(K_i\approx0\), diseñadas para un margen de fase de \(57^\circ\). Con ellas la teoría predice \(\omega_n=1.98\) rad/s, \(\zeta=0.56\) y 12 % de sobreimpulso. Esos números aparecen en «Qué predice la teoría»; compáralos con lo que mide la gráfica.</p><p>Observa que la curva azul (no lineal) y la gris (lineal ideal) casi coinciden: para ángulos pequeños el modelo lineal describe bien la planta.</p>`,
+ preset:{kp:8.3867,ki:0.001,kd:4.7305,ref:35,from:15,start:10,auto:true}},
+{short:'Planta',title:'Lazo abierto: la planta sola',
+ goal:'Entender por qué el sistema es inestable por sí mismo y no vuelve solo a ningún punto.',
+ steps:['Debajo de la animación aparece el panel «Control manual». Pon α = 2° (botón +2° o el deslizador) y observa cómo la bola acelera.','Pulsa 0°: la viga queda horizontal y la bola sigue moviéndose.','Pulsa «Reiniciar bola» y prueba α = −2°.','Activa el realismo «Prototipo» y repite: la fricción la frena un poco, pero no la regresa.'],
+ predict:'Si inclinas la viga 2° durante un segundo y luego la dejas horizontal, ¿qué hace la bola?',
+ explain:String.raw`<p>Con la viga a un ángulo \(\alpha\), la bola obedece \[ \ddot d=\frac{g\sin\alpha}{\kappa},\qquad \kappa=1+\frac{J}{mr^2}=1.4 \] <span class="ex-inline">Ejemplo:</span> \(\alpha=2^\circ\) da \(\ddot d=\dfrac{9.81\cdot0.0349}{1.4}=0.245\ \text{m/s}^2\); después de 1 s la velocidad es 0.25 m/s, que es lo que marca el simulador.</p><p>Al volver a \(\alpha=0\) la aceleración es cero pero la velocidad se conserva: \(\dot d=\text{cte}\). En Laplace \(D(s)=\dfrac{G_0}{s^2}\,\Theta(s)\): un doble integrador con dos polos en \(s=0\). No hay fuerza que lleve la bola a ninguna posición, y un pequeño error de \(\alpha\) se integra dos veces.</p><p>El factor \(\kappa=1.4\) aparece porque la bola rueda sin deslizar: parte de la energía va a rotación. Esfera maciza: \(J=\tfrac25mr^2\). Esfera hueca: \(J=\tfrac23mr^2\Rightarrow\kappa=\tfrac53\).</p>`,
+ preset:{kp:0,ki:0,kd:0,ref:35,from:15,manual:true,alphaManual:0,start:10}},
+{short:'P',title:'Solo proporcional: un resorte sin amortiguador',
+ goal:'Ver que subir Kp aumenta la frecuencia de oscilación pero no la detiene.',
+ steps:['Deja Kd = 0 y Ki = 0. Con Kp = 4 mide el periodo de oscilación en la gráfica.','Sube Kp a 8 y luego a 16. Mira cómo se mueven los polos en el mapa.','Activa el realismo «Prototipo» y observa cómo la amplitud ahora crece.','Pregúntate: ¿qué falta para frenar la bola?'],
+ predict:'Si Kp es muy grande, ¿la bola se detendrá en la referencia?',
+ explain:String.raw`<p>Con \(u=K_pe\) y la planta \(G_0/s^2\), el lazo cerrado es \[ \frac{D(s)}{R(s)}=\frac{G_0K_p}{s^2+G_0K_p}\quad\Rightarrow\quad s=\pm j\sqrt{G_0K_p} \] Polos imaginarios puros: oscilación sin amortiguamiento con \(\omega=\sqrt{G_0K_p}\) y periodo \(T=2\pi/\omega\).</p><p><span class="ex-inline">Ejemplo:</span> \(K_p=8.4\Rightarrow\omega=\sqrt{0.4671\cdot8.4}=1.98\) rad/s y \(T=3.17\) s. Con \(K_p=2\): \(T=6.5\) s. Mide el periodo en la gráfica y compáralo.</p><p>Es un resorte sin amortiguador: más \(K_p\) es un resorte más rígido que oscila más rápido, pero nunca frena la bola. Con retardos reales (servo, muestreo, sensor) la fase del lazo queda por debajo de \(-180^\circ\) y la amplitud crece. Compruébalo con «Prototipo».</p>`,
+ preset:{kp:4,ki:0,kd:0,ref:30,from:15,start:10}},
+{short:'D',title:'Derivada: el amortiguador',
+ goal:'Usar Kd para amortiguar y elegir ζ para un sobreimpulso deseado.',
+ steps:['Parte de Kp = 8.4 y Kd = 0. Sube Kd lentamente hasta 5 y mira ζ en «Qué predice la teoría».','Sigue hasta Kd = 15: la bola se vuelve lenta.','Vuelve a Kd = 4.7 y ejecuta un «Ensayo de escalón». Anota Mp y ts.','Prueba la calculadora «Asignación de polos» con ζ = 0.5 y ζ = 1 y compara los ensayos.'],
+ predict:'Si duplicas Kd, ¿qué pasa con el sobreimpulso y con el tiempo de asentamiento?',
+ explain:String.raw`<p>Con PD el polinomio característico es \[ s^2+G_0K_d\,s+G_0K_p=s^2+2\zeta\omega_n s+\omega_n^2 \] de donde \(\omega_n=\sqrt{G_0K_p}\) y \(\zeta=\dfrac{G_0K_d}{2\sqrt{G_0K_p}}\). Sobreimpulso y asentamiento: \[ M_p=e^{-\pi\zeta/\sqrt{1-\zeta^2}},\qquad t_s\approx\frac{4}{\zeta\omega_n} \]</p><p><span class="ex-inline">Ejemplo</span> con \(K_p=8.4\) (\(\omega_n=1.98\)): \(K_d=0\Rightarrow\zeta=0\) (oscila). \(K_d=2.5\Rightarrow\zeta=0.30,\ M_p=38\%\). \(K_d=4.7\Rightarrow\zeta=0.55,\ M_p=12\%\). \(K_d=6.7\Rightarrow\zeta=0.79,\ M_p\approx2\%\).</p><p>\(K_d\) es el amortiguador: mide la velocidad y se opone a ella, así la bola frena antes de llegar. Su precio es amplificar el ruido del sensor y, en exceso, hacer la respuesta lenta.</p>`,
+ preset:{kp:8.4,ki:0,kd:0,ref:35,from:15,start:10,auto:true}},
+{short:'I',title:'Integral y error estacionario',
+ goal:'Ver cuándo la acción integral es necesaria y qué precio tiene.',
+ steps:['Hay un desnivel de calibración de 1° (el «bias» del servo). Con Ki = 0 mide el error final de la bola.','Calcula el error esperado: e = (L/l₁)·α₀/Kp y compáralo.','Sube Ki a 0.3, luego 0.8 (usa velocidad 4× si quieres). Observa cómo el error desaparece lentamente.','Sube Ki a 1.5 y mira qué pasa con el margen de fase y las oscilaciones.'],
+ predict:'Con 1° de desnivel y Kp = 8.39, ¿con cuántos centímetros de error se queda la bola?',
+ explain:String.raw`<p>Un desnivel de calibración \(\alpha_0\) suma una inclinación constante: \(\alpha=\tfrac{l_1}{L}\theta+\alpha_0\). En reposo la aceleración es cero, así que \(\tfrac{l_1}{L}\theta=-\alpha_0\). Con PD, \(\theta=K_pe\), y queda \[ e_\infty=-\frac{L}{l_1}\,\frac{\alpha_0}{K_p} \] <span class="ex-inline">Ejemplo:</span> \(\alpha_0=1^\circ=0.01745\) rad y \(K_p=8.39\): \(e_\infty=-15\cdot0.01745/8.39=-3.1\) cm.</p><p>Aunque la planta sea tipo 2 (error cero ante un escalón), una perturbación constante sí deja error con PD. Con integral el polinomio es \(s^3+G_0K_ds^2+G_0K_ps+G_0K_i\) y el error tiende a cero con un polo lento en \(s\approx-K_i/K_p\), o sea \(\tau_I\approx K_p/K_i\).</p><p><span class="ex-inline">Ejemplo:</span> \(K_i=0.8\Rightarrow\tau_I\approx10\) s: en el simulador el error cae alrededor de 40 % cada 5 s. El precio es menos margen de fase; por eso el artículo usa \(K_i=0.001\).</p>`,
+ preset:{kp:8.3867,ki:0,kd:4.7305,ref:35,from:15,offset:1,start:10}},
+{short:'Ruido',title:'Ruido, retardo y por qué el modelo ideal es optimista',
+ goal:'Ver cómo el ruido del sensor y los retardos reales cambian la sintonía.',
+ steps:['El realismo «Prototipo» está activo con 3 mm de ruido: mira cómo la banda D (magenta) se vuelve ruidosa.','Con el filtro pasa-bajas en τd = 0 observa la señal de control. Sube τd a 100 ms: se suaviza, pero mira qué pasa con el sobreimpulso.','Cambia a «Media móvil» con N = 5 y compara el ruido y el sobreimpulso con el pasa-bajas.','Sube N a 10: el ruido baja más, pero la derivada llega más tarde y el margen de fase se reduce.','Compara la curva azul con la gris. ¿Cuánto se separan?'],
+ predict:'Con ruido de unos milímetros en el sensor, ¿qué término domina la señal de control?',
+ explain:String.raw`<p>La derivada de una señal con ruido de desviación \(\sigma\), muestreada cada \(T_s\), tiene desviación \(\approx\sqrt2\,\sigma/T_s\). Pasada por \(K_d\) y convertida a ángulo de viga: \[ \sigma_\alpha\approx\frac{l_1}{L}\,K_d\,\frac{\sqrt2\,\sigma}{T_s} \] <span class="ex-inline">Ejemplo:</span> \(K_d=4.73\), \(\sigma=3\) mm, \(T_s=30\) ms: \(\tfrac1{15}\cdot4.73\cdot\tfrac{1.414\cdot0.003}{0.03}=0.045\) rad \(\approx2.5^\circ\). El simulador mide cerca de 2.7°.</p><p>El filtro derivativo (constante \(\tau_d\)) baja el chatter: con \(\tau_d=100\) ms cae a unos 0.6°, pero agrega retardo. A la frecuencia de cruce \(\omega_c\), la fase perdida por servo, muestreo, sensor y filtro es aproximadamente \[ \Delta\varphi\approx\omega_c\left(\tau+\tfrac{T_s}{2}+t_d+\tau_d\right) \] <span class="ex-inline">Ejemplo:</span> \(\omega_c=2.7\) rad/s con \(\tau=60\), \(T_s/2=15\), \(t_d=30\), \(\tau_d=30\) ms da \(\Delta\varphi\approx0.36\) rad \(\approx20^\circ\). Con esa pérdida el sobreimpulso medido pasa de 12 % a 19 %.</p>`,
+ preset:{kp:8.3867,ki:0.001,kd:4.7305,ref:35,from:15,real:true,noise:3,tauD:0,start:10,auto:true}},
+{short:'Sat.',title:'Saturación y windup',
+ goal:'Entender la no linealidad más importante del lazo: el actuador tiene un límite de inclinación (en el prototipo, ±10°).',
+ steps:['El límite de la viga está en ±3° para que la saturación se note. Con anti-windup desactivado (casilla en «Realismo»), pulsa «Ensayo de escalón»: va de 10 a 50 cm.','Anota Mp y ts. Activa anti-windup y repite el ensayo.','Compara en la gráfica el ensayo anterior (gris) con el actual.','Mira la gráfica de control: ¿cuánto tiempo estuvo pegada a ±10°?'],
+ predict:'Con Ki = 0.5, ¿por qué crees que la bola sobrepasa tanto la referencia?',
+ explain:String.raw`<p>El actuador impone \(|\alpha_{cmd}|\le\alpha_{max}\). Mientras satura, el lazo está abierto de hecho, pero el integrador sigue acumulando \(I_k=I_{k-1}+K_iT_se_k\). La integración condicional lo evita: \[ I_k=\begin{cases}I_{k-1}&\text{si }|u|>u_{max}\text{ y }\operatorname{sgn}(e)=\operatorname{sgn}(u)\\[2pt] I_{k-1}+K_iT_se_k&\text{en otro caso}\end{cases} \]</p><p><span class="ex-inline">Ejemplo</span> (Kp = 8.39, Kd = 4.73, Ki = 0.5, límite 3°, escalón 10 → 50 cm): sin anti-windup el sobreimpulso es 17 %, no se asienta en 10 s y el error final es −13 mm. Con anti-windup el sobreimpulso baja a 12 %, asienta en 3.5 s y el error final es −2.5 mm.</p><p>El modelo lineal (curva gris) no conoce la saturación: la diferencia con la curva azul es no linealidad genuina, no un error del modelo.</p>`,
+ preset:{kp:8.3867,ki:0.5,kd:4.7305,ref:50,from:10,aw:false,satDeg:3,start:10}},
+{short:'Reto',title:'Reto: sintoniza el prototipo',
+ goal:'Cumplir las metas con el modelo realista: sobreimpulso ≤ 10 %, asentamiento ≤ 3 s y error final ≤ 5 mm.',
+ steps:['Ejecuta un ensayo con las ganancias del artículo y mira el historial.','Usa la calculadora de margen de fase (ωT = 2.73 rad/s, φ = 57°) y aplícala.','Ajusta Kp, Kd y Ki a mano. Cada ensayo queda en el historial con sus ganancias.','Compara con un compañero: gana quien cumpla las metas con el menor IAE.'],
+ predict:'¿Qué ganancia cambiarías primero para reducir el sobreimpulso, y qué efecto secundario esperas?',
+ explain:String.raw`<p>Método del artículo: con PD ideal \(C(j\omega)=K_p+jK_d\omega\) y planta \(P(j\omega)=-G_0/\omega^2\), se exige en \(\omega_T\) que \(|CP|=1\) y \(\angle CP=-180^\circ+\varphi\): \[ K_p=\frac{\cos\varphi}{|P(j\omega_T)|},\quad K_d=\frac{\sin\varphi}{|P(j\omega_T)|\,\omega_T},\quad |P(j\omega_T)|=\frac{G_0}{\omega_T^2} \] <span class="ex-inline">Ejemplo</span> (\(\omega_T=2.73\), \(\varphi=57^\circ\)): \(|P|=0.0627\), \(K_p=8.69\), \(K_d=4.90\). El artículo reporta 8.39 y 4.73.</p><p>Con la bola hueca \(G_0=0.392\) (16 % menos) y los retardos, el margen real queda por debajo de 57°. En el simulador, con \(K_p\) entre 6 y 7 y \(K_d\approx6\) se cumplen \(M_p\le10\%\) y \(t_s\le3\) s. Compruébalo con ensayos y mira el historial.</p>`,
+ preset:{kp:8.3867,ki:0.001,kd:4.7305,ref:45,from:15,real:true,start:15}},
+{short:'ZN',title:'Sintonía paso a paso con oscilación crítica (Ziegler–Nichols)',
+ goal:'Aplicar el método de lazo cerrado de Ziegler–Nichols, ver por qué falla en esta planta y adaptarlo: usar la oscilación para medir la planta y diseñar el PID.',
+ steps:['Con Ki = 0 y Kd = 0 deja Kp = 3 y observa 3 o más ciclos. Sube y baja Kp: oscila con cualquier valor, no aparece una ganancia crítica.','Con la velocidad en 4×, espera unos 20 s de simulación y pulsa «Medir periodo Tu» en «Diseño analítico». Obtienes Tu y la ganancia de planta G₀ = (2π/Tu)² / Kp.','Pulsa «Aplicar ZN clásico» (Kp = 0.6·Ku, Ti = Tu/2, Td = Tu/8, con Ku = Kp usada) y haz un «Ensayo de escalón». Mira ζ, el sobreimpulso y los polos.','Pulsa «Diseñar con G₀ medida» (ωₙ = 2 rad/s, ζ = 0.7) y repite el ensayo. Compara en el historial.','Sube Ki poco a poco hasta quitar el error de calibración sin que el margen de fase baje de unos 45°.','Activa el realismo «Prototipo», pulsa «Reiniciar bola», espera 20 s y mide otra vez: sale cerca de 0.39 en vez de 0.467. Esa diferencia es la bola hueca.'],
+ predict:'Si subes Kp en solo-P, ¿llegará un valor en el que la oscilación pase de decaer a crecer, como pide Ziegler–Nichols?',
+ explain:String.raw`<p>Ziegler–Nichols de lazo cerrado sube \(K_p\) hasta una oscilación sostenida (\(K_u\), \(T_u\)) y fija \(K_p=0.6K_u\), \(T_i=T_u/2\), \(T_d=T_u/8\), \(K_i=K_p/T_i\), \(K_d=K_pT_d\).</p><p>Aquí no existe \(K_u\): con solo P el lazo es \(G_0K_p/s^2\), con fase \(-180^\circ\) a toda frecuencia. Sin retardos la oscilación es constante; con retardos crece con cualquier \(K_p\). Lo que sí conserva la prueba es el periodo: \[ T_u=\frac{2\pi}{\sqrt{G_0K_p}}\quad\Rightarrow\quad G_0=\frac{(2\pi/T_u)^2}{K_p} \] <span class="ex-inline">Ejemplo:</span> \(K_p=3\), \(T_u=5.31\) s: \(G_0=(1.183)^2/3=0.467\). Con «Prototipo» sale 0.39: la bola hueca.</p><p>ZN clásico con \(K_u=3\) y \(T_u=5.31\) da \(K_p=1.8\), \(K_i=0.68\), \(K_d=1.19\). El polinomio \(s^3+0.556s^2+0.841s+0.317\) tiene polos \(-0.08\pm0.88j\) y \(-0.41\): \(\zeta=0.09\), y el simulador da 43 % de sobreimpulso sin asentar. Diseño con \(G_0\) medida, \(\omega_n=2\) y \(\zeta=0.7\): \(K_p=\omega_n^2/G_0=8.57\), \(K_d=2\zeta\omega_n/G_0=6.0\), con 4.6 % de sobreimpulso y \(t_s=2.9\) s.</p>`,
+ preset:{kp:3,ki:0,kd:0,ref:30,from:15,start:27}}
+];
+function applyLesson(i,fromRestore){
+  const L=LESSONS[i],p=L.preset;applying=true;
+  applyReal(p.real?REAL:IDEAL);
+  setBool('aw',p.aw!==undefined?p.aw:true);setBool('dMeas',true);setBool('ghost',true);
+  setBool('manual',!!p.manual);
+  setVal('offset',p.offset||0);
+  ['kp','ki','kd','ref','from'].forEach(k=>setVal(k,p[k]));
+  setVal('alphaManual',p.alphaManual||0);
+  if(p.satDeg!==undefined)setVal('satDeg',p.satDeg);
+  if(p.noise!==undefined)setVal('noise',p.noise);
+  if(p.tauD!==undefined)setVal('tauD',p.tauD);
+  setDMode(p.dMode||'lp');setVal('maN',p.maN||5);
+  setBool('auto',!!p.auto);
+  app.start=(p.start||10)/100;
+  applying=false;
+  resetBall();
+}
+let mjQ=Promise.resolve();
+function typeset(el){
+  if(!(window.MathJax&&MathJax.typesetPromise&&window.__mj))return;
+  mjQ=mjQ.then(()=>MathJax.typesetPromise(el?[el]:undefined)).catch(()=>{});
+}
+function renderLesson(){
+  const L=LESSONS[lessonIdx];
+  $('stepper').innerHTML=LESSONS.map((l,i)=>`<button type="button" data-i="${i}" title="${l.title}" aria-label="Lección ${i+1}: ${l.title}" ${i===lessonIdx?'aria-current="step"':''} class="${seen.has(i)?'seen':''}">${i+1}</button>`).join('');
+  $('l-kicker').textContent=`Lección ${lessonIdx+1} de ${LESSONS.length} · ${L.short}`;
+  $('l-title').textContent=L.title;$('l-goal').textContent=L.goal;
+  $('l-steps').innerHTML=L.steps.map(s=>`<li>${s}</li>`).join('');
+  $('l-predict').textContent=L.predict;
+  $('l-explain').innerHTML=L.explain;$('l-explain').hidden=true;
+  $('btn-reveal').textContent='Ver explicación';$('btn-reveal').setAttribute('aria-expanded','false');
+  $('btn-prev').disabled=lessonIdx===0;$('btn-next').disabled=lessonIdx===LESSONS.length-1;
+  typeset($('k-lesson'));
+}
+function goLesson(i){lessonIdx=clamp(i,0,LESSONS.length-1);seen.add(lessonIdx);renderLesson();applyLesson(lessonIdx);}
+$('stepper').addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(b)goLesson(+b.dataset.i);});
+$('btn-prev').onclick=()=>goLesson(lessonIdx-1);
+$('btn-next').onclick=()=>goLesson(lessonIdx+1);
+$('btn-restore').onclick=()=>applyLesson(lessonIdx);
+$('btn-reveal').onclick=()=>{const h=!$('l-explain').hidden;$('l-explain').hidden=h;$('btn-reveal').textContent=h?'Ver explicación':'Ocultar explicación';$('btn-reveal').setAttribute('aria-expanded',String(!h));if(h===false)typeset($('l-explain'));};
+
+/* ------------------------- Control de ejecución ------------------------- */
+function setPlaying(v){playing=v;$('btn-play').textContent=v?'Pausar':'Reanudar';}
+function resetBall(){
+  sim.reset(app.start);sim.cfg.ref=app.target;hist=[];trial=null;
+  $('plot-mode').textContent='Ventana de 20 s';$('leg-prev').hidden=true;
+  setPlaying(true);accT=0;
+}
+$('btn-play').onclick=()=>{if(trial&&trial.done){resetBall();return;}setPlaying(!playing);};
+$('btn-reset').onclick=resetBall;
+$('speed').addEventListener('click',e=>{const b=e.target.closest('button[data-s]');if(!b)return;speed=+b.dataset.s;[...$('speed').children].forEach(x=>x.setAttribute('aria-pressed',x===b));});
+$('btn-push').onclick=()=>{sim.v+=0.25;sim.vG+=0.25;};
+$('manual-quick').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(b)setVal('alphaManual',+b.dataset.a);});
+$('btn-closeloop').onclick=()=>setBool('manual',false);
+$('btn-zero').onclick=()=>{setVal('kp',0);setVal('ki',0);setVal('kd',0);};
+$('btn-paper').onclick=()=>{setVal('kp',8.3867);setVal('ki',0.001);setVal('kd',4.7305);};
+$('btn-trial').onclick=()=>{
+  setBool('manual',false);
+  sim.reset(app.from);sim.cfg.ref=app.from;hist=[];
+  trial={target:app.target,from:app.from,stepped:false,dur:10,done:false,overlay:prevTrial};
+  $('plot-mode').textContent='Ensayo de escalón · 10 s';$('leg-prev').hidden=!prevTrial;
+  setPlaying(true);accT=0;
+};
+function record(){
+  const k=KANG;
+  hist.push({t:sim.t,d:sim.d,r:sim.cfg.ref,a:sim.acmd/DEG,p:sim.P*k,i:sim.I*k,dd:sim.D*k,g:sim.dG});
+  if(!trial)while(hist.length&&hist[0].t<sim.t-20)hist.shift();
+}
+function finishTrial(){
+  trial.done=true;setPlaying(false);$('btn-play').textContent='Volver a modo libre';
+  const m=trialMetrics(hist,trial.from,trial.target,0.5);
+  const c=sim.cfg;
+  trialRows.push({kp:c.kp,ki:c.ki,kd:c.kd,...m});
+  if(trialRows.length>8)trialRows.shift();
+  prevTrial=hist.map(p=>({t:p.t,d:p.d}));
+  trial.m=m;needHist=true;
+}
+function advance(){
+  if(!trial&&sim.cfg.auto&&!sim.cfg.manual){const ph=Math.floor(sim.t/(sim.cfg.autoT/2))%2;sim.cfg.ref=clamp(app.target+(ph?-0.08:0.08),0.10,0.55);}
+  if(trial&&!trial.stepped&&sim.t>=0.5){sim.cfg.ref=trial.target;trial.stepped=true;}
+  sim.step();
+  if(sim.n%20===0)record();
+  if(trial&&!trial.done&&sim.t>=trial.dur)finishTrial();
+}
+
+/* ------------------------- Dibujo ------------------------- */
+let colCache=null,colT=0;
+function C(){
+  const now=performance.now();
+  if(colCache&&now-colT<400)return colCache;
+  const s=getComputedStyle(document.documentElement),g=n=>s.getPropertyValue(n).trim();
+  colCache={bg:g('--bg'),surface:g('--surface'),surface2:g('--surface2'),ink:g('--ink'),muted:g('--muted'),line:g('--line'),grid:g('--grid'),accent:g('--accent'),ref:g('--ref'),ball:g('--ball'),ghost:g('--ghost'),p:g('--p'),i:g('--i'),d:g('--d'),warn:g('--warn'),beam:g('--beam'),support:g('--support'),servo:g('--servo'),mono:g('--f-mono')||'monospace'};
+  colT=now;return colCache;
+}
+function fit(cv){
+  const dpr=window.devicePixelRatio||1,w=Math.round(cv.clientWidth*dpr),h=Math.round(cv.clientHeight*dpr);
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}
+  const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return ctx;
+}
+function drawStage(){
+  const cv=$('cv-stage'),ctx=fit(cv),W=cv.clientWidth,H=cv.clientHeight,col=C();
+  ctx.clearRect(0,0,W,H);
+  const hx=W*0.07,hy=H*0.44,sc=(W*0.86)/PHYS.L,tb=8,rpx=PHYS.r*sc;
+  const ae=sim.alpha+sim.cfg.offset,floor=H*0.94;
+  ctx.font=`11px ${col.mono}`;ctx.textBaseline='alphabetic';
+  ctx.strokeStyle=col.line;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,floor);ctx.lineTo(W,floor);ctx.stroke();
+  // soporte de la bisagra
+  ctx.fillStyle=col.support;ctx.beginPath();ctx.moveTo(hx-20,floor);ctx.lineTo(hx+20,floor);ctx.lineTo(hx+2,hy+6);ctx.lineTo(hx-2,hy+6);ctx.closePath();ctx.fill();
+  // servo y biela
+  const sx=hx+0.5*PHYS.L*sc,sy=floor-30;
+  const bpx=hx+0.5*PHYS.L*sc*Math.cos(ae),bpy=hy+0.5*PHYS.L*sc*Math.sin(ae);
+  const th=clamp(sim.alpha*(PHYS.L/PHYS.l1)*0.35,-1.2,1.2);
+  const tipx=sx+18*Math.sin(th),tipy=sy-18*Math.cos(th);
+  ctx.fillStyle=col.servo;ctx.fillRect(sx-26,sy-2,52,32);
+  ctx.strokeStyle=col.ink;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(tipx,tipy);ctx.stroke();
+  ctx.lineWidth=1.5;ctx.strokeStyle=col.muted;ctx.beginPath();ctx.moveTo(tipx,tipy);ctx.lineTo(bpx,bpy+tb/2);ctx.stroke();
+  ctx.fillStyle=col.surface;ctx.fillText('servo',sx-14,sy+20);
+  // viga en su marco
+  ctx.save();ctx.translate(hx,hy);ctx.rotate(ae);
+  ctx.fillStyle=col.beam;ctx.fillRect(0,-tb/2,PHYS.L*sc,tb);
+  ctx.strokeStyle=col.surface;ctx.lineWidth=1;ctx.fillStyle=col.muted;
+  for(let cm=0;cm<=60;cm+=10){const x=cm/100*sc;ctx.beginPath();ctx.moveTo(x,tb/2);ctx.lineTo(x,tb/2+5);ctx.strokeStyle=col.muted;ctx.stroke();ctx.fillText(String(cm),x-(cm>=10?6:3),tb/2+17);}
+  // sensor ToF
+  ctx.fillStyle=col.servo;ctx.fillRect(-16,-tb/2-2*rpx-2,16,2*rpx+4);
+  ctx.fillStyle=col.muted;ctx.fillText('ToF',-24,-tb/2-2*rpx-8);
+  const by=-(tb/2+rpx),bxp=sim.d*sc;
+  ctx.setLineDash([3,4]);ctx.strokeStyle=col.accent;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,by);ctx.lineTo(bxp-rpx,by);ctx.stroke();ctx.setLineDash([]);
+  // referencia
+  const rx=sim.cfg.ref*sc;
+  ctx.strokeStyle=col.ref;ctx.lineWidth=2;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(rx,tb/2);ctx.lineTo(rx,-2*rpx-34);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle=col.ref;ctx.beginPath();ctx.moveTo(rx,-2*rpx-34);ctx.lineTo(rx-6,-2*rpx-44);ctx.lineTo(rx+6,-2*rpx-44);ctx.closePath();ctx.fill();
+  ctx.fillText('r',rx+9,-2*rpx-38);
+  // flecha de error
+  const ey=-2*rpx-18;
+  ctx.strokeStyle=col.warn;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(bxp,ey);ctx.lineTo(rx,ey);ctx.stroke();
+  const dir=Math.sign(rx-bxp)||1;
+  if(Math.abs(rx-bxp)>8){ctx.beginPath();ctx.moveTo(rx,ey);ctx.lineTo(rx-dir*6,ey-3.5);ctx.lineTo(rx-dir*6,ey+3.5);ctx.closePath();ctx.fillStyle=col.warn;ctx.fill();}
+  // bola
+  const g=ctx.createRadialGradient(bxp-rpx*0.35,by-rpx*0.35,rpx*0.1,bxp,by,rpx);
+  g.addColorStop(0,'#ffb08a');g.addColorStop(1,col.ball);
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(bxp,by,rpx,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.8)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(bxp,by);ctx.lineTo(bxp+rpx*0.7*Math.cos(sim.roll),by+rpx*0.7*Math.sin(sim.roll));ctx.stroke();
+  // aceleración
+  const al=clamp(sim.acc*90,-120,120);
+  if(Math.abs(al)>3){ctx.strokeStyle=col.ink;ctx.fillStyle=col.ink;ctx.lineWidth=2;const ay=by-rpx-9;ctx.beginPath();ctx.moveTo(bxp,ay);ctx.lineTo(bxp+al,ay);ctx.stroke();const s=Math.sign(al);ctx.beginPath();ctx.moveTo(bxp+al,ay);ctx.lineTo(bxp+al-s*7,ay-4);ctx.lineTo(bxp+al-s*7,ay+4);ctx.closePath();ctx.fill();}
+  ctx.restore();
+  // hinge
+  ctx.fillStyle=col.ink;ctx.beginPath();ctx.arc(hx,hy,5,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=col.muted;ctx.fillText('bisagra',hx-18,floor-6);
+  if(sim.cfg.manual){ctx.fillStyle=col.warn;ctx.fillText('LAZO ABIERTO',W-100,16);}
+}
+function drawPlot(cv,o){
+  const ctx=fit(cv),W=cv.clientWidth,H=cv.clientHeight,col=C();
+  ctx.clearRect(0,0,W,H);
+  const ml=40,mr=10,mt=8,mb=22,pw=W-ml-mr,ph=H-mt-mb;
+  const X=x=>ml+(x-o.x0)/(o.x1-o.x0)*pw,Y=y=>mt+(1-(y-o.y0)/(o.y1-o.y0))*ph;
+  ctx.font=`11px ${col.mono}`;ctx.fillStyle=col.muted;ctx.strokeStyle=col.grid;ctx.lineWidth=1;
+  for(let y=o.y0;y<=o.y1+1e-9;y+=o.dy){ctx.beginPath();ctx.moveTo(ml,Y(y));ctx.lineTo(W-mr,Y(y));ctx.stroke();ctx.textAlign='right';ctx.fillText(String(Math.round(y*10)/10),ml-6,Y(y)+4);}
+  const xs=o.dx;let start=Math.ceil(o.x0/xs)*xs;
+  ctx.textAlign='center';
+  for(let x=start;x<=o.x1+1e-9;x+=xs){ctx.beginPath();ctx.moveTo(X(x),mt);ctx.lineTo(X(x),mt+ph);ctx.stroke();ctx.fillText(String(Math.round(x)),X(x),H-6);}
+  ctx.textAlign='left';
+  if(o.band){ctx.fillStyle=col.ref;ctx.globalAlpha=0.1;ctx.fillRect(ml,Y(o.band[1]),pw,Y(o.band[0])-Y(o.band[1]));ctx.globalAlpha=1;}
+  ctx.save();ctx.beginPath();ctx.rect(ml,mt-2,pw,ph+4);ctx.clip();
+  (o.hl||[]).forEach(l=>{ctx.strokeStyle=l.color;ctx.lineWidth=1.2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(ml,Y(l.y));ctx.lineTo(W-mr,Y(l.y));ctx.stroke();ctx.setLineDash([]);});
+  o.series.forEach(s=>{
+    if(!s.pts.length)return;
+    ctx.strokeStyle=s.color;ctx.lineWidth=s.w||2;ctx.globalAlpha=s.alpha||1;ctx.setLineDash(s.dash||[]);ctx.lineJoin='round';
+    ctx.beginPath();s.pts.forEach((p,i)=>{const x=X(p[0]),y=Y(clamp(p[1],o.y0-5*o.dy,o.y1+5*o.dy));i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+    ctx.setLineDash([]);ctx.globalAlpha=1;
+  });
+  ctx.restore();
+  ctx.strokeStyle=col.line;ctx.lineWidth=1;ctx.strokeRect(ml,mt,pw,ph);
+  ctx.fillStyle=col.muted;ctx.textAlign='right';ctx.textAlign='left';ctx.fillText(o.xl||'t [s]',2,H-6);
+  ctx.fillText(o.yl,ml+6,mt+13);
+}
+function drawPlots(){
+  const col=C(),inTrial=!!trial;
+  let x0,x1;
+  if(inTrial){x0=0;x1=10;}else{x1=Math.max(20,sim.t);x0=x1-20;}
+  const ref=hist.map(p=>[p.t,p.r*100]),d=hist.map(p=>[p.t,p.d*100]);
+  const ser=[];
+  if(inTrial&&trial.overlay)ser.push({pts:trial.overlay.map(p=>[p.t,p.d*100]),color:col.ghost,w:1.6,alpha:.55});
+  ser.push({pts:ref,color:col.ref,w:1.5,dash:[5,4]});
+  if(sim.cfg.ghost)ser.push({pts:hist.map(p=>[p.t,p.g*100]),color:col.ghost,w:1.6,dash:[2,3]});
+  ser.push({pts:d,color:col.accent,w:2.4});
+  let band=null;
+  if(inTrial){const A=Math.abs(trial.target-trial.from)*100,b=Math.max(0.02*A,0.2);band=[trial.target*100-b,trial.target*100+b];}
+  drawPlot($('cv-pos'),{x0,x1,y0:0,y1:60,dy:10,dx:inTrial?1:(x1-x0>40?10:2),series:ser,band,yl:'d [cm]'});
+  const sat=sim.cfg.satDeg;
+  drawPlot($('cv-ctl'),{x0,x1,y0:-12,y1:12,dy:4,dx:inTrial?1:2,
+    hl:[{y:sat,color:col.warn},{y:-sat,color:col.warn}],
+    series:[{pts:hist.map(p=>[p.t,p.p]),color:col.p,w:1.3},{pts:hist.map(p=>[p.t,p.i]),color:col.i,w:1.3},{pts:hist.map(p=>[p.t,p.dd]),color:col.d,w:1.3},{pts:hist.map(p=>[p.t,p.a]),color:col.ink,w:2.2}],yl:'α [°]'});
+}
+function drawPoles(){
+  const cv=$('cv-poles'),ctx=fit(cv),W=cv.clientWidth,H=cv.clientHeight,col=C();
+  ctx.clearRect(0,0,W,H);
+  const c=sim.cfg,G0=plantGain(c.hollow),a=analyze(G0,c.kp,c.ki,c.kd);
+  const minRe=Math.min(-3,...a.poles.map(p=>p.re*1.15));
+  const maxIm=Math.max(2.5,...a.poles.map(p=>Math.abs(p.im)*1.2));
+  const x0=minRe,x1=Math.max(1,...a.poles.map(p=>p.re*1.2)),y0=-maxIm,y1=maxIm;
+  const ml=24,mr=8,mt=8,mb=20,pw=W-ml-mr,ph=H-mt-mb;
+  const X=x=>ml+(x-x0)/(x1-x0)*pw,Y=y=>mt+(1-(y-y0)/(y1-y0))*ph;
+  ctx.fillStyle=col.warn;ctx.globalAlpha=0.09;ctx.fillRect(X(0),mt,ml+pw-X(0),ph);ctx.globalAlpha=1;
+  ctx.strokeStyle=col.grid;ctx.lineWidth=1;ctx.font=`10px ${col.mono}`;ctx.fillStyle=col.muted;ctx.textAlign='center';
+  for(let x=Math.ceil(x0);x<=x1;x++){ctx.beginPath();ctx.moveTo(X(x),mt);ctx.lineTo(X(x),mt+ph);ctx.stroke();ctx.fillText(String(x),X(x),H-6);}
+  ctx.textAlign='right';
+  for(let y=Math.ceil(y0);y<=y1;y++){ctx.beginPath();ctx.moveTo(ml,Y(y));ctx.lineTo(W-mr,Y(y));ctx.stroke();ctx.fillText(String(y),ml-4,Y(y)+3);}
+  ctx.strokeStyle=col.muted;ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(X(0),mt);ctx.lineTo(X(0),mt+ph);ctx.moveTo(ml,Y(0));ctx.lineTo(W-mr,Y(0));ctx.stroke();
+  ctx.setLineDash([4,3]);ctx.strokeStyle=col.ref;ctx.lineWidth=1.2;
+  // línea de ζ=0.707 en coordenadas de dato (misma escala en x e y por unidad de dato)
+  const tmax=Math.min(-x0,y1);
+  [1,-1].forEach(sg=>{ctx.beginPath();ctx.moveTo(X(0),Y(0));ctx.lineTo(X(-tmax),Y(sg*tmax));ctx.stroke();});
+  ctx.setLineDash([]);
+  ctx.strokeStyle=col.accent;ctx.lineWidth=2.4;
+  a.poles.forEach(p=>{const x=X(p.re),y=Y(p.im),s=5;ctx.beginPath();ctx.moveTo(x-s,y-s);ctx.lineTo(x+s,y+s);ctx.moveTo(x-s,y+s);ctx.lineTo(x+s,y-s);ctx.stroke();});
+  ctx.textAlign='left';ctx.fillStyle=col.muted;ctx.fillText('Im',ml+4,mt+10);ctx.textAlign='right';ctx.fillText('Re',W-mr-2,Y(0)-4);
+  return a;
+}
+const f2=(x,d=2)=>(x<0?'−':'')+Math.abs(x).toFixed(d);
+function fmtPole(p){return p.im===0?f2(p.re):`${f2(p.re)} ${p.im>0?'±':'∓'} ${Math.abs(p.im).toFixed(2)}j`;}
+function refreshTheory(){
+  const c=sim.cfg,G0=plantGain(c.hollow),a=drawPoles();
+  $('t-g0').textContent=G0.toFixed(4)+' m/(s²·rad)';
+  const uniq=[];a.poles.forEach(p=>{if(!(p.im<0&&a.poles.some(q=>q.im>0&&Math.abs(q.re-p.re)<1e-6)))uniq.push(p);});
+  $('t-poles').textContent=uniq.map(fmtPole).join(' ; ');
+  $('t-wn').textContent=a.wn?a.wn.toFixed(2)+' rad/s':'—';
+  $('t-z').textContent=a.zeta!==null?a.zeta.toFixed(2):'—';
+  $('t-mp').textContent=!a.stable?(a.maxRe>1e-6?'inestable':'sin amortiguamiento'):a.Mp.toFixed(1)+' %';
+  $('t-ts').textContent=!a.stable?'∞':(isFinite(a.ts)?a.ts.toFixed(1)+' s':'∞');
+  const pm=phaseMargin(G0,c.kp,c.ki,c.kd);
+  $('t-pm').textContent=pm?`${pm.pm.toFixed(0)}° en ${pm.wc.toFixed(2)} rad/s`:'—';
+  $('dp-out').textContent=`Kp = ${(Math.pow(+$('dp-wn').value,2)/G0).toFixed(2)} · Kd = ${(2*(+$('dp-z').value)*(+$('dp-wn').value)/G0).toFixed(2)}`;
+  const w=+$('dm-w').value,phi=(+$('dm-phi').value)*DEG,Pm=G0/(w*w);
+  $('dm-out').textContent=`Kp = ${(Math.cos(phi)/Pm).toFixed(2)} · Kd = ${(Math.sin(phi)/(Pm*w)).toFixed(2)}`;
+}
+['dp-wn','dp-z','dm-w','dm-phi'].forEach(id=>$(id).addEventListener('input',()=>{needTheory=true;}));
+$('dp-apply').onclick=()=>{const G0=plantGain(sim.cfg.hollow),w=+$('dp-wn').value,z=+$('dp-z').value;setVal('kp',w*w/G0);setVal('kd',2*z*w/G0);setVal('ki',0);};
+$('dm-apply').onclick=()=>{const G0=plantGain(sim.cfg.hollow),w=+$('dm-w').value,phi=(+$('dm-phi').value)*DEG,Pm=G0/(w*w);setVal('kp',Math.cos(phi)/Pm);setVal('kd',Math.sin(phi)/(Pm*w));setVal('ki',0);};
+
+let znRes=null;
+$('zn-measure').onclick=()=>{
+  const c=sim.cfg,o=$('zn-out');
+  if(c.kd>0||c.ki>0){o.textContent='Pon Ki = 0 y Kd = 0 para esta prueba.';return;}
+  if(c.kp<=0){o.textContent='Pon Kp > 0.';return;}
+  if(c.auto||c.manual||trial){o.textContent='Apaga la onda cuadrada, el modo manual y el ensayo.';return;}
+  const r=estimateOsc(hist,c.ref);
+  if(!r){o.textContent='Aún no hay 3 cruces por la referencia. Espera más ciclos (usa 2× o 4×).';return;}
+  const G0=Math.pow(2*Math.PI/r.Tu,2)/c.kp;
+  znRes={Tu:r.Tu,Ku:c.kp,G0};
+  o.innerHTML=`Tu = ${r.Tu.toFixed(2)} s con Kp = ${c.kp.toFixed(2)}<br>Amplitud ×${r.growth.toFixed(2)} por ciclo (${r.growth>1.02?'crece':r.growth<0.98?'decae':'constante'})<br>G₀ medida = ${G0.toFixed(3)} (modelo: ${plantGain(c.hollow).toFixed(3)})`;
+  $('zn-classic').disabled=false;$('zn-id').disabled=false;
+  const k=0.6*znRes.Ku,Ti=znRes.Tu/2,Td=znRes.Tu/8;
+  $('zn-pred').textContent=`ZN clásico: Kp = ${k.toFixed(2)} · Ki = ${(k/Ti).toFixed(3)} · Kd = ${(k*Td).toFixed(2)}`;
+};
+$('zn-classic').onclick=()=>{if(!znRes)return;const k=0.6*znRes.Ku,Ti=znRes.Tu/2,Td=znRes.Tu/8;setVal('kp',k);setVal('ki',k/Ti);setVal('kd',k*Td);};
+$('zn-id').onclick=()=>{if(!znRes)return;const w=+$('dp-wn').value,z=+$('dp-z').value;setVal('kp',w*w/znRes.G0);setVal('kd',2*z*w/znRes.G0);setVal('ki',0);};
+
+function renderHist(){
+  const tb=$('hist-table').querySelector('tbody');
+  tb.innerHTML=trialRows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.kp.toFixed(2)}</td><td>${r.ki.toFixed(3)}</td><td>${r.kd.toFixed(2)}</td><td>${r.Mp.toFixed(1)}</td><td>${r.tr===null?'—':r.tr.toFixed(2)}</td><td>${r.ts===null?'—':r.ts.toFixed(2)}</td><td>${r.ess.toFixed(1)}</td><td>${r.iae.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="9" class="note" style="text-align:left">Aún no hay ensayos.</td></tr>';
+  const m=trialRows[trialRows.length-1];
+  if(m){
+    $('trial-now').innerHTML=`<dl class="kv"><dt>Sobreimpulso Mp</dt><dd>${m.Mp.toFixed(1)} %</dd><dt>Tiempo de subida (10–90 %)</dt><dd>${m.tr===null?'no alcanzó':m.tr.toFixed(2)+' s'}</dd><dt>Asentamiento (2 %)</dt><dd>${m.ts===null?'no se asentó':m.ts.toFixed(2)+' s'}</dd><dt>Error final</dt><dd>${m.ess.toFixed(1)} mm</dd><dt>IAE</dt><dd>${m.iae.toFixed(3)} m·s</dd></dl>`;
+    const chip=(ok,t)=>`<span class="chip ${ok?'ok':'bad'}">${ok?'✓':'✗'} ${t}</span>`;
+    $('goal-chips').innerHTML=chip(m.Mp<=10,'Mp ≤ 10 %')+chip(m.ts!==null&&m.ts<=3,'ts ≤ 3 s')+chip(Math.abs(m.ess)<=5,'|e∞| ≤ 5 mm');
+  }
+}
+$('btn-clear-hist').onclick=()=>{trialRows=[];prevTrial=null;$('trial-now').textContent='Pulsa «Ensayo de escalón» para medir sobreimpulso, tiempo de subida y asentamiento.';$('goal-chips').innerHTML='';needHist=true;};
+
+
+/*GEN-START*/
+function genArduino(c){
+  const f=(x,d)=>Number(x).toFixed(d)+'f';
+  const TSms=Math.max(25,Math.round(c.Ts*1000));
+  const budget=clamp((TSms-3)*1000,20000,100000);
+  const ma=c.dMode==='ma';
+  const N=clamp(Math.round(c.maN),1,30);
+  const SIG=c.dMeas?'y':'e';
+  const sgn=c.dMeas?'-':'+';
+  const sigTxt=c.dMeas?'la medición y (como la librería PID de Arduino: sin golpe al cambiar la referencia)':'el error e (hay golpe derivativo al cambiar la referencia)';
+  const reach=Math.min(c.satDeg*PHYS.L/PHYS.l1,80);
+  const filtDecl=ma?
+`// Derivada: media móvil de N muestras y diferencia de las medias.
+// Reduce el ruido de la derivada N veces; el retardo es ~ N*TS/2 = ${Math.round(N*TSms/2)} ms.
+const uint8_t N_MA = ${N};
+float maBuf[N_MA];
+uint8_t maIdx = 0;
+float maPrev = 0.0f;`:
+`// Derivada: diferencia hacia atrás + filtro pasa-bajas de primer orden.
+// TAU_D = 0 desactiva el filtro (derivada cruda, muy sensible al ruido).
+const float TAU_D = ${f(c.tauD,3)};   // [s]
+float sPrev = 0.0f;                  // señal anterior (${SIG})
+float dFilt = 0.0f;                  // derivada filtrada`;
+  const maFn=ma?`
+float movingAverage(float x) {
+  maBuf[maIdx] = x;
+  maIdx = (maIdx + 1) % N_MA;
+  float sum = 0.0f;
+  for (uint8_t i = 0; i < N_MA; i++) sum += maBuf[i];
+  return sum / N_MA;
+}
+`:'';
+  const resetBody=ma?`  for (uint8_t i = 0; i < N_MA; i++) maBuf[i] = s0;
+  maPrev = s0;`:`  sPrev = s0;
+  dFilt = 0.0f;`;
+  const dCode=ma?`  float sAvg  = movingAverage(${SIG});
+  float dFilt = (sAvg - maPrev) / TS;
+  maPrev = sAvg;`:`  float ds = (${SIG} - sPrev) / TS;
+  sPrev = ${SIG};
+  dFilt += (TS / (TAU_D + TS)) * (ds - dFilt);`;
+  const awCode=c.aw?`  // --- Integral con anti-windup (integración condicional) ---
+  float iNew  = iTerm + KI * TS * e;
+  float uTent = pTerm + iNew + dTerm;
+  bool  saturado = fabsf(uTent) > THETA_MAX;
+  if (!(saturado && e * uTent > 0.0f)) iTerm = iNew;   // congela I si satura y el error empuja más
+  iTerm = constrain(iTerm, -THETA_MAX, THETA_MAX);`:`  // --- Integral SIN anti-windup (solo para demostración; se acumula mientras satura) ---
+  iTerm = constrain(iTerm + KI * TS * e, -20.0f, 20.0f);`;
+  return `// Ball & Beam: PID discreto con derivada filtrada y anti-windup
+// Generado desde el Laboratorio Ball and Beam.
+// Hardware: Arduino UNO + VL53L1X (I2C) + servo en el pin 9.
+#include <Wire.h>
+#include <VL53L1X.h>   // librería de Pololu
+#include <Servo.h>
+
+// ---------- Ganancias (sintonizadas en el simulador) ----------
+const float KP = ${f(c.kp,3)};   // [rad/m]
+const float KI = ${f(c.ki,3)};   // [rad/(m*s)]
+const float KD = ${f(c.kd,3)};   // [rad*s/m]
+
+// ---------- Muestreo ----------
+// El VL53L1X necesita al menos ~20 ms por medida, por eso TS_MS >= 25.
+const uint16_t TS_MS = ${TSms};
+const float TS = TS_MS / 1000.0f;                  // [s]
+
+// ---------- Geometría y límites ----------
+const float L_BEAM = 0.60f;                        // longitud de la viga [m]
+const float L1 = 0.04f;                            // brazo del servo [m]
+const float ALPHA_MAX_DEG = ${f(c.satDeg,1)};       // inclinación máxima de la viga
+const float SERVO_REACH_DEG = ${f(reach,1)};        // recorrido útil del servo a cada lado del centro (medir en tu montaje)
+// Saturación del servo en radianes. Con la Ec. 2 del artículo (alfa = L1/L * theta),
+// ${c.satDeg.toFixed(0)} grados de viga equivalen a ${(c.satDeg*PHYS.L/PHYS.l1).toFixed(0)} grados de servo, que casi ningún servo alcanza.
+// Por eso se toma el menor de los dos límites y el anti-windup usa ese valor.
+const float THETA_MAX = min(ALPHA_MAX_DEG * DEG_TO_RAD * L_BEAM / L1,
+                            SERVO_REACH_DEG * DEG_TO_RAD);
+
+// ---------- Servo ----------
+const int   SERVO_PIN = 9;
+const float SERVO_CENTER_DEG = 90.0f;   // viga horizontal: CALIBRAR con un nivel
+const float SERVO_SIGN = -1.0f;         // artículo: servo.write(bias - Output); usa +1 si gira al revés
+const float SERVO_MIN_DEG = 0.0f, SERVO_MAX_DEG = 180.0f;
+
+// ---------- Referencia ----------
+float setpoint = 0.35f;                 // [m]
+// Con potenciómetro en A0 (como en el artículo):
+// setpoint = 0.10f + 0.45f * analogRead(A0) / 1023.0f;
+
+VL53L1X sensor;
+Servo servo;
+
+// ---------- Estado del controlador ----------
+float iTerm = 0.0f;
+float dist = 0.0f;   // última distancia válida [m]
+
+${filtDecl}
+${maFn}
+void pidReset(float y0, float r) {
+  float s0 = ${c.dMeas?'y0;\n  (void)r;                      // con derivada sobre la medición no se usa':'r - y0;'}
+${resetBody}
+  iTerm = 0.0f;
+}
+
+// Un paso del controlador. Devuelve el ángulo del servo en rad.
+// La derivada se calcula sobre ${sigTxt}.
+float pidStep(float r, float y) {
+  float e = r - y;
+
+  // --- Derivada filtrada ---
+${dCode}
+  float dTerm = ${sgn}KD * dFilt;
+
+  // --- Proporcional ---
+  float pTerm = KP * e;
+
+${awCode}
+
+  return constrain(pTerm + iTerm + dTerm, -THETA_MAX, THETA_MAX);
+}
+
+void writeServo(float theta) {
+  float deg = SERVO_CENTER_DEG + SERVO_SIGN * theta * RAD_TO_DEG;
+  deg = constrain(deg, SERVO_MIN_DEG, SERVO_MAX_DEG);
+  servo.writeMicroseconds((int)(544.0f + deg * (1856.0f / 180.0f)));   // 544-2400 us = 0-180 grados
+}
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  Wire.setClock(400000);
+
+  sensor.setTimeout(500);
+  if (!sensor.init()) {
+    Serial.println("VL53L1X no responde");
+    while (true) {}
+  }
+  sensor.setDistanceMode(VL53L1X::Long);
+  sensor.setMeasurementTimingBudget(${budget}UL);   // [us], menor que el periodo
+  sensor.startContinuous(TS_MS);
+
+  servo.attach(SERVO_PIN);
+  writeServo(0.0f);
+
+  // Espera la primera lectura válida y arranca el controlador sin salto.
+  while (!sensor.dataReady()) {}
+  sensor.read(false);
+  dist = sensor.ranging_data.range_mm / 1000.0f;
+  pidReset(dist, setpoint);
+}
+
+void loop() {
+  static uint32_t tNext = 0;
+  static uint8_t printDiv = 0;
+  uint32_t now = millis();
+  if ((int32_t)(now - tNext) < 0) return;   // espera al siguiente periodo
+  tNext = now + TS_MS;
+
+  if (sensor.dataReady()) {
+    sensor.read(false);                      // no bloquea
+    if (sensor.ranging_data.range_status == VL53L1X::RangeValid)
+      dist = sensor.ranging_data.range_mm / 1000.0f;   // [m]
+  }
+
+  float theta = pidStep(setpoint, dist);     // [rad]
+  writeServo(theta);
+
+  if (++printDiv >= 4) {                     // Serial Plotter: r, d [cm] y alfa [grados]
+    printDiv = 0;
+    Serial.print(setpoint * 100.0f, 1); Serial.print(',');
+    Serial.print(dist * 100.0f, 1);     Serial.print(',');
+    Serial.println(theta * RAD_TO_DEG * L1 / L_BEAM, 2);
+  }
+}
+`;
+}
+/*GEN-END*/
+
+function hl(src){
+  const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const re=/(\/\/[^\n]*)|(^#[^\n]*)|\b(const|float|int|uint8_t|uint16_t|uint32_t|int32_t|bool|void|static|return|if|else|for|while|true|false)\b|\b(\d+\.?\d*(?:UL|f)?)\b/gm;
+  let out='',last=0,m;
+  while((m=re.exec(src))){
+    out+=esc(src.slice(last,m.index));
+    const cls=m[1]?'c':m[2]?'p':m[3]?'k':'n';
+    out+='<span class="tk-'+cls+'">'+esc(m[0])+'</span>';last=re.lastIndex;
+  }
+  return out+esc(src.slice(last));
+}
+let lastCode='';
+function renderCode(){
+  const c=sim.cfg;
+  lastCode=genArduino(c);
+  $('code-src').innerHTML=hl(lastCode);
+  const TSms=Math.round(c.Ts*1000);
+  const chips=[`Kp ${c.kp.toFixed(3)}`,`Ki ${c.ki.toFixed(3)}`,`Kd ${c.kd.toFixed(3)}`,`Ts ${Math.max(25,TSms)} ms`,
+    c.dMode==='ma'?`Media móvil N = ${Math.round(c.maN)}`:`Pasa-bajas τd = ${(c.tauD*1000).toFixed(0)} ms`,
+    c.aw?'Anti-windup activo':'Sin anti-windup',c.dMeas?'Derivada sobre la medición':'Derivada sobre el error'];
+  let h=chips.map(t=>`<span class="chip">${t}</span>`).join('');
+  if(TSms<25)h+=`<span class="chip warn-chip">Ts = ${TSms} ms: se usa 25 ms por el sensor</span>`;
+  if(!c.aw)h+=`<span class="chip warn-chip">Anti-windup apagado en el simulador</span>`;
+  if(c.dMode==='lp'&&c.tauD===0&&c.noise>0)h+=`<span class="chip warn-chip">Sin filtro con ruido: la derivada será ruidosa</span>`;
+  $('code-chips').innerHTML=h;
+  $('verify-note').textContent=VERIFY_NOTE;
+  const th=$('ma-theory');
+  if(!th.dataset.done){
+    th.dataset.done='1';
+    th.innerHTML=String.raw`<p>La diferencia simple da un ruido \(\sqrt2\,\sigma/T_s\). La media móvil de \(N\) muestras lo reduce a \[ \sigma_{\dot y}\approx\frac{\sqrt2\,\sigma}{N\,T_s} \] y retrasa la derivada \(\approx N\,T_s/2\). El pasa-bajas de constante \(\tau_d\) retrasa \(\approx\tau_d\).</p><p>Con \(T_s=30\) ms y \(N=5\) el retardo es 75 ms, parecido a un pasa-bajas de 100 ms, y el ruido baja unas 4 veces en ambos. La media móvil solo necesita sumas y un arreglo circular, pero ocupa \(N\) floats de RAM (4 bytes cada uno).</p>`;
+  }
+  typeset($('tab-code'));
+}
+const VERIFY_NOTE='El sketch se compiló con un banco de pruebas en PC (librerías simuladas) en sus ocho variantes y se ejecutó contra una planta lineal ideal: la bola llega a la referencia. No se probó en un Arduino ni con el VL53L1X reales. Calibra el centro y el recorrido del servo antes de conectar la viga.';
+let tab='sim';
+function showTab(t){
+  tab=t;
+  $('tab-sim').hidden=t!=='sim';$('tab-code').hidden=t!=='code';
+  $('tb-sim').setAttribute('aria-selected',t==='sim');$('tb-code').setAttribute('aria-selected',t==='code');
+  if(t==='sim'){needTheory=true;needHist=true;}else renderCode();
+  window.scrollTo(0,0);
+}
+$('tb-sim').onclick=()=>showTab('sim');
+$('tb-code').onclick=()=>showTab('code');
+$('btn-copy-code').onclick=()=>{
+  const done=ok=>{$('copy-msg').textContent=ok?'Copiado':'Selecciona el código y cópialo con Ctrl+C';setTimeout(()=>{$('copy-msg').textContent='';},2500);};
+  try{navigator.clipboard.writeText(lastCode).then(()=>done(true),()=>{selectCode();done(false);});}catch(e){selectCode();done(false);}
+};
+function selectCode(){try{const r=document.createRange();r.selectNodeContents($('code-src'));const s=getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+function updateFiltNote(){
+  const c=sim.cfg,Ts=c.Ts*1000;
+  $('filt-note').textContent=c.dMode==='ma'?`Retardo de la derivada ≈ N·Ts/2 = ${(Math.round(c.maN)*Ts/2).toFixed(0)} ms. Ruido de la derivada ÷ ${Math.round(c.maN)}.`:`Retardo ≈ τd = ${(c.tauD*1000).toFixed(0)} ms. Con 0 no hay filtro.`;
+}
+
+let uiT=0;
+function updateReadouts(){
+  const c=sim.cfg;
+  $('o-d').textContent=(sim.d*100).toFixed(1)+' cm';
+  $('o-r').textContent=(c.ref*100).toFixed(1)+' cm';
+  const e=(c.ref-sim.d)*100;$('o-e').textContent=(e>=0?'+':'−')+Math.abs(e).toFixed(1)+' cm';
+  $('o-a').textContent=((sim.alpha+c.offset)/DEG).toFixed(1)+'°';
+  $('o-acc').textContent=sim.acc.toFixed(2)+' m/s²';
+  $('o-t').textContent=sim.t.toFixed(1)+' s';
+  $('sat-badge').hidden=!sim.sat;
+  const last=hist[hist.length-1];
+  $('lv-d').textContent=(sim.d*100).toFixed(1)+' cm';
+  if(last){$('lv-u').textContent=last.a.toFixed(1)+'°';$('lv-p').textContent=last.p.toFixed(1)+'°';$('lv-i').textContent=last.i.toFixed(1)+'°';$('lv-dd').textContent=last.dd.toFixed(1)+'°';}
+  $('leg-ghost').hidden=!c.ghost;$('lv-sat').textContent='±'+c.satDeg+'°';
+}
+function frame(now){
+  const dt=Math.min((now-lastT)/1000,0.05);lastT=now;
+  if(playing){accT+=dt*speed;let n=0;while(accT>=sim.h&&n<400&&playing){advance();accT-=sim.h;n++;}if(n>=400)accT=0;}
+  if(tab==='sim'){
+    if(needTheory){needTheory=false;refreshTheory();}
+    if(needHist){needHist=false;renderHist();}
+    drawStage();drawPlots();
+    if(now-uiT>100){uiT=now;updateReadouts();updateFiltNote();}
+  }
+  requestAnimationFrame(frame);
+}
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{colCache=null;});}catch(e){}
+new MutationObserver(()=>{colCache=null;}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+window.addEventListener('resize',()=>{needTheory=true;});
+
+renderLesson();renderHist();
+if(location.hash==='#codigo')showTab('code');
+applyLesson(0);
+requestAnimationFrame(frame);
+</script>
+
+</body></html>
